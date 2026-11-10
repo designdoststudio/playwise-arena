@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://designdoststudio.github.io/playwise-arena/sitemap.xml
