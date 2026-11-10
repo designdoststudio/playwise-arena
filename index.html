@@ -243,6 +243,7 @@ padding:8px 2px;
 .diff-cell:active{background:#6550a5}
 .diff-cell.correct{background:#14794f}
 .diff-cell.wrong{background:#9e3152}
+
 footer{
 text-align:center;
 border-top:1px solid #ffffff18;
@@ -252,6 +253,23 @@ font-size:13px;
 line-height:1.8;
 }
 footer strong{color:white}
+footer nav{
+margin:12px 0;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:8px;
+}
+footer nav a{
+color:#b9b1ce;
+text-decoration:none;
+padding:4px 3px;
+}
+footer nav a:hover{
+color:white;
+text-decoration:underline;
+}
+
 @media(max-width:480px){
 .hero h1{font-size:25px}
 .answers{grid-template-columns:1fr}
@@ -437,6 +455,15 @@ footer strong{color:white}
 <footer>
 <strong>PlayWise Arena</strong><br>
 A place where fun meets learning.<br>
+
+<nav aria-label="Footer navigation">
+<a href="index.html">Home</a>
+<a href="about.html">About Us</a>
+<a href="contact.html">Contact Us</a>
+<a href="privacy.html">Privacy Policy</a>
+<a href="terms.html">Terms &amp; Conditions</a>
+</nav>
+
 Created &amp; Managed by <strong>Muhammad Bilal</strong><br>
 © <span id="year"></span> PlayWise Arena. All rights reserved.
 </footer>
