@@ -3,690 +3,544 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#15152e">
-<meta name="description" content="PlayWise Arena is a free online quiz, brain games and educational entertainment platform for children, teens and adults.">
-<title>PlayWise Arena - Free Quiz, Brain Games & Fun</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17112f">
+<meta name="description" content="PlayWise Arena is a free online platform for fun quizzes, brain games, puzzles and learning challenges for everyone.">
+<title>PlayWise Arena - Free Quizzes, Brain Games & Fun Learning</title>
 
 <style>
 :root{
---bg:#101126;--card:#1c1d3c;--card2:#292a50;
---purple:#7965ff;--pink:#f36ab8;--cyan:#52d9e9;
---white:#fff;--muted:#b8bad1;--green:#55d99a
+--bg:#100c20;--panel:#1d1733;--panel2:#30264c;
+--purple:#8b6cff;--pink:#ff6da9;--text:#fff;
+--muted:#b9b1ce;--green:#5ce0a0;
 }
 *{box-sizing:border-box}
 body{
-margin:0;background:var(--bg);color:white;
-font-family:Arial,Helvetica,sans-serif
+margin:0;background:linear-gradient(150deg,#100c20,#21123a 55%,#11152c);
+color:var(--text);font-family:Arial,sans-serif;min-height:100vh;
 }
-button{font:inherit;cursor:pointer}
-header{
-background:#17162f;padding:16px;
-display:flex;justify-content:space-between;
-align-items:center;position:sticky;top:0;
-z-index:5;border-bottom:1px solid #303052
-}
-.logo{font-size:20px;font-weight:900}
-.logo span{color:var(--pink)}
-.lang{
-background:var(--card2);border:1px solid #555;
-color:white;padding:9px 13px;border-radius:10px
-}
-.container{max-width:1000px;margin:auto;padding:18px 15px 35px}
+header{text-align:center;padding:22px 15px;border-bottom:1px solid #ffffff18}
+.logo{font-size:30px;font-weight:900}
+.logo span{color:#a995ff}
+header p{color:var(--muted);margin:8px 0 0;font-size:14px}
+.container{max-width:1050px;margin:auto;padding:18px 14px 45px}
 .hero{
-background:linear-gradient(135deg,#5542c5,#a348b7,#df649e);
-padding:35px 18px;border-radius:22px;text-align:center
+background:linear-gradient(120deg,#563bd1,#a64bd8);
+padding:28px 20px;border-radius:22px;text-align:center;margin:12px 0 20px;
 }
-.tag{background:#ffffff25;padding:8px 12px;border-radius:20px;font-size:12px}
-.hero h1{font-size:34px;margin:20px 0 10px}
-.hero p{line-height:1.6;color:#f0eaff}
-.primary{
-background:white;color:#503cbb;border:0;
-padding:13px 22px;border-radius:11px;
-font-weight:bold;margin-top:10px
+.hero h1{font-size:29px;margin:0 0 10px}
+.hero p{line-height:1.6;margin:0 auto 17px;max-width:600px}
+.stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.stat{background:#ffffff20;padding:10px 17px;border-radius:12px;font-size:13px}
+.stat strong{display:block;font-size:20px;margin-bottom:3px}
+.section-title{font-size:22px;margin:28px 0 13px}
+.section-sub{color:var(--muted);font-size:14px;margin-top:-5px;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
+.card{
+background:var(--panel);border:1px solid #ffffff12;border-radius:17px;
+padding:17px 13px;cursor:pointer;transition:.2s;min-height:130px;
 }
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:20px 0}
-.stat{
-text-align:center;background:var(--card);
-padding:14px 5px;border-radius:13px;
-border:1px solid #343558
+.card:hover{transform:translateY(-3px);border-color:var(--purple)}
+.card .emoji{font-size:29px}
+.card h3{font-size:16px;margin:10px 0 6px}
+.card p{font-size:12px;color:var(--muted);line-height:1.4;margin:0}
+button{
+border:0;border-radius:11px;padding:12px 17px;background:var(--purple);
+color:white;font-weight:bold;font-size:14px;cursor:pointer;
 }
-.stat strong{display:block;color:var(--cyan);font-size:23px}
-.stat small{font-size:10px;color:var(--muted)}
-.daily{
-background:linear-gradient(110deg,#263f70,#3b3279);
-padding:19px;border-radius:16px;margin:25px 0
+button:hover{filter:brightness(1.12)}
+button.secondary{background:#403458}
+button:disabled{opacity:.5;cursor:not-allowed}
+.gamebox{
+display:none;background:var(--panel);border:1px solid #ffffff18;
+border-radius:20px;padding:20px;margin-top:18px;
 }
-.daily p,.game-card small{color:var(--muted);font-size:13px;line-height:1.5}
-.section-title{
-display:flex;justify-content:space-between;
-align-items:center;margin:27px 0 13px
-}
-.section-title h2{font-size:20px;margin:0}
-.section-title small{color:var(--muted)}
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.game-card{
-background:var(--card);border:1px solid #38395f;
-border-radius:15px;padding:17px;text-align:left;
-color:white;min-height:140px
-}
-.game-card:active{transform:scale(.97)}
-.game-card .emoji{font-size:31px;display:block;margin-bottom:12px}
-.game-card strong{display:block;margin-bottom:7px;font-size:15px}
-.purple{border-color:#7965ff}
-.pink{border-color:#a64b91}
-.blue{border-color:#397d9c}
-.green{border-color:#38886e}
-.panel{
-background:var(--card);border:1px solid #38395f;
-border-radius:17px;padding:18px;margin-top:16px
-}
-.hidden{display:none!important}
-.back{background:none;border:0;color:var(--cyan);padding:5px 0 15px}
-.heading{text-align:center;margin:10px 0 20px}
-.heading .big{font-size:44px}
-.heading h2{margin:8px 0}
-.heading p,.note{color:var(--muted);font-size:13px;line-height:1.6}
-.progress{height:7px;background:#393957;border-radius:10px;overflow:hidden;margin:15px 0}
-.progress div{height:100%;background:var(--green);transition:.3s}
-.question{font-size:19px;line-height:1.5;font-weight:bold;margin:20px 0}
-.answers{display:grid;gap:10px}
-.answer{
-background:var(--card2);border:1px solid #46476c;
-border-radius:11px;color:white;padding:14px;text-align:left
-}
-.answer.correct{background:#145b48;border-color:var(--green)}
-.answer.wrong{background:#642d48;border-color:#fa719c}
-.answer:disabled{cursor:default}
-.feedback{color:var(--muted);font-size:14px;line-height:1.6;margin-top:15px}
-.action{
-width:100%;background:var(--purple);color:white;
-border:0;padding:14px;border-radius:11px;
-font-weight:bold;margin-top:17px
-}
-.secondary{
-background:var(--card2);border:1px solid #555;
-color:white;padding:12px;border-radius:10px;margin-top:10px
-}
-.result{text-align:center;padding:15px 0}
-.result .trophy{font-size:55px}
-.result strong{font-size:32px;color:var(--green)}
-.input{
-width:100%;padding:14px;background:#12132a;
-border:1px solid #55567b;border-radius:10px;
-color:white;font-size:18px;margin:12px 0
+.gamebox.active{display:block}
+.gamehead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.gamehead h2{margin:0;font-size:21px}
+.question{font-size:20px;font-weight:bold;line-height:1.5;margin:23px 0 17px;text-align:center}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.answers button{background:var(--panel2);border:1px solid #ffffff18;min-height:48px}
+.answers button.correct{background:#14794f}
+.answers button.wrong{background:#9e3152}
+.feedback{text-align:center;min-height:27px;margin:15px 0;color:var(--green);font-weight:bold}
+.info{text-align:center;color:var(--muted);font-size:13px;margin:10px 0}
+.input-row{display:flex;gap:8px;max-width:500px;margin:15px auto}
+input{
+width:100%;min-width:0;padding:13px;border-radius:10px;
+border:1px solid #ffffff30;background:#100c20;color:white;font-size:16px;
 }
 .center{text-align:center}
-.memory-grid{
-display:grid;grid-template-columns:repeat(3,1fr);
-gap:10px;margin:20px 0
+.big-emoji{font-size:65px;text-align:center;margin:15px}
+.discovery{background:linear-gradient(120deg,#282047,#38285b);padding:20px;border-radius:17px;line-height:1.6}
+.hidden{display:none!important}
+.difference-board{
+display:grid;grid-template-columns:repeat(5,1fr);gap:7px;
+max-width:350px;margin:18px auto;
 }
-.tile{
-aspect-ratio:1;background:var(--card2);
-border:1px solid #55567b;border-radius:13px;
-color:white;font-size:27px
+.diff-cell{
+background:#30264c;border-radius:10px;min-height:55px;
+font-size:26px;padding:8px 2px;
 }
-.tile.lit{background:#6955d8;border-color:#b8aaff}
+.diff-cell:active{background:#6550a5}
 footer{
-text-align:center;border-top:1px solid #303052;
-margin-top:40px;padding:25px 12px;
-color:var(--muted);font-size:12px;line-height:2
+text-align:center;border-top:1px solid #ffffff18;padding:24px 12px;
+color:var(--muted);font-size:13px;line-height:1.8;
 }
-@media(min-width:650px){
-.container{padding-top:28px}
-.hero{padding:50px}
-.hero h1{font-size:45px}
-.cards{grid-template-columns:repeat(3,1fr)}
-.game-card{min-height:155px}
+footer strong{color:white}
+@media(max-width:480px){
+.hero h1{font-size:25px}
+.answers{grid-template-columns:1fr}
+.gamebox{padding:15px}
+.section-title{font-size:20px}
+.diff-cell{min-height:48px;font-size:22px}
 }
 </style>
 </head>
 
 <body>
-
 <header>
 <div class="logo">🎮 PlayWise <span>Arena</span></div>
-<button class="lang" onclick="alert('Urdu language support is coming soon!')">اردو Soon</button>
+<p>Play • Learn • Think • Discover</p>
 </header>
 
 <main class="container">
 
-<div id="home">
-
 <section class="hero">
-<span class="tag">✨ FREE ENTERTAINMENT & LEARNING</span>
-<h1>Challenge Your Brain!</h1>
-<p>Play exciting games, test your knowledge and discover something new every day.</p>
-<button class="primary" onclick="startQuiz('general')">Play Now →</button>
-</section>
-
+<h1>Welcome to PlayWise Arena!</h1>
+<p>Challenge your brain, test your knowledge, solve puzzles and discover something new every day. Fun learning for everyone!</p>
 <div class="stats">
-<div class="stat"><strong id="totalScore">0</strong><small>TOTAL POINTS</small></div>
-<div class="stat"><strong id="bestScore">0</strong><small>BEST QUIZ SCORE</small></div>
-<div class="stat"><strong id="played">0</strong><small>GAMES PLAYED</small></div>
+<div class="stat"><strong id="totalScore">0</strong>Total Points</div>
+<div class="stat"><strong>8</strong>Fun Games</div>
+<div class="stat"><strong>5</strong>Quiz Categories</div>
 </div>
-
-<section class="daily">
-<h3>🔥 Daily Challenge</h3>
-<p>Answer five knowledge questions and earn points!</p>
-<button class="primary" onclick="startQuiz('daily')">Start Daily Quiz</button>
 </section>
 
-<div class="section-title">
-<h2>🧠 Quiz Arena</h2>
-<small>Test your knowledge</small>
+<h2 class="section-title">🧩 Quiz Arena</h2>
+<p class="section-sub">Choose a topic and test what you know.</p>
+
+<div class="grid">
+<div class="card" onclick="startQuiz('general')"><div class="emoji">🌎</div><h3>General Knowledge</h3><p>Everyday facts and knowledge</p></div>
+<div class="card" onclick="startQuiz('science')"><div class="emoji">🔬</div><h3>Science & Technology</h3><p>Discover science and inventions</p></div>
+<div class="card" onclick="startQuiz('sports')"><div class="emoji">⚽</div><h3>Sports</h3><p>Sports trivia and champions</p></div>
+<div class="card" onclick="startQuiz('pakistan')"><div class="emoji">🇵🇰</div><h3>Pakistan</h3><p>History, places and culture</p></div>
+<div class="card" onclick="startQuiz('world')"><div class="emoji">🗺️</div><h3>World Knowledge</h3><p>Countries and world facts</p></div>
 </div>
 
-<div class="cards">
+<h2 class="section-title">🎯 Mind Games</h2>
+<p class="section-sub">Eight fun challenges to sharpen your brain. Pick any game to begin!</p>
 
-<button class="game-card purple" onclick="startQuiz('general')">
-<span class="emoji">🌟</span>
-<strong>General Knowledge</strong>
-<small>Explore the world of knowledge</small>
-</button>
-
-<button class="game-card blue" onclick="startQuiz('science')">
-<span class="emoji">🔬</span>
-<strong>Science & Technology</strong>
-<small>Discover amazing science facts</small>
-</button>
-
-<button class="game-card pink" onclick="startQuiz('sports')">
-<span class="emoji">⚽</span>
-<strong>Sports Quiz</strong>
-<small>Test your sports knowledge</small>
-</button>
-
-<button class="game-card green" onclick="startQuiz('pakistan')">
-<span class="emoji">🇵🇰</span>
-<strong>Pakistan Quiz</strong>
-<small>Learn about Pakistan</small>
-</button>
-
-<button class="game-card" onclick="startQuiz('world')">
-<span class="emoji">🌍</span>
-<strong>World Knowledge</strong>
-<small>Discover our amazing world</small>
-</button>
-
+<div class="grid">
+<div class="card" onclick="startGame('flags')"><div class="emoji">🌍</div><h3>Flag Challenge</h3><p>Recognise flags from around the world</p></div>
+<div class="card" onclick="startGame('words')"><div class="emoji">🔤</div><h3>Word Scramble</h3><p>Unscramble letters to find the word</p></div>
+<div class="card" onclick="startGame('math')"><div class="emoji">⚡</div><h3>Math Sprint</h3><p>Solve quick maths questions</p></div>
+<div class="card" onclick="startGame('truefalse')"><div class="emoji">🧠</div><h3>True or False</h3><p>Can you spot the correct facts?</p></div>
+<div class="card" onclick="startGame('odd')"><div class="emoji">🔍</div><h3>Odd One Out</h3><p>Find the item that does not belong</p></div>
+<div class="card" onclick="startGame('riddle')"><div class="emoji">❓</div><h3>Riddle Challenge</h3><p>Think carefully and solve riddles</p></div>
+<div class="card" onclick="startGame('emoji')"><div class="emoji">😀</div><h3>Emoji Decode</h3><p>Guess words from emoji clues</p></div>
+<div class="card" onclick="startGame('difference')"><div class="emoji">👀</div><h3>Find the Difference</h3><p>Spot the different symbol quickly</p></div>
 </div>
 
-<div class="section-title">
-<h2>🎯 Mind Games</h2>
-<small>Train your brain</small>
+<section class="gamebox" id="gameBox">
+<div class="gamehead">
+<h2 id="gameTitle">Game</h2>
+<button class="secondary" onclick="closeGame()">✕ Close</button>
 </div>
-
-<div class="cards">
-
-<button class="game-card purple" onclick="startMemory()">
-<span class="emoji">🧩</span>
-<strong>Memory Challenge</strong>
-<small>Remember the pattern</small>
-</button>
-
-<button class="game-card blue" onclick="startNumber()">
-<span class="emoji">🔢</span>
-<strong>Number Guess</strong>
-<small>Find the hidden number</small>
-</button>
-
-<button class="game-card pink" onclick="startFlags()">
-<span class="emoji">🏳️</span>
-<strong>Flag Challenge</strong>
-<small>Guess the country flag</small>
-</button>
-
+<div class="info" id="gameProgress"></div>
+<div id="gameContent"></div>
+<div class="feedback" id="feedback"></div>
+<div class="center">
+<button id="nextBtn" class="hidden" onclick="nextQuestion()">Next Question →</button>
+<button id="restartBtn" class="hidden secondary" onclick="restartGame()">Play Again</button>
 </div>
-
-<div class="section-title">
-<h2>💡 Daily Discovery</h2>
-<small>Learn something new</small>
-</div>
-
-<div class="panel">
-<h3 id="factTitle">Did You Know?</h3>
-<p id="factText">Octopuses have three hearts. Two pump blood to the gills, while one pumps it to the rest of the body.</p>
-<button class="secondary" onclick="newFact()">Discover Another Fact ↗</button>
-</div>
-
-</div>
-
-<section id="gameArea" class="hidden">
-<button class="back" onclick="goHome()">← Back to Home</button>
-<div class="panel" id="gameContent"></div>
 </section>
+
+<h2 class="section-title">✨ Daily Discovery</h2>
+<div class="discovery">
+<strong>Did you know?</strong>
+<p id="dailyFact">Octopuses have three hearts. Two pump blood to the gills, while one pumps it to the rest of the body!</p>
+<button class="secondary" onclick="newFact()">Discover Another Fact</button>
+</div>
 
 </main>
 
 <footer>
-<strong>🎮 PlayWise Arena</strong><br>
-Play. Learn. Challenge. Free entertainment for everyone.<br>
-Created & Managed by <strong style="color:white">Muhammad Bilal</strong><br>
-© <span id="year"></span> PlayWise Arena. All rights reserved.<br>
-<small>A free educational entertainment platform. No account or payment required.</small>
+<strong>PlayWise Arena</strong><br>
+A place where fun meets learning.<br>
+Created &amp; Managed by <strong>Muhammad Bilal</strong><br>
+© <span id="year"></span> PlayWise Arena. All rights reserved.
 </footer>
 
 <script>
-
 const $=id=>document.getElementById(id);
+let score=Number(localStorage.getItem("pwaScore")||0);
+$("totalScore").textContent=score;
+$("year").textContent=new Date().getFullYear();
 
-let total=Number(localStorage.pwTotal||0);
-let best=Number(localStorage.pwBest||0);
-let played=Number(localStorage.pwPlayed||0);
-
-let questions=[],qIndex=0,correct=0,answered=false;
-let target=0,attempts=0,numberDone=false;
-let memorySequence=[],memoryInput=[],memoryLevel=0,memoryBusy=false;
-let flagIndex=0,flagScore=0,flagDone=false;
+function addPoints(n){
+score+=n;
+localStorage.setItem("pwaScore",score);
+$("totalScore").textContent=score;
+}
 
 const quizzes={
-
 general:[
-["Which planet is known as the Red Planet?",["Earth","Mars","Venus","Jupiter"],1,"Mars looks reddish because of iron oxide on its surface."],
-["How many days are in a leap year?",["364","365","366","367"],2,"A leap year has 366 days."],
-["Which animal is the tallest in the world?",["Elephant","Giraffe","Camel","Horse"],1,"Giraffes are the tallest living land animals."],
-["What is the largest ocean?",["Atlantic","Indian","Pacific","Arctic"],2,"The Pacific Ocean is the largest ocean."],
-["How many colours are in a rainbow?",["5","6","7","8"],2,"A rainbow is commonly described as having seven colours."],
-["Which is the fastest land animal?",["Lion","Cheetah","Horse","Tiger"],1,"The cheetah is the fastest land animal."]
+["Which planet is known as the Red Planet?",["Mars","Venus","Jupiter","Mercury"],0],
+["How many days are in a leap year?",["364","365","366","367"],2],
+["Which animal is known as the King of the Jungle?",["Tiger","Lion","Elephant","Wolf"],1],
+["What is the largest ocean?",["Atlantic","Indian","Arctic","Pacific"],3],
+["How many colours are in a rainbow?",["5","6","7","8"],2]
 ],
-
 science:[
-["What gas do plants absorb?",["Oxygen","Carbon dioxide","Nitrogen","Hydrogen"],1,"Plants use carbon dioxide during photosynthesis."],
-["What is the centre of an atom called?",["Cell","Nucleus","Core","Electron"],1,"The nucleus contains protons and neutrons."],
-["Which planet is closest to the Sun?",["Venus","Earth","Mercury","Mars"],2,"Mercury is closest to the Sun."],
-["What is H2O commonly called?",["Salt","Water","Oxygen","Hydrogen"],1,"H2O is the chemical formula for water."],
-["Which organ pumps blood?",["Lungs","Brain","Heart","Kidney"],2,"The heart pumps blood around the body."],
-["What force pulls objects toward Earth?",["Magnetism","Gravity","Friction","Pressure"],1,"Gravity attracts objects toward one another."]
+["What gas do plants absorb?",["Oxygen","Carbon dioxide","Hydrogen","Nitrogen"],1],
+["What is H2O commonly known as?",["Salt","Water","Oxygen","Sugar"],1],
+["Which organ pumps blood?",["Lungs","Brain","Heart","Kidney"],2],
+["Which force pulls objects towards Earth?",["Magnetism","Gravity","Friction","Light"],1],
+["What is the centre of an atom called?",["Nucleus","Cell","Core","Orbit"],0]
 ],
-
 sports:[
-["How many players does a football team have on the field?",["9","10","11","12"],2,"A football team has 11 players on the field."],
-["Which sport uses a shuttlecock?",["Tennis","Badminton","Cricket","Hockey"],1,"Badminton is played with a shuttlecock."],
-["How many rings are on the Olympic symbol?",["4","5","6","7"],1,"The Olympic symbol has five interlocking rings."],
-["How many balls are in a standard cricket over?",["4","5","6","8"],2,"A standard over consists of six legal balls."],
-["Which country hosted the 2016 Summer Olympics?",["China","Brazil","Japan","UK"],1,"Rio de Janeiro, Brazil hosted the 2016 Olympics."]
+["How many players are on a football team on the field?",["9","10","11","12"],2],
+["Which sport uses a shuttlecock?",["Tennis","Badminton","Cricket","Hockey"],1],
+["How many rings are on the Olympic symbol?",["4","5","6","7"],1],
+["In cricket, a boundary without bouncing scores how many runs?",["2","3","4","6"],3],
+["Wimbledon is associated with which sport?",["Tennis","Golf","Rugby","Swimming"],0]
 ],
-
 pakistan:[
-["What is the capital of Pakistan?",["Karachi","Lahore","Islamabad","Quetta"],2,"Islamabad is the capital of Pakistan."],
-["When did Pakistan become independent?",["1940","1947","1956","1965"],1,"Pakistan became independent on 14 August 1947."],
-["What is Pakistan's national language?",["Punjabi","Sindhi","Urdu","Pashto"],2,"Urdu is Pakistan's national language."],
-["Which is Pakistan's highest mountain?",["Nanga Parbat","K2","Rakaposhi","Tirich Mir"],1,"K2 is the highest mountain in Pakistan."],
-["What is Pakistan's national flower?",["Rose","Tulip","Jasmine","Sunflower"],2,"Jasmine is Pakistan's national flower."]
+["What is the capital of Pakistan?",["Karachi","Lahore","Islamabad","Peshawar"],2],
+["When is Pakistan's Independence Day?",["23 March","14 August","6 September","25 December"],1],
+["What is the national language of Pakistan?",["Punjabi","Sindhi","Urdu","Pashto"],2],
+["Which is the highest mountain in Pakistan?",["Nanga Parbat","K2","Rakaposhi","Tirich Mir"],1],
+["Who was the founder of Pakistan?",["Allama Iqbal","Liaquat Ali Khan","Quaid-e-Azam","Sir Syed"],2]
 ],
-
 world:[
-["Which country is famous for the Eiffel Tower?",["Italy","France","Spain","Germany"],1,"The Eiffel Tower is in Paris, France."],
-["What is the largest continent?",["Africa","Europe","Asia","Australia"],2,"Asia is the largest continent by area."],
-["Which is the smallest country in the world?",["Monaco","Maldives","Vatican City","Malta"],2,"Vatican City is the world's smallest country."],
-["Which country is known as the Land of the Rising Sun?",["China","Japan","Thailand","Korea"],1,"Japan is known as the Land of the Rising Sun."],
-["What is the capital of Australia?",["Sydney","Melbourne","Canberra","Perth"],2,"Canberra is the capital of Australia."]
+["Which country is famous for the Eiffel Tower?",["Italy","France","Spain","Germany"],1],
+["Which is the largest continent?",["Africa","Europe","Asia","Australia"],2],
+["What is the capital of Japan?",["Seoul","Beijing","Tokyo","Bangkok"],2],
+["Which country has the city of Cairo?",["Egypt","Turkey","Morocco","Greece"],0],
+["Which is the smallest continent?",["Europe","Australia","South America","Antarctica"],1]
 ]
-
 };
 
-const facts=[
-"Octopuses have three hearts. Two pump blood to the gills, while one pumps it to the rest of the body.",
-"Honeybees communicate the location of food through a special movement called the waggle dance.",
-"Light from the Sun takes about 8 minutes and 20 seconds to reach Earth.",
-"A group of flamingos is called a flamboyance.",
-"Bananas are berries in botanical terms, but strawberries are not.",
-"The human brain contains billions of neurons.",
-"Sharks existed before trees appeared on Earth.",
-"Some turtles can breathe through specialized tissues near their tails."
-];
+const games={
+flags:{
+title:"🌍 Flag Challenge",
+items:[
+["🇵🇰","Pakistan",["Pakistan","India","Turkey","Malaysia"]],
+["🇯🇵","Japan",["China","Japan","South Korea","Thailand"]],
+["🇧🇷","Brazil",["Argentina","Mexico","Brazil","Portugal"]],
+["🇨🇦","Canada",["USA","Canada","UK","Australia"]],
+["🇹🇷","Turkey",["Turkey","Pakistan","Tunisia","Albania"]],
+["🇫🇷","France",["France","Italy","Germany","Russia"]],
+["🇩🇪","Germany",["Belgium","Germany","Spain","Austria"]],
+["🇦🇺","Australia",["New Zealand","Australia","UK","Canada"]],
+["🇸🇦","Saudi Arabia",["Iran","Oman","Saudi Arabia","Qatar"]],
+["🇮🇹","Italy",["France","Italy","Ireland","Mexico"]]
+],
+type:"choice"
+},
+words:{
+title:"🔤 Word Scramble",
+type:"text",
+items:[
+["PLEAP","APPLE"],["NARIB","BRAIN"],["REWAT","WATER"],
+["NOLMI","LEMON"],["OCHOLS","SCHOOL"],["DNIREF","FRIEND"],
+["NACEO","OCEAN"],["WOLFRE","FLOWER"],["RTAEH","EARTH"],["GAMNE","MANGO"]
+]
+},
+math:{
+title:"⚡ Math Sprint",
+type:"choice",
+items:[
+["8 + 7 = ?",["15","14","16","13"],0],
+["9 × 6 = ?",["45","54","56","49"],1],
+["45 ÷ 5 = ?",["8","10","9","7"],2],
+["100 - 37 = ?",["63","67","73","53"],0],
+["12 × 12 = ?",["124","144","132","154"],1],
+["56 + 29 = ?",["85","84","86","83"],0],
+["81 ÷ 9 = ?",["8","7","9","6"],2],
+["15 × 4 = ?",["45","50","60","55"],2],
+["90 - 46 = ?",["44","46","54","42"],0],
+["7 × 8 = ?",["54","56","64","48"],1]
+]
+},
+truefalse:{
+title:"🧠 True or False",
+type:"choice",
+items:[
+["The Sun is a star.",["True","False"],0],
+["A spider has six legs.",["True","False"],1],
+["Earth has one natural moon.",["True","False"],0],
+["Penguins can fly.",["True","False"],1],
+["Water freezes at 0°C at standard pressure.",["True","False"],0],
+["The human body has two hearts.",["True","False"],1],
+["Lightning is hotter than the surface of the Sun.",["True","False"],0],
+["Bats are mammals.",["True","False"],0],
+["The Pacific is the largest ocean.",["True","False"],0],
+["A square has five sides.",["True","False"],1]
+]
+},
+odd:{
+title:"🔍 Odd One Out",
+type:"choice",
+items:[
+["Which one is not a fruit?",["Apple","Banana","Carrot","Mango"],2],
+["Which one is not a planet?",["Mars","Venus","Moon","Saturn"],2],
+["Which one is not a bird?",["Eagle","Parrot","Dolphin","Sparrow"],2],
+["Which one is not a colour?",["Blue","Green","Circle","Yellow"],2],
+["Which one is not a season?",["Winter","Summer","Monday","Spring"],2],
+["Which one is not a vehicle?",["Car","Bus","Bicycle","Table"],3],
+["Which one is not a musical instrument?",["Piano","Guitar","Drum","Laptop"],3],
+["Which one is not a shape?",["Triangle","Square","Banana","Circle"],2],
+["Which one is not a drink?",["Milk","Juice","Water","Bread"],3],
+["Which one is not an animal?",["Tiger","Elephant","Rose","Horse"],2]
+]
+},
+riddle:{
+title:"❓ Riddle Challenge",
+type:"choice",
+items:[
+["What has hands but cannot clap?",["Clock","Robot","Tree","Chair"],0],
+["What gets wetter as it dries?",["Soap","Towel","Rain","Sponge"],1],
+["What has a neck but no head?",["Bottle","Snake","Shirt","Guitar"],0],
+["What has keys but no locks?",["Car","Piano","Door","Map"],1],
+["What goes up but never comes down?",["Balloon","Age","Smoke","Lift"],1],
+["What has one eye but cannot see?",["Needle","Potato","Storm","Fish"],0],
+["What has many teeth but cannot bite?",["Lion","Comb","Shark","Dog"],1],
+["What can travel around the world while staying in a corner?",["Stamp","Plane","Sun","Clock"],0],
+["What has a face and two hands but no arms or legs?",["Clock","Doll","Book","Mirror"],0],
+["What has words but never speaks?",["Radio","Book","Phone","Bird"],1]
+]
+},
+emoji:{
+title:"😀 Emoji Decode",
+type:"choice",
+items:[
+["🍎📱",["Apple phone","Fruit basket","Red computer","Smart watch"],0],
+["🌞🌻",["Moon flower","Sunflower","Summer rain","Yellow sky"],1],
+["🐝🍯",["Bee honey","Sweet fish","Honey bee","Golden bird"],2],
+["🌧️☂️",["Sunny day","Rainy day","Snow fall","Windy day"],1],
+["⭐🐟",["Starfish","Goldfish","Sky fish","Sea star"],0],
+["🔥🐶",["Hot dog","Fire dog","Red puppy","Dog house"],0],
+["🌙🚶",["Moon walk","Night train","Space trip","Star walk"],0],
+["🎂🎉",["Wedding day","Birthday party","Music show","School day"],1],
+["🐱🐟",["Cat food","Fish cat","Pet shop","Wild animal"],0],
+["🧊🍦",["Cold drink","Ice cream","Snow cone","Frozen cake"],1]
+]
+}
+};
 
-const flags=[
-["🇵🇰","Pakistan"],
-["🇯🇵","Japan"],
-["🇧🇷","Brazil"],
-["🇫🇷","France"],
-["🇨🇦","Canada"],
-["🇩🇪","Germany"],
-["🇮🇹","Italy"],
-["🇹🇷","Turkey"]
-];
+let currentMode="",currentItems=[],currentIndex=0,currentLocked=false,currentCategory="";
+let currentDifferenceAnswer=0;
 
-function updateStats(){
-$("totalScore").textContent=total;
-$("bestScore").textContent=best;
-$("played").textContent=played;
+function shuffle(array){
+let a=[...array];
+for(let i=a.length-1;i>0;i--){
+let j=Math.floor(Math.random()*(i+1));
+[a[i],a[j]]=[a[j],a[i]];
+}
+return a;
 }
 
-function addScore(points){
-total+=points;
-played++;
-localStorage.pwTotal=total;
-localStorage.pwPlayed=played;
-updateStats();
+function openGame(title){
+$("gameBox").classList.add("active");
+$("gameTitle").textContent=title;
+$("feedback").textContent="";
+$("nextBtn").classList.add("hidden");
+$("restartBtn").classList.add("hidden");
+$("gameBox").scrollIntoView({behavior:"smooth",block:"start"});
 }
 
-function goHome(){
-$("home").classList.remove("hidden");
-$("gameArea").classList.add("hidden");
-window.scrollTo(0,0);
+function closeGame(){
+$("gameBox").classList.remove("active");
 }
 
-function showGame(html){
-$("home").classList.add("hidden");
-$("gameArea").classList.remove("hidden");
-$("gameContent").innerHTML=html;
-window.scrollTo(0,0);
+function startQuiz(category){
+currentMode="quiz";
+currentCategory=category;
+currentItems=shuffle(quizzes[category]);
+currentIndex=0;
+openGame("🧩 "+category.charAt(0).toUpperCase()+category.slice(1)+" Quiz");
+showQuestion();
 }
 
-function startQuiz(type){
-questions=type==="daily"?
-[...quizzes.general.slice(0,2),...quizzes.science.slice(0,2),quizzes.pakistan[0]]:
-[...quizzes[type]];
-qIndex=0;
-correct=0;
-answered=false;
-showQuestion(type);
+function startGame(type){
+currentMode=type;
+currentCategory="";
+currentIndex=0;
+currentItems=shuffle(games[type].items);
+openGame(games[type].title);
+showQuestion();
 }
 
-function showQuestion(type){
-if(qIndex>=questions.length){
-finishQuiz();
+function showQuestion(){
+currentLocked=false;
+$("feedback").textContent="";
+$("nextBtn").classList.add("hidden");
+$("restartBtn").classList.add("hidden");
+$("gameProgress").textContent="Question "+(currentIndex+1)+" of "+currentItems.length;
+let item=currentItems[currentIndex];
+let content=$("gameContent");
+content.innerHTML="";
+
+if(currentMode==="difference"){
+showDifference();
 return;
 }
-let q=questions[qIndex];
-showGame(`
-<div class="heading">
-<div class="big">🧠</div>
-<h2>${type==="daily"?"Daily Challenge":"Quiz Challenge"}</h2>
-<p>Question ${qIndex+1} of ${questions.length}</p>
-</div>
-<div class="progress"><div style="width:${qIndex/questions.length*100}%"></div></div>
-<div class="question">${q[0]}</div>
-<div class="answers">
-${q[1].map((a,i)=>`<button class="answer" onclick="chooseAnswer(${i})">${String.fromCharCode(65+i)}. ${a}</button>`).join("")}
-</div>
-<div id="feedback" class="feedback"></div>
-<button class="action hidden" id="nextBtn" onclick="nextQuestion('${type}')">Next Question →</button>
-`);
+
+if(currentMode==="words"){
+let word=item[0];
+content.innerHTML='<div class="question">Unscramble these letters</div><div class="big-emoji">🔠</div><div class="question" style="letter-spacing:7px">'+word+'</div><div class="input-row"><input id="answerInput" placeholder="Type your answer" autocomplete="off"><button onclick="checkText()">Check</button></div>';
+$("answerInput").addEventListener("keydown",e=>{if(e.key==="Enter")checkText()});
+return;
 }
 
-function chooseAnswer(i){
-if(answered)return;
-answered=true;
-let q=questions[qIndex];
+if(currentMode==="flags"){
+content.innerHTML='<div class="big-emoji">'+item[0]+'</div><div class="question">Which country does this flag belong to?</div>';
+renderChoices(item[2],item[2].indexOf(item[1]));
+return;
+}
 
-document.querySelectorAll(".answer").forEach((b,j)=>{
-b.disabled=true;
-if(j===q[2])b.classList.add("correct");
-else if(j===i)b.classList.add("wrong");
+if(currentMode==="quiz"){
+content.innerHTML='<div class="question">'+item[0]+'</div>';
+renderChoices(item[1],item[2]);
+return;
+}
+
+if(currentMode==="math"||currentMode==="truefalse"||currentMode==="odd"||currentMode==="riddle"||currentMode==="emoji"){
+content.innerHTML='<div class="big-emoji">'+(currentMode==="emoji"?item[0]:"")+'</div><div class="question">'+item[0]+'</div>';
+renderChoices(item[1],item[2]);
+}
+}
+
+function renderChoices(options,answerIndex){
+let box=document.createElement("div");
+box.className="answers";
+options.forEach((option,i)=>{
+let b=document.createElement("button");
+b.textContent=option;
+b.onclick=()=>answerChoice(i,answerIndex,box);
+box.appendChild(b);
 });
-
-if(i===q[2])correct++;
-
-$("feedback").textContent=(i===q[2]?"✓ Correct! ":"✗ Not quite. ")+q[3];
-$("nextBtn").classList.remove("hidden");
-$("nextBtn").textContent=qIndex===questions.length-1?"See Results":"Next Question →";
+$("gameContent").appendChild(box);
 }
 
-function nextQuestion(type){
-qIndex++;
-answered=false;
-showQuestion(type);
-}
-
-function finishQuiz(){
-let points=correct*10;
-addScore(points);
-
-if(points>best){
-best=points;
-localStorage.pwBest=best;
-updateStats();
-}
-
-showGame(`
-<div class="result">
-<div class="trophy">🏆</div>
-<h2>Quiz Completed!</h2>
-<p>You answered <strong>${correct}/${questions.length}</strong> correctly.</p>
-<strong>+${points} Points</strong>
-<p class="note">Keep learning and try another challenge!</p>
-<button class="action" onclick="goHome()">Back to Home</button>
-<button class="secondary" style="width:100%" onclick="startQuiz('general')">Play Again</button>
-</div>
-`);
-}
-
-/* NUMBER GUESS */
-
-function startNumber(){
-target=Math.floor(Math.random()*50)+1;
-attempts=0;
-numberDone=false;
-renderNumber();
-}
-
-function renderNumber(message="Guess a number between 1 and 50."){
-showGame(`
-<div class="heading">
-<div class="big">🔢</div>
-<h2>Number Guess</h2>
-<p>Find the hidden number between 1 and 50.</p>
-</div>
-<div class="center">
-<input class="input" id="guessInput" type="number" min="1" max="50" placeholder="Enter a number">
-<p id="guessMessage" class="feedback">${message}</p>
-<button class="action" onclick="checkNumber()">Check Number</button>
-<p class="note">Attempts: <span id="attemptCount">${attempts}</span></p>
-</div>
-`);
-}
-
-function checkNumber(){
-if(numberDone)return;
-
-let input=$("guessInput");
-let n=Number(input.value);
-
-if(!input.value||n<1||n>50){
-$("guessMessage").textContent="Please enter a number from 1 to 50.";
-return;
-}
-
-attempts++;
-$("attemptCount").textContent=attempts;
-
-if(n===target){
-numberDone=true;
-let points=Math.max(10,50-attempts*5);
-addScore(points);
-$("guessMessage").textContent="🎉 Correct! The number was "+target+". You earned "+points+" points!";
-$("gameContent").insertAdjacentHTML("beforeend",`
-<button class="action" onclick="goHome()">Back to Home</button>
-<button class="secondary" style="width:100%" onclick="startNumber()">Play Again</button>
-`);
+function answerChoice(selected,correct,box){
+if(currentLocked)return;
+currentLocked=true;
+let buttons=box.querySelectorAll("button");
+buttons.forEach((b,i)=>{
+b.disabled=true;
+if(i===correct)b.classList.add("correct");
+});
+if(selected===correct){
+addPoints(10);
+$("feedback").textContent="Correct! +10 points 🎉";
 }else{
-$("guessMessage").textContent=n<target?"📈 Try a higher number!":"📉 Try a lower number!";
-input.value="";
+buttons[selected].classList.add("wrong");
+$("feedback").textContent="Not quite! Better luck next time.";
+}
+finishQuestion();
+}
+
+function checkText(){
+if(currentLocked)return;
+let answer=$("answerInput").value.trim().toUpperCase();
+if(!answer){$("feedback").textContent="Please enter your answer.";return;}
+currentLocked=true;
+if(answer===currentItems[currentIndex][1]){
+addPoints(10);
+$("feedback").textContent="Excellent! Correct answer. +10 points 🎉";
+}else{
+$("feedback").textContent="Correct answer: "+currentItems[currentIndex][1];
+}
+$("answerInput").disabled=true;
+finishQuestion();
+}
+
+function finishQuestion(){
+$("nextBtn").classList.remove("hidden");
+if(currentIndex===currentItems.length-1){
+$("nextBtn").textContent="See Results";
 }
 }
 
-/* MEMORY CHALLENGE */
-
-function startMemory(){
-memoryLevel=1;
-memorySequence=[];
-memoryInput=[];
-memoryBusy=false;
-
-showGame(`
-<div class="heading">
-<div class="big">🧩</div>
-<h2>Memory Challenge</h2>
-<p>Remember the highlighted squares, then repeat the pattern.</p>
-</div>
-<div class="center">
-<h3 id="memoryMessage">Watch carefully!</h3>
-<div class="memory-grid" id="memoryGrid">
-${Array.from({length:9},(_,i)=>`<button class="tile" id="tile${i}" onclick="memoryTap(${i})">?</button>`).join("")}
-</div>
-<p class="note">Level: <span id="memoryLevel">1</span></p>
-<button class="action" id="memoryStart" onclick="nextMemory()">Start Challenge</button>
-</div>
-`);
-}
-
-function nextMemory(){
-if(memoryBusy)return;
-
-memoryBusy=true;
-memoryInput=[];
-memorySequence=[];
-
-let length=Math.min(memoryLevel+1,8);
-
-while(memorySequence.length<length){
-let n=Math.floor(Math.random()*9);
-if(!memorySequence.includes(n))memorySequence.push(n);
-}
-
-$("memoryMessage").textContent="Watch the pattern!";
-
-let step=0;
-
-function flash(){
-if(step>0){
-$("tile"+memorySequence[step-1]).classList.remove("lit");
-}
-
-if(step>=memorySequence.length){
-memoryBusy=false;
-$("memoryMessage").textContent="Now repeat the pattern!";
-return;
-}
-
-$("tile"+memorySequence[step]).classList.add("lit");
-step++;
-setTimeout(flash,650);
-}
-
-flash();
-}
-
-function memoryTap(i){
-if(memoryBusy||memorySequence.length===0)return;
-
-$("tile"+i).classList.add("lit");
-setTimeout(()=>$("tile"+i).classList.remove("lit"),220);
-
-memoryInput.push(i);
-let pos=memoryInput.length-1;
-
-if(memoryInput[pos]!==memorySequence[pos]){
-memoryBusy=true;
-let points=(memoryLevel-1)*5;
-addScore(points);
-
-$("memoryMessage").textContent="Game over! You reached level "+memoryLevel+".";
-$("memoryStart").textContent="Play Again";
-$("memoryStart").classList.remove("hidden");
-$("memoryStart").onclick=()=>startMemory();
-return;
-}
-
-if(memoryInput.length===memorySequence.length){
-memoryBusy=true;
-memoryLevel++;
-$("memoryLevel").textContent=memoryLevel;
-$("memoryMessage").textContent="✓ Excellent! Next level...";
-
-setTimeout(()=>{
-memoryBusy=false;
-nextMemory();
-},850);
+function nextQuestion(){
+if(!currentLocked)return;
+if(currentIndex<currentItems.length-1){
+currentIndex++;
+$("nextBtn").textContent="Next Question →";
+showQuestion();
+}else{
+showResults();
 }
 }
 
-/* FLAG CHALLENGE */
-
-function startFlags(){
-flagIndex=0;
-flagScore=0;
-flagDone=false;
-showFlag();
+function showResults(){
+$("gameContent").innerHTML='<div class="big-emoji">🏆</div><div class="question">Challenge Completed!</div><p class="center">Great effort! Keep playing and learning.</p>';
+$("gameProgress").textContent="You completed "+currentItems.length+" questions.";
+$("feedback").textContent="Your total points: "+score;
+$("nextBtn").classList.add("hidden");
+$("restartBtn").classList.remove("hidden");
 }
 
-function showFlag(){
-if(flagIndex>=flags.length){
-addScore(flagScore);
-
-showGame(`
-<div class="result">
-<div class="trophy">🌍</div>
-<h2>Flag Challenge Complete!</h2>
-<strong>+${flagScore} Points</strong>
-<p>You identified ${flagScore/10} flags correctly.</p>
-<button class="action" onclick="goHome()">Back to Home</button>
-<button class="secondary" style="width:100%" onclick="startFlags()">Play Again</button>
-</div>
-`);
-return;
+function restartGame(){
+if(currentMode==="quiz"){
+startQuiz(currentCategory);
+}else{
+startGame(currentMode);
+}
 }
 
-let item=flags[flagIndex];
-
-let choices=[
-item[1],
-...flags.filter((f,i)=>i!==flagIndex)
-.sort(()=>Math.random()-.5)
-.slice(0,3).map(f=>f[1])
-].sort(()=>Math.random()-.5);
-
-flagDone=false;
-
-showGame(`
-<div class="heading">
-<div class="big">🏳️</div>
-<h2>Flag Challenge</h2>
-<p>Flag ${flagIndex+1} of ${flags.length}</p>
-<div style="font-size:65px;margin:15px">${item[0]}</div>
-<h3>Which country does this flag belong to?</h3>
-</div>
-<div class="answers">
-${choices.map(c=>`
-<button class="answer" onclick="chooseFlag('${c}','${item[1]}')">${c}</button>
-`).join("")}
-</div>
-<p id="flagFeedback" class="feedback"></p>
-`);
+/* Find the Difference */
+function showDifference(){
+let same="🔵";
+let different="🟣";
+currentDifferenceAnswer=Math.floor(Math.random()*25);
+let board=document.createElement("div");
+board.className="difference-board";
+for(let i=0;i<25;i++){
+let b=document.createElement("button");
+b.className="diff-cell";
+b.textContent=i===currentDifferenceAnswer?different:same;
+b.onclick=()=>checkDifference(i,b);
+board.appendChild(b);
+}
+$("gameContent").innerHTML='<div class="question">Find and tap the different symbol!</div><p class="info">Look carefully. Only one symbol is different.</p>';
+$("gameContent").appendChild(board);
 }
 
-function chooseFlag(choice,answer){
-if(flagDone)return;
-flagDone=true;
-
-document.querySelectorAll(".answer").forEach(b=>{
-b.disabled=true;
-if(b.textContent===answer)b.classList.add("correct");
-else if(b.textContent===choice)b.classList.add("wrong");
-});
-
-if(choice===answer)flagScore+=10;
-
-$("flagFeedback").textContent=choice===answer?"✓ Correct!":"The correct answer is "+answer+".";
-
-$("flagFeedback").insertAdjacentHTML("afterend",`
-<button class="action" onclick="flagIndex++;showFlag()">Next Flag →</button>
-`);
+function checkDifference(selected,button){
+if(currentLocked)return;
+currentLocked=true;
+if(selected===currentDifferenceAnswer){
+button.classList.add("correct");
+addPoints(15);
+$("feedback").textContent="Amazing eyes! You found it. +15 points 👀";
+}else{
+button.classList.add("wrong");
+$("feedback").textContent="Not this one! The different symbol is highlighted.";
+let cells=document.querySelectorAll(".diff-cell");
+cells[currentDifferenceAnswer].classList.add("correct");
+}
+finishQuestion();
 }
 
-/* DAILY DISCOVERY */
-
+const facts=[
+"Octopuses have three hearts. Two pump blood to the gills, while one pumps it to the rest of the body!",
+"Honey can stay edible for a very long time when properly stored.",
+"Bananas are berries, but strawberries are not botanical berries.",
+"The Moon is slowly moving away from Earth.",
+"An adult human body usually has 206 bones.",
+"Some turtles can breathe through specialised tissues near their tails.",
+"Light from the Sun takes about eight minutes to reach Earth.",
+"A group of flamingos is called a flamboyance.",
+"Sharks existed before trees appeared on Earth.",
+"Your brain uses a large share of your body's energy."
+];
 function newFact(){
-let factIndex=Math.floor(Math.random()*facts.length);
-$("factText").textContent=facts[factIndex];
-$("factTitle").textContent="💡 Did You Know?";
+let fact=facts[Math.floor(Math.random()*facts.length)];
+$("dailyFact").textContent=fact;
 }
-
-$("year").textContent=new Date().getFullYear();
-updateStats();
-
 </script>
 </body>
 </html>
