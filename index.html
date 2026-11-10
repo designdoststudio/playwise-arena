@@ -3,10 +3,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#15152e">
-<meta name="description" content="PlayWise Arena is a free online quiz and brain games platform. Play fun games, test your knowledge and learn something new every day.">
+<meta name="description" content="PlayWise Arena is a free online quiz, brain games and educational entertainment platform for children, teens and adults.">
 <title>PlayWise Arena - Free Quiz, Brain Games & Fun</title>
+
 <style>
 :root{
 --bg:#101126;--card:#1c1d3c;--card2:#292a50;
@@ -14,34 +15,72 @@
 --white:#fff;--muted:#b8bad1;--green:#55d99a
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:white;font-family:Arial,sans-serif}
+body{
+margin:0;background:var(--bg);color:white;
+font-family:Arial,Helvetica,sans-serif
+}
 button{font:inherit;cursor:pointer}
-header{background:#17162f;padding:16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5;border-bottom:1px solid #303052}
+header{
+background:#17162f;padding:16px;
+display:flex;justify-content:space-between;
+align-items:center;position:sticky;top:0;
+z-index:5;border-bottom:1px solid #303052
+}
 .logo{font-size:20px;font-weight:900}
 .logo span{color:var(--pink)}
-.lang{background:var(--card2);border:1px solid #555;color:white;padding:9px 13px;border-radius:10px}
+.lang{
+background:var(--card2);border:1px solid #555;
+color:white;padding:9px 13px;border-radius:10px
+}
 .container{max-width:1000px;margin:auto;padding:18px 15px 35px}
-.hero{background:linear-gradient(135deg,#5542c5,#a348b7,#df649e);padding:35px 18px;border-radius:22px;text-align:center}
+.hero{
+background:linear-gradient(135deg,#5542c5,#a348b7,#df649e);
+padding:35px 18px;border-radius:22px;text-align:center
+}
 .tag{background:#ffffff25;padding:8px 12px;border-radius:20px;font-size:12px}
 .hero h1{font-size:34px;margin:20px 0 10px}
 .hero p{line-height:1.6;color:#f0eaff}
-.primary{background:white;color:#503cbb;border:0;padding:13px 22px;border-radius:11px;font-weight:bold;margin-top:10px}
+.primary{
+background:white;color:#503cbb;border:0;
+padding:13px 22px;border-radius:11px;
+font-weight:bold;margin-top:10px
+}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:20px 0}
-.stat{text-align:center;background:var(--card);padding:14px 5px;border-radius:13px;border:1px solid #343558}
+.stat{
+text-align:center;background:var(--card);
+padding:14px 5px;border-radius:13px;
+border:1px solid #343558
+}
 .stat strong{display:block;color:var(--cyan);font-size:23px}
 .stat small{font-size:10px;color:var(--muted)}
-.daily{background:linear-gradient(110deg,#263f70,#3b3279);padding:19px;border-radius:16px;margin:25px 0}
+.daily{
+background:linear-gradient(110deg,#263f70,#3b3279);
+padding:19px;border-radius:16px;margin:25px 0
+}
 .daily p,.game-card small{color:var(--muted);font-size:13px;line-height:1.5}
-.section-title{display:flex;justify-content:space-between;align-items:center;margin:27px 0 13px}
+.section-title{
+display:flex;justify-content:space-between;
+align-items:center;margin:27px 0 13px
+}
 .section-title h2{font-size:20px;margin:0}
 .section-title small{color:var(--muted)}
 .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.game-card{background:var(--card);border:1px solid #38395f;border-radius:15px;padding:17px;text-align:left;color:white;min-height:140px}
+.game-card{
+background:var(--card);border:1px solid #38395f;
+border-radius:15px;padding:17px;text-align:left;
+color:white;min-height:140px
+}
 .game-card:active{transform:scale(.97)}
 .game-card .emoji{font-size:31px;display:block;margin-bottom:12px}
 .game-card strong{display:block;margin-bottom:7px;font-size:15px}
-.purple{border-color:#7965ff}.pink{border-color:#a64b91}.blue{border-color:#397d9c}.green{border-color:#38886e}
-.panel{background:var(--card);border:1px solid #38395f;border-radius:17px;padding:18px;margin-top:16px}
+.purple{border-color:#7965ff}
+.pink{border-color:#a64b91}
+.blue{border-color:#397d9c}
+.green{border-color:#38886e}
+.panel{
+background:var(--card);border:1px solid #38395f;
+border-radius:17px;padding:18px;margin-top:16px
+}
 .hidden{display:none!important}
 .back{background:none;border:0;color:var(--cyan);padding:5px 0 15px}
 .heading{text-align:center;margin:10px 0 20px}
@@ -52,40 +91,68 @@ header{background:#17162f;padding:16px;display:flex;justify-content:space-betwee
 .progress div{height:100%;background:var(--green);transition:.3s}
 .question{font-size:19px;line-height:1.5;font-weight:bold;margin:20px 0}
 .answers{display:grid;gap:10px}
-.answer{background:var(--card2);border:1px solid #46476c;border-radius:11px;color:white;padding:14px;text-align:left}
+.answer{
+background:var(--card2);border:1px solid #46476c;
+border-radius:11px;color:white;padding:14px;text-align:left
+}
 .answer.correct{background:#145b48;border-color:var(--green)}
 .answer.wrong{background:#642d48;border-color:#fa719c}
 .answer:disabled{cursor:default}
 .feedback{color:var(--muted);font-size:14px;line-height:1.6;margin-top:15px}
-.action{width:100%;background:var(--purple);color:white;border:0;padding:14px;border-radius:11px;font-weight:bold;margin-top:17px}
-.secondary{background:var(--card2);border:1px solid #555;color:white;padding:12px;border-radius:10px;margin-top:10px}
+.action{
+width:100%;background:var(--purple);color:white;
+border:0;padding:14px;border-radius:11px;
+font-weight:bold;margin-top:17px
+}
+.secondary{
+background:var(--card2);border:1px solid #555;
+color:white;padding:12px;border-radius:10px;margin-top:10px
+}
 .result{text-align:center;padding:15px 0}
 .result .trophy{font-size:55px}
 .result strong{font-size:32px;color:var(--green)}
-.input{width:100%;padding:14px;background:#12132a;border:1px solid #55567b;border-radius:10px;color:white;font-size:18px;margin:12px 0}
+.input{
+width:100%;padding:14px;background:#12132a;
+border:1px solid #55567b;border-radius:10px;
+color:white;font-size:18px;margin:12px 0
+}
 .center{text-align:center}
-.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
-.tile{aspect-ratio:1;background:var(--card2);border:1px solid #55567b;border-radius:13px;color:white;font-size:27px}
+.memory-grid{
+display:grid;grid-template-columns:repeat(3,1fr);
+gap:10px;margin:20px 0
+}
+.tile{
+aspect-ratio:1;background:var(--card2);
+border:1px solid #55567b;border-radius:13px;
+color:white;font-size:27px
+}
 .tile.lit{background:#6955d8;border-color:#b8aaff}
-footer{text-align:center;border-top:1px solid #303052;margin-top:40px;padding:25px 12px;color:var(--muted);font-size:12px;line-height:2}
-footer a{color:#c4baff}
+footer{
+text-align:center;border-top:1px solid #303052;
+margin-top:40px;padding:25px 12px;
+color:var(--muted);font-size:12px;line-height:2
+}
 @media(min-width:650px){
-.container{padding-top:28px}.hero{padding:50px}.hero h1{font-size:45px}
+.container{padding-top:28px}
+.hero{padding:50px}
+.hero h1{font-size:45px}
 .cards{grid-template-columns:repeat(3,1fr)}
 .game-card{min-height:155px}
 }
 </style>
 </head>
+
 <body>
 
 <header>
 <div class="logo">🎮 PlayWise <span>Arena</span></div>
-<button class="lang" onclick="toggleLanguage()" id="langButton">اردو</button>
+<button class="lang" onclick="alert('Urdu language support is coming soon!')">اردو Soon</button>
 </header>
 
 <main class="container">
 
 <div id="home">
+
 <section class="hero">
 <span class="tag">✨ FREE ENTERTAINMENT & LEARNING</span>
 <h1>Challenge Your Brain!</h1>
@@ -101,32 +168,87 @@ footer a{color:#c4baff}
 
 <section class="daily">
 <h3>🔥 Daily Challenge</h3>
-<p>Answer today's five knowledge questions and earn points!</p>
+<p>Answer five knowledge questions and earn points!</p>
 <button class="primary" onclick="startQuiz('daily')">Start Daily Quiz</button>
 </section>
 
-<div class="section-title"><h2>🧠 Quiz Arena</h2><small>Test your knowledge</small></div>
-<div class="cards">
-<button class="game-card purple" onclick="startQuiz('general')"><span class="emoji">🌟</span><strong>General Knowledge</strong><small>Explore the world of knowledge</small></button>
-<button class="game-card blue" onclick="startQuiz('science')"><span class="emoji">🔬</span><strong>Science & Technology</strong><small>Discover amazing science facts</small></button>
-<button class="game-card pink" onclick="startQuiz('sports')"><span class="emoji">⚽</span><strong>Sports Quiz</strong><small>Test your sports knowledge</small></button>
-<button class="game-card green" onclick="startQuiz('pakistan')"><span class="emoji">🇵🇰</span><strong>Pakistan Quiz</strong><small>Learn about Pakistan</small></button>
-<button class="game-card" onclick="startQuiz('world')"><span class="emoji">🌍</span><strong>World Knowledge</strong><small>Discover our amazing world</small></button>
+<div class="section-title">
+<h2>🧠 Quiz Arena</h2>
+<small>Test your knowledge</small>
 </div>
 
-<div class="section-title"><h2>🎯 Mind Games</h2><small>Train your brain</small></div>
 <div class="cards">
-<button class="game-card purple" onclick="startMemory()"><span class="emoji">🧩</span><strong>Memory Challenge</strong><small>Remember the pattern</small></button>
-<button class="game-card blue" onclick="startNumber()"><span class="emoji">🔢</span><strong>Number Guess</strong><small>Find the hidden number</small></button>
-<button class="game-card pink" onclick="startFlags()"><span class="emoji">🏳️</span><strong>Flag Challenge</strong><small>Guess the country flag</small></button>
+
+<button class="game-card purple" onclick="startQuiz('general')">
+<span class="emoji">🌟</span>
+<strong>General Knowledge</strong>
+<small>Explore the world of knowledge</small>
+</button>
+
+<button class="game-card blue" onclick="startQuiz('science')">
+<span class="emoji">🔬</span>
+<strong>Science & Technology</strong>
+<small>Discover amazing science facts</small>
+</button>
+
+<button class="game-card pink" onclick="startQuiz('sports')">
+<span class="emoji">⚽</span>
+<strong>Sports Quiz</strong>
+<small>Test your sports knowledge</small>
+</button>
+
+<button class="game-card green" onclick="startQuiz('pakistan')">
+<span class="emoji">🇵🇰</span>
+<strong>Pakistan Quiz</strong>
+<small>Learn about Pakistan</small>
+</button>
+
+<button class="game-card" onclick="startQuiz('world')">
+<span class="emoji">🌍</span>
+<strong>World Knowledge</strong>
+<small>Discover our amazing world</small>
+</button>
+
 </div>
 
-<div class="section-title"><h2>💡 Daily Discovery</h2><small>Learn something new</small></div>
+<div class="section-title">
+<h2>🎯 Mind Games</h2>
+<small>Train your brain</small>
+</div>
+
+<div class="cards">
+
+<button class="game-card purple" onclick="startMemory()">
+<span class="emoji">🧩</span>
+<strong>Memory Challenge</strong>
+<small>Remember the pattern</small>
+</button>
+
+<button class="game-card blue" onclick="startNumber()">
+<span class="emoji">🔢</span>
+<strong>Number Guess</strong>
+<small>Find the hidden number</small>
+</button>
+
+<button class="game-card pink" onclick="startFlags()">
+<span class="emoji">🏳️</span>
+<strong>Flag Challenge</strong>
+<small>Guess the country flag</small>
+</button>
+
+</div>
+
+<div class="section-title">
+<h2>💡 Daily Discovery</h2>
+<small>Learn something new</small>
+</div>
+
 <div class="panel">
 <h3 id="factTitle">Did You Know?</h3>
 <p id="factText">Octopuses have three hearts. Two pump blood to the gills, while one pumps it to the rest of the body.</p>
 <button class="secondary" onclick="newFact()">Discover Another Fact ↗</button>
 </div>
+
 </div>
 
 <section id="gameArea" class="hidden">
@@ -145,16 +267,20 @@ Created & Managed by <strong style="color:white">Muhammad Bilal</strong><br>
 </footer>
 
 <script>
+
 const $=id=>document.getElementById(id);
+
 let total=Number(localStorage.pwTotal||0);
 let best=Number(localStorage.pwBest||0);
 let played=Number(localStorage.pwPlayed||0);
+
 let questions=[],qIndex=0,correct=0,answered=false;
 let target=0,attempts=0,numberDone=false;
 let memorySequence=[],memoryInput=[],memoryLevel=0,memoryBusy=false;
 let flagIndex=0,flagScore=0,flagDone=false;
 
 const quizzes={
+
 general:[
 ["Which planet is known as the Red Planet?",["Earth","Mars","Venus","Jupiter"],1,"Mars looks reddish because of iron oxide on its surface."],
 ["How many days are in a leap year?",["364","365","366","367"],2,"A leap year has 366 days."],
@@ -163,6 +289,7 @@ general:[
 ["How many colours are in a rainbow?",["5","6","7","8"],2,"A rainbow is commonly described as having seven colours."],
 ["Which is the fastest land animal?",["Lion","Cheetah","Horse","Tiger"],1,"The cheetah is the fastest land animal."]
 ],
+
 science:[
 ["What gas do plants absorb?",["Oxygen","Carbon dioxide","Nitrogen","Hydrogen"],1,"Plants use carbon dioxide during photosynthesis."],
 ["What is the centre of an atom called?",["Cell","Nucleus","Core","Electron"],1,"The nucleus contains protons and neutrons."],
@@ -171,6 +298,7 @@ science:[
 ["Which organ pumps blood?",["Lungs","Brain","Heart","Kidney"],2,"The heart pumps blood around the body."],
 ["What force pulls objects toward Earth?",["Magnetism","Gravity","Friction","Pressure"],1,"Gravity attracts objects toward one another."]
 ],
+
 sports:[
 ["How many players does a football team have on the field?",["9","10","11","12"],2,"A football team has 11 players on the field."],
 ["Which sport uses a shuttlecock?",["Tennis","Badminton","Cricket","Hockey"],1,"Badminton is played with a shuttlecock."],
@@ -178,6 +306,7 @@ sports:[
 ["How many balls are in a standard cricket over?",["4","5","6","8"],2,"A standard over consists of six legal balls."],
 ["Which country hosted the 2016 Summer Olympics?",["China","Brazil","Japan","UK"],1,"Rio de Janeiro, Brazil hosted the 2016 Olympics."]
 ],
+
 pakistan:[
 ["What is the capital of Pakistan?",["Karachi","Lahore","Islamabad","Quetta"],2,"Islamabad is the capital of Pakistan."],
 ["When did Pakistan become independent?",["1940","1947","1956","1965"],1,"Pakistan became independent on 14 August 1947."],
@@ -185,6 +314,7 @@ pakistan:[
 ["Which is Pakistan's highest mountain?",["Nanga Parbat","K2","Rakaposhi","Tirich Mir"],1,"K2 is the highest mountain in Pakistan."],
 ["What is Pakistan's national flower?",["Rose","Tulip","Jasmine","Sunflower"],2,"Jasmine is Pakistan's national flower."]
 ],
+
 world:[
 ["Which country is famous for the Eiffel Tower?",["Italy","France","Spain","Germany"],1,"The Eiffel Tower is in Paris, France."],
 ["What is the largest continent?",["Africa","Europe","Asia","Australia"],2,"Asia is the largest continent by area."],
@@ -192,6 +322,7 @@ world:[
 ["Which country is known as the Land of the Rising Sun?",["China","Japan","Thailand","Korea"],1,"Japan is known as the Land of the Rising Sun."],
 ["What is the capital of Australia?",["Sydney","Melbourne","Canberra","Perth"],2,"Canberra is the capital of Australia."]
 ]
+
 };
 
 const facts=[
@@ -206,9 +337,14 @@ const facts=[
 ];
 
 const flags=[
-["🇵🇰","Pakistan"],["🇯🇵","Japan"],["🇧🇷","Brazil"],
-["🇫🇷","France"],["🇨🇦","Canada"],["🇩🇪","Germany"],
-["🇮🇹","Italy"],["🇹🇷","Turkey"]
+["🇵🇰","Pakistan"],
+["🇯🇵","Japan"],
+["🇧🇷","Brazil"],
+["🇫🇷","France"],
+["🇨🇦","Canada"],
+["🇩🇪","Germany"],
+["🇮🇹","Italy"],
+["🇹🇷","Turkey"]
 ];
 
 function updateStats(){
@@ -216,186 +352,341 @@ $("totalScore").textContent=total;
 $("bestScore").textContent=best;
 $("played").textContent=played;
 }
+
 function addScore(points){
-total+=points;played++;
+total+=points;
+played++;
 localStorage.pwTotal=total;
 localStorage.pwPlayed=played;
 updateStats();
 }
+
 function goHome(){
 $("home").classList.remove("hidden");
 $("gameArea").classList.add("hidden");
 window.scrollTo(0,0);
 }
+
 function showGame(html){
 $("home").classList.add("hidden");
 $("gameArea").classList.remove("hidden");
 $("gameContent").innerHTML=html;
 window.scrollTo(0,0);
 }
+
 function startQuiz(type){
-questions=[...(type==="daily"?[
-...quizzes.general.slice(0,2),
-...quizzes.science.slice(0,2),
-quizzes.pakistan[0]
-]:quizzes[type])];
-qIndex=0;correct=0;answered=false;
+questions=type==="daily"?
+[...quizzes.general.slice(0,2),...quizzes.science.slice(0,2),quizzes.pakistan[0]]:
+[...quizzes[type]];
+qIndex=0;
+correct=0;
+answered=false;
 showQuestion(type);
 }
+
 function showQuestion(type){
-if(qIndex>=questions.length){finishQuiz();return}
+if(qIndex>=questions.length){
+finishQuiz();
+return;
+}
 let q=questions[qIndex];
 showGame(`
-<div class="heading"><div class="big">🧠</div><h2>${type==="daily"?"Daily Challenge":"Quiz Challenge"}</h2><p>Question ${qIndex+1} of ${questions.length}</p></div>
+<div class="heading">
+<div class="big">🧠</div>
+<h2>${type==="daily"?"Daily Challenge":"Quiz Challenge"}</h2>
+<p>Question ${qIndex+1} of ${questions.length}</p>
+</div>
 <div class="progress"><div style="width:${qIndex/questions.length*100}%"></div></div>
 <div class="question">${q[0]}</div>
-<div class="answers">${q[1].map((a,i)=>`<button class="answer" onclick="chooseAnswer(${i})">${String.fromCharCode(65+i)}. ${a}</button>`).join("")}</div>
+<div class="answers">
+${q[1].map((a,i)=>`<button class="answer" onclick="chooseAnswer(${i})">${String.fromCharCode(65+i)}. ${a}</button>`).join("")}
+</div>
 <div id="feedback" class="feedback"></div>
-<button class="action hidden" id="nextBtn" onclick="nextQuestion('${type}')">Next Question →</button>`);
+<button class="action hidden" id="nextBtn" onclick="nextQuestion('${type}')">Next Question →</button>
+`);
 }
+
 function chooseAnswer(i){
 if(answered)return;
 answered=true;
 let q=questions[qIndex];
+
 document.querySelectorAll(".answer").forEach((b,j)=>{
 b.disabled=true;
 if(j===q[2])b.classList.add("correct");
 else if(j===i)b.classList.add("wrong");
 });
+
 if(i===q[2])correct++;
+
 $("feedback").textContent=(i===q[2]?"✓ Correct! ":"✗ Not quite. ")+q[3];
 $("nextBtn").classList.remove("hidden");
 $("nextBtn").textContent=qIndex===questions.length-1?"See Results":"Next Question →";
 }
-function nextQuestion(type){qIndex++;answered=false;showQuestion(type)}
+
+function nextQuestion(type){
+qIndex++;
+answered=false;
+showQuestion(type);
+}
+
 function finishQuiz(){
 let points=correct*10;
 addScore(points);
-if(points>best){best=points;localStorage.pwBest=best;updateStats()}
-showGame(`<div class="result"><div class="trophy">🏆</div><h2>Quiz Completed!</h2><p>You answered <strong>${correct}/${questions.length}</strong> correctly.</p><strong>+${points} Points</strong><p class="note">Keep learning and try another challenge!</p><button class="action" onclick="goHome()">Back to Home</button><button class="secondary" style="width:100%" onclick="startQuiz('general')">Play Again</button></div>`);
+
+if(points>best){
+best=points;
+localStorage.pwBest=best;
+updateStats();
 }
-function newFact(){
-let i=Math.floor(Math.random()*facts.length);
-$("factText").textContent=facts[i];
-$("factTitle").textContent="💡 Did You Know?";
+
+showGame(`
+<div class="result">
+<div class="trophy">🏆</div>
+<h2>Quiz Completed!</h2>
+<p>You answered <strong>${correct}/${questions.length}</strong> correctly.</p>
+<strong>+${points} Points</strong>
+<p class="note">Keep learning and try another challenge!</p>
+<button class="action" onclick="goHome()">Back to Home</button>
+<button class="secondary" style="width:100%" onclick="startQuiz('general')">Play Again</button>
+</div>
+`);
 }
+
+/* NUMBER GUESS */
 
 function startNumber(){
 target=Math.floor(Math.random()*50)+1;
-attempts=0;numberDone=false;
+attempts=0;
+numberDone=false;
 renderNumber();
 }
+
 function renderNumber(message="Guess a number between 1 and 50."){
-showGame(`<div class="heading"><div class="big">🔢</div><h2>Number Guess</h2><p>Find the hidden number between 1 and 50.</p></div>
-<div class="center"><input class="input" id="guessInput" type="number" min="1" max="50" placeholder="Enter a number"><p id="guessMessage" class="feedback">${message}</p><button class="action" onclick="checkNumber()">Check Number</button><p class="note">Attempts: <span id="attemptCount">${attempts}</span></p></div>`);
+showGame(`
+<div class="heading">
+<div class="big">🔢</div>
+<h2>Number Guess</h2>
+<p>Find the hidden number between 1 and 50.</p>
+</div>
+<div class="center">
+<input class="input" id="guessInput" type="number" min="1" max="50" placeholder="Enter a number">
+<p id="guessMessage" class="feedback">${message}</p>
+<button class="action" onclick="checkNumber()">Check Number</button>
+<p class="note">Attempts: <span id="attemptCount">${attempts}</span></p>
+</div>
+`);
 }
+
 function checkNumber(){
 if(numberDone)return;
+
 let input=$("guessInput");
 let n=Number(input.value);
-if(!input.value||n<1||n>50){$("guessMessage").textContent="Please enter a number from 1 to 50.";return}
+
+if(!input.value||n<1||n>50){
+$("guessMessage").textContent="Please enter a number from 1 to 50.";
+return;
+}
+
 attempts++;
 $("attemptCount").textContent=attempts;
+
 if(n===target){
 numberDone=true;
-addScore(Math.max(10,50-attempts*5));
-$("guessMessage").textContent="🎉 Correct! The number was "+target+". You earned points!";
-$("gameContent").insertAdjacentHTML("beforeend",'<button class="action" onclick="goHome()">Back to Home</button><button class="secondary" style="width:100%" onclick="startNumber()">Play Again</button>');
+let points=Math.max(10,50-attempts*5);
+addScore(points);
+$("guessMessage").textContent="🎉 Correct! The number was "+target+". You earned "+points+" points!";
+$("gameContent").insertAdjacentHTML("beforeend",`
+<button class="action" onclick="goHome()">Back to Home</button>
+<button class="secondary" style="width:100%" onclick="startNumber()">Play Again</button>
+`);
 }else{
 $("guessMessage").textContent=n<target?"📈 Try a higher number!":"📉 Try a lower number!";
 input.value="";
 }
 }
 
+/* MEMORY CHALLENGE */
+
 function startMemory(){
 memoryLevel=1;
 memorySequence=[];
 memoryInput=[];
 memoryBusy=false;
-showGame(`<div class="heading"><div class="big">🧩</div><h2>Memory Challenge</h2><p>Remember the highlighted squares, then repeat the pattern.</p></div><div class="center"><h3 id="memoryMessage">Watch carefully!</h3><div class="memory-grid" id="memoryGrid">${Array.from({length:9},(_,i)=>`<button class="tile" id="tile${i}" onclick="memoryTap(${i})">?</button>`).join("")}</div><p class="note">Level: <span id="memoryLevel">1</span></p><button class="action" id="memoryStart" onclick="nextMemory()">Start Challenge</button></div>`);
+
+showGame(`
+<div class="heading">
+<div class="big">🧩</div>
+<h2>Memory Challenge</h2>
+<p>Remember the highlighted squares, then repeat the pattern.</p>
+</div>
+<div class="center">
+<h3 id="memoryMessage">Watch carefully!</h3>
+<div class="memory-grid" id="memoryGrid">
+${Array.from({length:9},(_,i)=>`<button class="tile" id="tile${i}" onclick="memoryTap(${i})">?</button>`).join("")}
+</div>
+<p class="note">Level: <span id="memoryLevel">1</span></p>
+<button class="action" id="memoryStart" onclick="nextMemory()">Start Challenge</button>
+</div>
+`);
 }
+
 function nextMemory(){
 if(memoryBusy)return;
+
 memoryBusy=true;
 memoryInput=[];
 memorySequence=[];
+
 let length=Math.min(memoryLevel+1,8);
-for(let i=0;i<length;i++)memorySequence.push(Math.floor(Math.random()*9));
+
+while(memorySequence.length<length){
+let n=Math.floor(Math.random()*9);
+if(!memorySequence.includes(n))memorySequence.push(n);
+}
+
 $("memoryMessage").textContent="Watch the pattern!";
-$("memoryStart").classList.add("hidden");
+
 let step=0;
+
 function flash(){
-if(step>0)$("tile"+memorySequence[step-1]).classList.remove("lit");
+if(step>0){
+$("tile"+memorySequence[step-1]).classList.remove("lit");
+}
+
 if(step>=memorySequence.length){
 memoryBusy=false;
 $("memoryMessage").textContent="Now repeat the pattern!";
 return;
 }
+
 $("tile"+memorySequence[step]).classList.add("lit");
 step++;
 setTimeout(flash,650);
 }
+
 flash();
 }
+
 function memoryTap(i){
 if(memoryBusy||memorySequence.length===0)return;
+
 $("tile"+i).classList.add("lit");
 setTimeout(()=>$("tile"+i).classList.remove("lit"),220);
+
 memoryInput.push(i);
 let pos=memoryInput.length-1;
+
 if(memoryInput[pos]!==memorySequence[pos]){
 memoryBusy=true;
-addScore((memoryLevel-1)*5);
+let points=(memoryLevel-1)*5;
+addScore(points);
+
 $("memoryMessage").textContent="Game over! You reached level "+memoryLevel+".";
 $("memoryStart").textContent="Play Again";
 $("memoryStart").classList.remove("hidden");
 $("memoryStart").onclick=()=>startMemory();
 return;
 }
+
 if(memoryInput.length===memorySequence.length){
 memoryBusy=true;
 memoryLevel++;
 $("memoryLevel").textContent=memoryLevel;
 $("memoryMessage").textContent="✓ Excellent! Next level...";
-setTimeout(nextMemory,850);
+
+setTimeout(()=>{
+memoryBusy=false;
+nextMemory();
+},850);
 }
 }
 
+/* FLAG CHALLENGE */
+
 function startFlags(){
-flagIndex=0;flagScore=0;flagDone=false;
+flagIndex=0;
+flagScore=0;
+flagDone=false;
 showFlag();
 }
+
 function showFlag(){
 if(flagIndex>=flags.length){
 addScore(flagScore);
-showGame(`<div class="result"><div class="trophy">🌍</div><h2>Flag Challenge Complete!</h2><strong>+${flagScore} Points</strong><p>You identified ${flagScore/10} flags correctly.</p><button class="action" onclick="goHome()">Back to Home</button><button class="secondary" style="width:100%" onclick="startFlags()">Play Again</button></div>`);
+
+showGame(`
+<div class="result">
+<div class="trophy">🌍</div>
+<h2>Flag Challenge Complete!</h2>
+<strong>+${flagScore} Points</strong>
+<p>You identified ${flagScore/10} flags correctly.</p>
+<button class="action" onclick="goHome()">Back to Home</button>
+<button class="secondary" style="width:100%" onclick="startFlags()">Play Again</button>
+</div>
+`);
 return;
 }
+
 let item=flags[flagIndex];
-let choices=[item[1],...flags.filter((f,i)=>i!==flagIndex).sort(()=>Math.random()-.5).slice(0,3).map(f=>f[1])].sort(()=>Math.random()-.5);
+
+let choices=[
+item[1],
+...flags.filter((f,i)=>i!==flagIndex)
+.sort(()=>Math.random()-.5)
+.slice(0,3).map(f=>f[1])
+].sort(()=>Math.random()-.5);
+
 flagDone=false;
-showGame(`<div class="heading"><div class="big">🏳️</div><h2>Flag Challenge</h2><p>Flag ${flagIndex+1} of ${flags.length}</p><div class="flag">${item[0]}</div><h3>Which country does this flag belong to?</h3></div><div class="answers">${choices.map(c=>`<button class="answer" onclick="chooseFlag('${c.replace(/'/g,"\\'")}','${item[1]}')">${c}</button>`).join("")}</div><p id="flagFeedback" class="feedback"></p>`);
+
+showGame(`
+<div class="heading">
+<div class="big">🏳️</div>
+<h2>Flag Challenge</h2>
+<p>Flag ${flagIndex+1} of ${flags.length}</p>
+<div style="font-size:65px;margin:15px">${item[0]}</div>
+<h3>Which country does this flag belong to?</h3>
+</div>
+<div class="answers">
+${choices.map(c=>`
+<button class="answer" onclick="chooseFlag('${c}','${item[1]}')">${c}</button>
+`).join("")}
+</div>
+<p id="flagFeedback" class="feedback"></p>
+`);
 }
+
 function chooseFlag(choice,answer){
 if(flagDone)return;
 flagDone=true;
-let buttons=document.querySelectorAll(".answer");
-buttons.forEach(b=>{
+
+document.querySelectorAll(".answer").forEach(b=>{
 b.disabled=true;
 if(b.textContent===answer)b.classList.add("correct");
 else if(b.textContent===choice)b.classList.add("wrong");
 });
+
 if(choice===answer)flagScore+=10;
+
 $("flagFeedback").textContent=choice===answer?"✓ Correct!":"The correct answer is "+answer+".";
-$("flagFeedback").insertAdjacentHTML("afterend",'<button class="action" onclick="flagIndex++;showFlag()">Next Flag →</button>');
+
+$("flagFeedback").insertAdjacentHTML("afterend",`
+<button class="action" onclick="flagIndex++;showFlag()">Next Flag →</button>
+`);
 }
 
-function toggleLanguage(){
-if(!confirm("The Urdu interface is planned for a future update. Continue in English for now?"))return;
-$("langButton").textContent="اردو (Soon)";
+/* DAILY DISCOVERY */
+
+function newFact(){
+let factIndex=Math.floor(Math.random()*facts.length);
+$("factText").textContent=facts[factIndex];
+$("factTitle").textContent="💡 Did You Know?";
 }
+
 $("year").textContent=new Date().getFullYear();
 updateStats();
+
 </script>
 </body>
 </html>
