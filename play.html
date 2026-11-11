@@ -44,17 +44,21 @@ input{width:100%;padding:13px;border:1px solid #cfc5f5;border-radius:10px;font-s
 .wordgrid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;max-width:430px;margin:15px auto}
 .wordgrid button{padding:9px 0;background:#eee9ff;color:#30215d;font-size:17px}
 .wordgrid button.selected{background:#6245d4;color:white}
+.wordgrid button.found{background:#b8f2cf;color:#17452b;opacity:1}
 .sudoku{display:grid;grid-template-columns:repeat(4,1fr);max-width:300px;margin:15px auto;border:2px solid #30215d}
 .sudoku input{margin:0;border-radius:0;text-align:center;padding:12px 2px;font-size:22px;border:1px solid #bcb2db}
 .numberpad{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-width:300px;margin:auto}
 .numberpad button{padding:12px}
 footer{text-align:center;color:#77718b;padding:20px;font-size:13px}
+button:focus-visible,input:focus-visible{outline:3px solid #a995ff;outline-offset:2px}
 @media(max-width:420px){
 .panel{padding:15px}
 .question{font-size:19px}
 .options{grid-template-columns:1fr}
 .tile{font-size:23px}
 .gridhunt button{font-size:21px}
+.wordgrid{gap:3px}
+.wordgrid button{font-size:15px;padding:9px 0}
 }
 </style>
 </head>
@@ -76,7 +80,7 @@ footer{text-align:center;color:#77718b;padding:20px;font-size:13px}
 </div>
 
 <div id="content"></div>
-<div id="feedback"></div>
+<div id="feedback" aria-live="polite"></div>
 <button class="primary" id="next" style="display:none">Next</button>
 </div>
 </main>
@@ -223,6 +227,7 @@ world:[
 function quiz(category){
 quizMode = true;
 game = "quiz";
+
 const names = {
 general:"General Knowledge",
 science:"Science & Technology",
@@ -230,9 +235,11 @@ sports:"Sports",
 pakistan:"Pakistan",
 world:"World Knowledge"
 };
+
 items = quizzes[category] || quizzes.general;
 round = 0;
 locked = false;
+
 start((names[category] || "General Knowledge")+" Quiz","Choose the correct answer. Each correct answer earns 10 points.");
 renderCurrent();
 }
@@ -247,6 +254,7 @@ $("content").innerHTML =
 $("content").querySelector(".question").textContent = q[0];
 
 const options = $("content").querySelector(".options");
+
 q[1].forEach((option,index)=>{
 const button = document.createElement("button");
 button.className = "option";
@@ -318,7 +326,10 @@ const hunts = [
 ];
 
 function renderCurrent(){
-if(quizMode){renderQuiz();return;}
+if(quizMode){
+renderQuiz();
+return;
+}
 
 switch(game){
 case "flags":renderFlag();break;
@@ -337,10 +348,13 @@ function renderFlag(){
 const q = items[round];
 status("Round "+(round+1)+" / "+items.length,"");
 
-$("content").innerHTML = '<div class="big"></div><div class="question">Which country does this flag belong to?</div><div class="options"></div>';
+$("content").innerHTML =
+'<div class="big"></div><div class="question">Which country does this flag belong to?</div><div class="options"></div>';
+
 $("content").querySelector(".big").textContent = q[0];
 
 const options = $("content").querySelector(".options");
+
 shuffle(q[2]).forEach(option=>{
 const b = document.createElement("button");
 b.className = "option";
@@ -373,9 +387,13 @@ mathNext();
 }
 
 function mathNext(){
-if(round>=10){finish("Math Sprint completed!");return;}
+if(round>=10){
+finish("Math Sprint completed!");
+return;
+}
 
 locked = false;
+
 const a = Math.floor(Math.random()*20)+1;
 const b = Math.floor(Math.random()*20)+1;
 const op = Math.random()>.5?"+":"-";
@@ -389,12 +407,14 @@ $("content").innerHTML =
 $("mathcheck").onclick = () => {
 if(locked)return;
 locked = true;
+
 if(Number($("mathanswer").value)===correct && $("mathanswer").value.trim()!==""){
 addPoints(10);
 $("feedback").textContent = "✅ Correct! +10 points";
 }else{
 $("feedback").textContent = "❌ Correct answer: "+correct;
 }
+
 nextAction(()=>{
 round++;
 mathNext();
@@ -412,6 +432,7 @@ $("content").innerHTML =
 '<div class="big">🤔</div><div class="question"></div><div class="options"><button class="option" id="yes">True</button><button class="option" id="no">False</button></div>';
 
 $("content").querySelector(".question").textContent = q[0];
+
 $("yes").onclick = () => answer(q[1]===true,"Correct answer is "+q[1],10);
 $("no").onclick = () => answer(q[1]===false,"Correct answer is "+q[1],10);
 }
@@ -426,6 +447,7 @@ $("content").innerHTML =
 '<div class="question">Find the odd one out</div><div class="options"></div>';
 
 const options = $("content").querySelector(".options");
+
 q.slice(0,4).forEach((item,index)=>{
 const b = document.createElement("button");
 b.className = "option";
@@ -450,6 +472,7 @@ $("content").querySelector(".question").textContent = q[0];
 $("riddlecheck").onclick = () => {
 const value = $("riddleanswer").value.trim().toLowerCase();
 const target = q[1].toLowerCase();
+
 answer(value.length>0 && (value===target || value===target.replace("a ","")),"Answer: "+q[1],10);
 };
 }
@@ -489,6 +512,7 @@ const grid = $("content").querySelector(".gridhunt");
 q.scene.forEach((item,index)=>{
 const b = document.createElement("button");
 b.textContent = item;
+
 b.onclick = () => {
 if(b.disabled)return;
 
@@ -507,6 +531,7 @@ b.disabled = true;
 $("feedback").textContent = "❌ Not this one. Keep looking!";
 }
 };
+
 grid.appendChild(b);
 });
 }
@@ -521,6 +546,7 @@ let previous = -1;
 
 for(let k=0;k<80;k++){
 const zero = nums.indexOf(0);
+
 const options = [zero-3,zero+3,zero-1,zero+1].filter(i=>
 i>=0 && i<9 &&
 (Math.abs(zero-i)===3 ||
@@ -530,6 +556,7 @@ i!==previous
 
 const pick = options[Math.floor(Math.random()*options.length)];
 previous = zero;
+
 [nums[zero],nums[pick]] = [nums[pick],nums[zero]];
 }
 
@@ -552,8 +579,10 @@ nums.forEach((n,index)=>{
 const tile = document.createElement("div");
 tile.className = "tile"+(n===0?" empty":"");
 tile.textContent = n===0?"":n;
+
 tile.onclick = () => {
 const zero = nums.indexOf(0);
+
 const adjacent = Math.abs(zero-index)===3 ||
 (Math.floor(zero/3)===Math.floor(index/3) && Math.abs(zero-index)===1);
 
@@ -564,6 +593,7 @@ draw();
 check();
 }
 };
+
 tiles.appendChild(tile);
 });
 }
@@ -636,10 +666,10 @@ grid.appendChild(card);
 });
 }
 
-/* WORD SEARCH */
+/* WORD SEARCH - IMPROVED */
 
 function wordSearchGame(){
-start("Word Search","Find SUN, CAT and BOOK. Select letters in order, then check your word.");
+start("Word Search","Find SUN, CAT and BOOK. Select connected letters in a straight line. Horizontal, vertical and diagonal words are allowed.");
 
 const rows = [
 "SUNXXXXX",
@@ -652,64 +682,154 @@ const rows = [
 "XXXXXXXX"
 ];
 
+const letters = rows.join("");
 let selected = [];
 let targets = ["SUN","CAT","BOOK"];
-const letters = rows.join("");
+let foundCells = [];
 
 $("content").innerHTML =
 '<div class="question">Find: SUN • CAT • BOOK</div>' +
 '<div class="wordgrid"></div>' +
 '<p style="text-align:center">Selected: <b id="selected">None</b></p>' +
+'<p style="text-align:center">Found: <b id="foundwords">None</b></p>' +
 '<button class="primary" id="wordcheck">Check Word</button>' +
 '<button class="primary secondary" id="wordclear">Clear Selection</button>';
 
 const grid = $("content").querySelector(".wordgrid");
+const cells = [];
 
 letters.split("").forEach((letter,index)=>{
 const b = document.createElement("button");
 b.textContent = letter;
 
 b.onclick = () => {
+if(b.disabled)return;
+
+const last = selected[selected.length-1];
+
 if(selected.includes(index)){
-selected = selected.filter(x=>x!==index);
-b.classList.remove("selected");
+if(index===last){
+selected.pop();
 }else{
-selected.push(index);
-b.classList.add("selected");
+return;
 }
-$("selected").textContent = selected.map(x=>letters[x]).join("") || "None";
+}else{
+if(selected.length>0){
+const previous = selected[selected.length-1];
+
+const previousRow = Math.floor(previous/8);
+const previousCol = previous%8;
+const currentRow = Math.floor(index/8);
+const currentCol = index%8;
+
+const rowDiff = currentRow-previousRow;
+const colDiff = currentCol-previousCol;
+
+if(Math.max(Math.abs(rowDiff),Math.abs(colDiff))!==1){
+$("feedback").textContent = "Select the next connected letter.";
+return;
+}
+
+if(selected.length>=2){
+const first = selected[0];
+const second = selected[1];
+
+const directionRow = Math.sign(
+Math.floor(second/8)-Math.floor(first/8)
+);
+
+const directionCol = Math.sign(
+(second%8)-(first%8)
+);
+
+if(
+Math.sign(rowDiff)!==directionRow ||
+Math.sign(colDiff)!==directionCol
+){
+$("feedback").textContent = "Keep selecting in the same direction.";
+return;
+}
+}
+}
+
+selected.push(index);
+}
+
+refreshSelection();
 };
 
 grid.appendChild(b);
+cells.push(b);
 });
 
-const cells = [...grid.querySelectorAll("button")];
+function refreshSelection(){
+cells.forEach((cell,index)=>{
+cell.classList.toggle("selected",selected.includes(index));
+});
+
+$("selected").textContent =
+selected.map(index=>letters[index]).join("") || "None";
+}
+
+function clearSelection(){
+selected = [];
+refreshSelection();
+}
+
+function updateFound(){
+const found = ["SUN","CAT","BOOK"].filter(word=>!targets.includes(word));
+
+$("foundwords").textContent = found.join(", ") || "None";
+$("progress").textContent = "Found "+found.length+" / 3";
+}
 
 $("wordclear").onclick = () => {
-selected = [];
-cells.forEach(c=>c.classList.remove("selected"));
-$("selected").textContent = "None";
+clearSelection();
+$("feedback").textContent = "";
 };
 
 $("wordcheck").onclick = () => {
-const word = selected.map(x=>letters[x]).join("");
+if(selected.length===0){
+$("feedback").textContent = "Select letters first.";
+return;
+}
 
-if(targets.includes(word)){
-targets = targets.filter(x=>x!==word);
+const word = selected.map(index=>letters[index]).join("");
+const reversed = word.split("").reverse().join("");
+
+const matched = targets.find(target=>
+target===word || target===reversed
+);
+
+if(matched){
+selected.forEach(index=>{
+foundCells.push(index);
+cells[index].classList.remove("selected");
+cells[index].classList.add("found");
+cells[index].disabled = true;
+});
+
+targets = targets.filter(target=>target!==matched);
+
 addPoints(10);
-$("feedback").textContent = "✅ "+word+" found! +10 points";
+$("feedback").textContent = "✅ "+matched+" found! +10 points";
+
+clearSelection();
+updateFound();
 
 if(targets.length===0){
 addPoints(15);
 finish("All hidden words found! Bonus +15 points");
 }else{
-$("instructions").textContent = "Still find: "+targets.join(", ");
-$("wordclear").click();
+$("instructions").textContent =
+"Great work! Still find: "+targets.join(", ");
 }
 }else{
 $("feedback").textContent = "❌ Not a target word. Try again.";
 }
 };
+
+updateFound();
 }
 
 /* REACTION TEST */
@@ -795,6 +915,7 @@ $("content").innerHTML =
 
 const grid = $("content").querySelector(".sudoku");
 const pad = $("content").querySelector(".numberpad");
+
 let selected = null;
 const cells = [];
 
@@ -822,11 +943,13 @@ cells.push(input);
 [1,2,3,4].forEach(number=>{
 const b = document.createElement("button");
 b.textContent = number;
+
 b.onclick = () => {
 if(selected && !selected.readOnly){
 selected.value = number;
 }
 };
+
 pad.appendChild(b);
 });
 
