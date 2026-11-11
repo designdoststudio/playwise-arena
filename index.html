@@ -5,893 +5,135 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#17112f">
-
 <title>PlayWise Arena | Free Online Quizzes, Brain Games & Puzzles</title>
-<meta name="description" content="Play free online quizzes, brain games, puzzles and fun learning challenges at PlayWise Arena. Test your knowledge with science, sports, world and general knowledge quizzes.">
-<meta name="keywords" content="free online quizzes, brain games, online puzzles, fun learning games, general knowledge quiz, science quiz, sports quiz, word scramble, flag quiz, picture hunt">
-<meta name="author" content="Muhammad Bilal">
-<meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="googlebot" content="index, follow">
-
+<meta name="description" content="Play free online quizzes, brain games, puzzles and fun learning challenges at PlayWise Arena. Test your knowledge and sharpen your mind.">
+<meta name="robots" content="index,follow">
 <link rel="canonical" href="https://designdoststudio.github.io/playwise-arena/">
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="PlayWise Arena | Free Online Quizzes & Brain Games">
-<meta property="og:description" content="Play free quizzes, solve puzzles and enjoy brain games. Learn something new with PlayWise Arena.">
+<meta property="og:title" content="PlayWise Arena | Free Online Games & Quizzes">
+<meta property="og:description" content="Explore free quizzes, brain games and fun challenges.">
 <meta property="og:url" content="https://designdoststudio.github.io/playwise-arena/">
-<meta property="og:site_name" content="PlayWise Arena">
-
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PlayWise Arena | Free Online Quizzes & Brain Games">
-<meta name="twitter:description" content="Enjoy free online quizzes, brain games, puzzles and fun learning challenges.">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "PlayWise Arena",
-  "url": "https://designdoststudio.github.io/playwise-arena/",
-  "description": "A free online platform for quizzes, brain games, puzzles and fun learning challenges.",
-  "author": {
-    "@type": "Person",
-    "name": "Muhammad Bilal"
-  }
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "PlayWise Arena",
-  "url": "https://designdoststudio.github.io/playwise-arena/",
-  "applicationCategory": "GameApplication",
-  "operatingSystem": "Any",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "description": "Free browser-based quizzes, brain games, puzzles and learning challenges."
-}
-</script>
-
+<meta property="og:type" content="website">
 <style>
-:root{
---bg:#100c20;
---panel:#1d1733;
---panel2:#30264c;
---purple:#8b6cff;
---text:#fff;
---muted:#b9b1ce;
---green:#5ce0a0;
-}
 *{box-sizing:border-box}
-body{
-margin:0;
-background:linear-gradient(150deg,#100c20,#21123a 55%,#11152c);
-color:var(--text);
-font-family:Arial,sans-serif;
-min-height:100vh;
-}
-header{
-text-align:center;
-padding:22px 15px;
-border-bottom:1px solid #ffffff18;
-}
-.logo{font-size:30px;font-weight:900}
-.logo span{color:#a995ff}
-header p{color:var(--muted);margin:8px 0 0;font-size:14px}
-.container{max-width:1050px;margin:auto;padding:18px 14px 45px}
-.hero{
-background:linear-gradient(120deg,#563bd1,#a64bd8);
-padding:28px 20px;
-border-radius:22px;
-text-align:center;
-margin:12px 0 20px;
-}
-.hero h1{font-size:29px;margin:0 0 10px}
-.hero p{line-height:1.6;margin:0 auto 17px;max-width:600px}
-.stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-.stat{
-background:#ffffff20;
-padding:10px 17px;
-border-radius:12px;
-font-size:13px;
-}
-.stat strong{display:block;font-size:20px;margin-bottom:3px}
-.section-title{font-size:22px;margin:28px 0 13px}
-.section-sub{color:var(--muted);font-size:14px;margin-top:-5px;line-height:1.5}
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
-gap:12px;
-}
-.card{
-background:var(--panel);
-border:1px solid #ffffff12;
-border-radius:17px;
-padding:17px 13px;
-cursor:pointer;
-transition:.2s;
-min-height:130px;
-}
-.card:hover{transform:translateY(-3px);border-color:var(--purple)}
-.card .emoji{font-size:29px}
-.card h3{font-size:16px;margin:10px 0 6px}
-.card p{font-size:12px;color:var(--muted);line-height:1.4;margin:0}
-button{
-border:0;
-border-radius:11px;
-padding:12px 17px;
-background:var(--purple);
-color:white;
-font-weight:bold;
-font-size:14px;
-cursor:pointer;
-}
-button:hover{filter:brightness(1.12)}
-button.secondary{background:#403458}
-button:disabled{opacity:.5;cursor:not-allowed}
-.gamebox{
-display:none;
-background:var(--panel);
-border:1px solid #ffffff18;
-border-radius:20px;
-padding:20px;
-margin-top:18px;
-}
-.gamebox.active{display:block}
-.gamehead{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px;
-flex-wrap:wrap;
-}
-.gamehead h2{margin:0;font-size:21px}
-.question{
-font-size:20px;
-font-weight:bold;
-line-height:1.5;
-margin:23px 0 17px;
-text-align:center;
-}
-.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.answers button{
-background:var(--panel2);
-border:1px solid #ffffff18;
-min-height:48px;
-}
-.answers button.correct{background:#14794f}
-.answers button.wrong{background:#9e3152}
-.feedback{
-text-align:center;
-min-height:27px;
-margin:15px 0;
-color:var(--green);
-font-weight:bold;
-}
-.info{text-align:center;color:var(--muted);font-size:13px;margin:10px 0}
-.input-row{
-display:flex;
-gap:8px;
-max-width:500px;
-margin:15px auto;
-}
-input{
-width:100%;
-min-width:0;
-padding:13px;
-border-radius:10px;
-border:1px solid #ffffff30;
-background:#100c20;
-color:white;
-font-size:16px;
-}
-.center{text-align:center}
-.big-emoji{font-size:65px;text-align:center;margin:15px}
-.discovery{
-background:linear-gradient(120deg,#282047,#38285b);
-padding:20px;
-border-radius:17px;
-line-height:1.6;
-}
-.seo-content{
-background:var(--panel);
-border:1px solid #ffffff18;
-border-radius:17px;
-padding:20px;
-margin-top:25px;
-line-height:1.7;
-}
-.seo-content h2{font-size:21px;margin-top:0}
-.seo-content h3{font-size:17px;margin-bottom:5px}
-.seo-content p,.seo-content li{
-color:var(--muted);
-font-size:14px;
-}
-.seo-content ul{padding-left:22px}
-.faq-item{
-border-top:1px solid #ffffff18;
-padding:12px 0;
-}
-.faq-item h3{margin:0 0 5px}
-.faq-item p{margin:0}
-.hidden{display:none!important}
-
-/* Picture Hunt Challenge */
-.difference-board{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:8px;
-max-width:410px;
-margin:20px auto;
-padding:12px;
-background:linear-gradient(135deg,#41315f,#25203c);
-border:1px solid #ffffff20;
-border-radius:18px;
-}
-.diff-cell{
-background:#ffffff18;
-border:1px solid #ffffff20;
-border-radius:12px;
-min-height:65px;
-font-size:30px;
-padding:8px 2px;
-}
-.diff-cell:active{background:#6550a5}
-.diff-cell.correct{background:#14794f}
-.diff-cell.wrong{background:#9e3152}
-
-footer{
-text-align:center;
-border-top:1px solid #ffffff18;
-padding:24px 12px;
-color:var(--muted);
-font-size:13px;
-line-height:1.8;
-}
-footer strong{color:white}
-footer nav{
-margin:12px 0;
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:8px;
-}
-footer nav a{
-color:#b9b1ce;
-text-decoration:none;
-padding:4px 3px;
-}
-footer nav a:hover{
-color:white;
-text-decoration:underline;
-}
-
-@media(max-width:480px){
-.hero h1{font-size:25px}
-.answers{grid-template-columns:1fr}
-.gamebox{padding:15px}
-.section-title{font-size:20px}
-.diff-cell{min-height:52px;font-size:25px}
-}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f3ff;color:#211b38}
+header{background:#17112f;color:white;padding:22px 15px;text-align:center}
+header h1{margin:0;font-size:30px}
+header p{color:#d7d0ff;margin:9px 0 0}
+nav{background:#251b49;padding:12px;text-align:center}
+nav a{color:white;text-decoration:none;margin:0 10px;font-size:14px}
+.hero{padding:35px 17px;text-align:center;background:linear-gradient(135deg,#30205f,#6846d9);color:white}
+.hero h2{font-size:29px;margin:0 0 12px}
+.hero p{line-height:1.6;max-width:650px;margin:auto;color:#eee9ff}
+.score{display:inline-block;margin-top:17px;padding:10px 18px;background:#fff;color:#38246d;border-radius:30px;font-weight:bold}
+.wrap{max-width:1050px;margin:auto;padding:22px 15px}
+.section-title{text-align:center;margin:15px 0 20px}
+.section-title h2{font-size:25px;margin-bottom:7px}
+.section-title p{color:#6d6680}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:14px}
+.item{background:white;border-radius:16px;padding:19px 12px;text-align:center;text-decoration:none;color:#211b38;box-shadow:0 4px 15px #211b3810;border:1px solid #e8e2ff;transition:.2s}
+.item:hover{transform:translateY(-3px);border-color:#7657e8}
+.item .emoji{font-size:35px;display:block;margin-bottom:10px}
+.item strong{display:block;font-size:16px}
+.item small{display:block;color:#77718b;margin-top:7px;line-height:1.4}
+.info{background:white;padding:22px;border-radius:15px;margin:25px 0;line-height:1.7}
+.info h2{margin-top:0}
+footer{background:#17112f;color:#ddd5ff;text-align:center;padding:25px 12px;margin-top:30px}
+footer a{color:white;text-decoration:none;margin:0 8px;line-height:2}
+footer p{font-size:13px}
+@media(max-width:420px){header h1{font-size:25px}.hero h2{font-size:24px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
-
 <body>
-
 <header>
-<div class="logo">🎮 PlayWise <span>Arena</span></div>
-<p>Play • Learn • Think • Discover</p>
+<h1>🎮 PlayWise Arena</h1>
+<p>Play • Learn • Challenge Your Mind</p>
 </header>
-
-<main class="container">
+<nav>
+<a href="#quizzes">Quizzes</a>
+<a href="#games">Games</a>
+<a href="#discover">Daily Discovery</a>
+</nav>
 
 <section class="hero">
-<h1>Free Online Quizzes, Brain Games & Fun Learning</h1>
-<p>Welcome to PlayWise Arena! Challenge your brain, test your knowledge, solve puzzles and discover something new every day. Enjoy free fun learning activities for everyone.</p>
-<div class="stats">
-<div class="stat"><strong id="totalScore">0</strong>Total Points</div>
-<div class="stat"><strong>8</strong>Fun Games</div>
-<div class="stat"><strong>5</strong>Quiz Categories</div>
-</div>
+<h2>Welcome to PlayWise Arena!</h2>
+<p>Enjoy free online quizzes, brain games, puzzles and fun learning challenges. Test your knowledge, improve your skills and challenge yourself every day.</p>
+<div class="score">⭐ Your Score: <span id="score">0</span></div>
 </section>
 
-<h2 class="section-title">🧩 Quiz Arena</h2>
-<p class="section-sub">Choose a topic and test what you know with free online quizzes.</p>
-
+<main class="wrap">
+<section id="quizzes">
+<div class="section-title">
+<h2>🧠 Quiz Arena</h2>
+<p>Choose a category and test your knowledge.</p>
+</div>
 <div class="grid">
-<div class="card" onclick="startQuiz('general')">
-<div class="emoji">🌎</div>
-<h3>General Knowledge</h3>
-<p>Everyday facts and knowledge</p>
+<a class="item" href="play.html?type=quiz&category=general"><span class="emoji">🌍</span><strong>General Knowledge</strong><small>Explore interesting facts</small></a>
+<a class="item" href="play.html?type=quiz&category=science"><span class="emoji">🔬</span><strong>Science & Technology</strong><small>Discover science</small></a>
+<a class="item" href="play.html?type=quiz&category=sports"><span class="emoji">⚽</span><strong>Sports Quiz</strong><small>Test your sports knowledge</small></a>
+<a class="item" href="play.html?type=quiz&category=pakistan"><span class="emoji">🇵🇰</span><strong>Pakistan Quiz</strong><small>Learn about Pakistan</small></a>
+<a class="item" href="play.html?type=quiz&category=world"><span class="emoji">🗺️</span><strong>World Knowledge</strong><small>Explore the world</small></a>
 </div>
-<div class="card" onclick="startQuiz('science')">
-<div class="emoji">🔬</div>
-<h3>Science & Technology</h3>
-<p>Discover science and inventions</p>
-</div>
-<div class="card" onclick="startQuiz('sports')">
-<div class="emoji">⚽</div>
-<h3>Sports</h3>
-<p>Sports trivia and champions</p>
-</div>
-<div class="card" onclick="startQuiz('pakistan')">
-<div class="emoji">🇵🇰</div>
-<h3>Pakistan</h3>
-<p>History, places and culture</p>
-</div>
-<div class="card" onclick="startQuiz('world')">
-<div class="emoji">🗺️</div>
-<h3>World Knowledge</h3>
-<p>Countries and world facts</p>
-</div>
-</div>
+</section>
 
-<h2 class="section-title">🎯 Mind Games</h2>
-<p class="section-sub">Eight fun challenges to sharpen your brain. Pick any game to begin!</p>
-
+<section id="games">
+<div class="section-title">
+<h2>🎯 Mind Games</h2>
+<p>Play exciting challenges and sharpen your mind.</p>
+</div>
 <div class="grid">
-<div class="card" onclick="startGame('flags')">
-<div class="emoji">🌍</div>
-<h3>Flag Challenge</h3>
-<p>Recognise flags from around the world</p>
-</div>
-<div class="card" onclick="startGame('words')">
-<div class="emoji">🔤</div>
-<h3>Word Scramble</h3>
-<p>Unscramble letters to find the word</p>
-</div>
-<div class="card" onclick="startGame('math')">
-<div class="emoji">⚡</div>
-<h3>Math Sprint</h3>
-<p>Solve quick maths questions</p>
-</div>
-<div class="card" onclick="startGame('truefalse')">
-<div class="emoji">🧠</div>
-<h3>True or False</h3>
-<p>Can you spot the correct facts?</p>
-</div>
-<div class="card" onclick="startGame('odd')">
-<div class="emoji">🔍</div>
-<h3>Odd One Out</h3>
-<p>Find the item that does not belong</p>
-</div>
-<div class="card" onclick="startGame('riddle')">
-<div class="emoji">❓</div>
-<h3>Riddle Challenge</h3>
-<p>Think carefully and solve riddles</p>
-</div>
-<div class="card" onclick="startGame('emoji')">
-<div class="emoji">😀</div>
-<h3>Emoji Decode</h3>
-<p>Guess words from emoji clues</p>
-</div>
-<div class="card" onclick="startGame('difference')">
-<div class="emoji">👀</div>
-<h3>Picture Hunt</h3>
-<p>Find the target object in the picture</p>
-</div>
-</div>
-
-<section class="gamebox" id="gameBox">
-<div class="gamehead">
-<h2 id="gameTitle">Game</h2>
-<button class="secondary" onclick="closeGame()">✕ Close</button>
-</div>
-<div class="info" id="gameProgress"></div>
-<div id="gameContent"></div>
-<div class="feedback" id="feedback"></div>
-<div class="center">
-<button id="nextBtn" class="hidden" onclick="nextQuestion()">Next Question →</button>
-<button id="restartBtn" class="hidden secondary" onclick="restartGame()">Play Again</button>
+<a class="item" href="play.html?game=flags"><span class="emoji">🚩</span><strong>Flag Challenge</strong><small>Identify country flags</small></a>
+<a class="item" href="play.html?game=scramble"><span class="emoji">🔤</span><strong>Word Scramble</strong><small>Unscramble letters</small></a>
+<a class="item" href="play.html?game=math"><span class="emoji">➗</span><strong>Math Sprint</strong><small>Solve quick calculations</small></a>
+<a class="item" href="play.html?game=truefalse"><span class="emoji">✅</span><strong>True or False</strong><small>Choose the right answer</small></a>
+<a class="item" href="play.html?game=odd"><span class="emoji">🧐</span><strong>Odd One Out</strong><small>Find the different item</small></a>
+<a class="item" href="play.html?game=riddle"><span class="emoji">💡</span><strong>Riddle Challenge</strong><small>Solve clever riddles</small></a>
+<a class="item" href="play.html?game=emoji"><span class="emoji">😃</span><strong>Emoji Decode</strong><small>Guess the meaning</small></a>
+<a class="item" href="play.html?game=hunt"><span class="emoji">🔎</span><strong>Picture Hunt</strong><small>Find hidden objects</small></a>
+<a class="item" href="play.html?game=number"><span class="emoji">🔢</span><strong>Number Puzzle</strong><small>Arrange the numbers</small></a>
+<a class="item" href="play.html?game=memory"><span class="emoji">🧩</span><strong>Memory Match</strong><small>Match the pairs</small></a>
+<a class="item" href="play.html?game=wordsearch"><span class="emoji">🔠</span><strong>Word Search</strong><small>Find hidden words</small></a>
+<a class="item" href="play.html?game=reaction"><span class="emoji">⚡</span><strong>Reaction Test</strong><small>Test your reflexes</small></a>
+<a class="item" href="play.html?game=sudoku"><span class="emoji">🔲</span><strong>Sudoku Challenge</strong><small>Solve a number grid</small></a>
+<a class="item" href="play.html?game=guess"><span class="emoji">❓</span><strong>Word Guess</strong><small>Guess the secret word</small></a>
 </div>
 </section>
 
-<h2 class="section-title">✨ Daily Discovery</h2>
-<div class="discovery">
-<strong>Did you know?</strong>
-<p id="dailyFact">Octopuses have three hearts. Two pump blood to the gills, while one pumps it to the rest of the body!</p>
-<button class="secondary" onclick="newFact()">Discover Another Fact</button>
-</div>
-
-<section class="seo-content">
-<h2>Welcome to PlayWise Arena – Free Online Games and Quizzes</h2>
-<p>PlayWise Arena is a free online learning and entertainment platform where visitors can enjoy quizzes, brain games, puzzles and fun challenges. The website is designed for people who want to test their knowledge, practise problem-solving and learn interesting facts while having fun.</p>
-
-<h3>Test Your Knowledge with Online Quizzes</h3>
-<p>Explore quiz topics including general knowledge, science and technology, sports, Pakistan and world knowledge. Each quiz offers multiple-choice questions that make learning simple and enjoyable.</p>
-
-<h3>Enjoy Free Brain Games and Puzzles</h3>
-<p>Try different challenges such as Flag Challenge, Word Scramble, Math Sprint, True or False, Odd One Out, Riddle Challenge, Emoji Decode and Picture Hunt. These activities encourage observation, memory, vocabulary and logical thinking.</p>
-
-<h3>Learn Something New Every Day</h3>
-<p>Visit the Daily Discovery section to explore interesting facts about science, nature, animals, space and the world around us. You can discover a different fact whenever you visit.</p>
-
-<h3>How to Use PlayWise Arena</h3>
-<ul>
-<li>Choose a quiz category or a mind game.</li>
-<li>Read the question or challenge carefully.</li>
-<li>Select an answer or enter your response.</li>
-<li>Earn points for correct answers.</li>
-<li>Try another activity and improve your score.</li>
-</ul>
-
-<h3>Free and Easy to Access</h3>
-<p>PlayWise Arena works in a web browser on mobile phones, tablets and computers. No app installation is required. Your game points are saved in your browser on the device you use.</p>
-
-<h2>Frequently Asked Questions</h2>
-
-<div class="faq-item">
-<h3>Is PlayWise Arena free to use?</h3>
-<p>Yes. The quizzes and games currently available on PlayWise Arena are free to play.</p>
-</div>
-
-<div class="faq-item">
-<h3>Do I need to install an app?</h3>
-<p>No. You can open PlayWise Arena in your web browser on a mobile phone, tablet or computer.</p>
-</div>
-
-<div class="faq-item">
-<h3>Which games are available?</h3>
-<p>PlayWise Arena includes Flag Challenge, Word Scramble, Math Sprint, True or False, Odd One Out, Riddle Challenge, Emoji Decode and Picture Hunt.</p>
-</div>
-
-<div class="faq-item">
-<h3>Are my points saved?</h3>
-<p>Your points are saved locally in your browser. They are not currently shared between different devices or browsers.</p>
-</div>
-
-<div class="faq-item">
-<h3>Who can play these games?</h3>
-<p>The activities are designed for a broad audience. Younger children should use online activities with appropriate adult guidance.</p>
-</div>
+<section id="discover" class="info">
+<h2>🌟 Daily Discovery</h2>
+<p>Did you know? Honey never spoils when stored properly. Archaeologists have found ancient honey that remained preserved for thousands of years.</p>
 </section>
 
+<section class="info">
+<h2>Welcome to PlayWise Arena – Free Online Quizzes and Brain Games</h2>
+<p>PlayWise Arena is a free online platform for quizzes, puzzles and fun brain games. Explore general knowledge, science, sports, Pakistan and world knowledge quizzes. You can also enjoy word games, number puzzles, memory challenges and reaction tests.</p>
+<h3>How to Play</h3>
+<p>Choose any quiz category or game card. It opens on a separate page with a larger play area. Read the instructions, answer questions and enjoy the challenge. Your score is saved locally in your browser on your device.</p>
+<h3>Free Games for Everyone</h3>
+<p>PlayWise Arena is designed for learning and entertainment. No account or payment is required. Enjoy the games on mobile phones, tablets and desktop screens.</p>
+<h3>Privacy Friendly</h3>
+<p>Your game score is stored in your own browser using local storage. This website does not need an account to play.</p>
+</section>
+
+<section class="info">
+<h2>❓ Frequently Asked Questions</h2>
+<h3>Are the games free?</h3>
+<p>Yes. All games and quizzes on PlayWise Arena are free to play.</p>
+<h3>Do I need to create an account?</h3>
+<p>No. You can play without signing up.</p>
+<h3>Can I play on my mobile?</h3>
+<p>Yes. The website is designed to work on mobile phones, tablets and computers.</p>
+<h3>Is my score saved?</h3>
+<p>Your score is saved in your browser on the same device. It is not a global leaderboard.</p>
+</section>
 </main>
 
 <footer>
-<strong>PlayWise Arena</strong><br>
-A place where fun meets learning.<br>
-
-<nav aria-label="Footer navigation">
-<a href="index.html">Home</a>
-<a href="about.html">About Us</a>
-<a href="contact.html">Contact Us</a>
-<a href="privacy.html">Privacy Policy</a>
-<a href="terms.html">Terms &amp; Conditions</a>
-</nav>
-
-Created &amp; Managed by <strong>Muhammad Bilal</strong><br>
-© <span id="year"></span> PlayWise Arena. All rights reserved.
+<p><a href="index.html">Home</a> | <a href="about.html">About Us</a> | <a href="contact.html">Contact Us</a> | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms & Conditions</a></p>
+<p>Created & Managed by Muhammad Bilal</p>
+<p>© 2026 PlayWise Arena. All rights reserved.</p>
 </footer>
-
 <script>
-const $=id=>document.getElementById(id);
-
-let score=Number(localStorage.getItem("pwaScore")||0);
-$("totalScore").textContent=score;
-$("year").textContent=new Date().getFullYear();
-
-function addPoints(n){
-score+=n;
-localStorage.setItem("pwaScore",score);
-$("totalScore").textContent=score;
-}
-
-function shuffle(array){
-let a=[...array];
-for(let i=a.length-1;i>0;i--){
-let j=Math.floor(Math.random()*(i+1));
-[a[i],a[j]]=[a[j],a[i]];
-}
-return a;
-}
-
-const quizzes={
-general:[
-["Which planet is known as the Red Planet?",["Mars","Venus","Jupiter","Mercury"],0],
-["How many days are in a leap year?",["364","365","366","367"],2],
-["Which animal is known as the King of the Jungle?",["Tiger","Lion","Elephant","Wolf"],1],
-["What is the largest ocean?",["Atlantic","Indian","Arctic","Pacific"],3],
-["How many colours are in a rainbow?",["5","6","7","8"],2]
-],
-science:[
-["What gas do plants absorb?",["Oxygen","Carbon dioxide","Hydrogen","Nitrogen"],1],
-["What is H2O commonly known as?",["Salt","Water","Oxygen","Sugar"],1],
-["Which organ pumps blood?",["Lungs","Brain","Heart","Kidney"],2],
-["Which force pulls objects towards Earth?",["Magnetism","Gravity","Friction","Light"],1],
-["What is the centre of an atom called?",["Nucleus","Cell","Core","Orbit"],0]
-],
-sports:[
-["How many players are on a football team on the field?",["9","10","11","12"],2],
-["Which sport uses a shuttlecock?",["Tennis","Badminton","Cricket","Hockey"],1],
-["How many rings are on the Olympic symbol?",["4","5","6","7"],1],
-["In cricket, a boundary without bouncing scores how many runs?",["2","3","4","6"],3],
-["Wimbledon is associated with which sport?",["Tennis","Golf","Rugby","Swimming"],0]
-],
-pakistan:[
-["What is the capital of Pakistan?",["Karachi","Lahore","Islamabad","Peshawar"],2],
-["When is Pakistan's Independence Day?",["23 March","14 August","6 September","25 December"],1],
-["What is the national language of Pakistan?",["Punjabi","Sindhi","Urdu","Pashto"],2],
-["Which is the highest mountain in Pakistan?",["Nanga Parbat","K2","Rakaposhi","Tirich Mir"],1],
-["Who was the founder of Pakistan?",["Allama Iqbal","Liaquat Ali Khan","Quaid-e-Azam","Sir Syed"],2]
-],
-world:[
-["Which country is famous for the Eiffel Tower?",["Italy","France","Spain","Germany"],1],
-["Which is the largest continent?",["Africa","Europe","Asia","Australia"],2],
-["What is the capital of Japan?",["Seoul","Beijing","Tokyo","Bangkok"],2],
-["Which country has the city of Cairo?",["Egypt","Turkey","Morocco","Greece"],0],
-["Which is the smallest continent?",["Europe","Australia","South America","Antarctica"],1]
-]
-};
-
-const games={
-flags:{
-title:"🌍 Flag Challenge",
-type:"choice",
-items:[
-["🇵🇰","Pakistan",["Pakistan","India","Turkey","Malaysia"]],
-["🇯🇵","Japan",["China","Japan","South Korea","Thailand"]],
-["🇧🇷","Brazil",["Argentina","Mexico","Brazil","Portugal"]],
-["🇨🇦","Canada",["USA","Canada","UK","Australia"]],
-["🇹🇷","Turkey",["Turkey","Pakistan","Tunisia","Albania"]],
-["🇫🇷","France",["France","Italy","Germany","Russia"]],
-["🇩🇪","Germany",["Belgium","Germany","Spain","Austria"]],
-["🇦🇺","Australia",["New Zealand","Australia","UK","Canada"]],
-["🇸🇦","Saudi Arabia",["Iran","Oman","Saudi Arabia","Qatar"]],
-["🇮🇹","Italy",["France","Italy","Ireland","Mexico"]]
-]
-},
-words:{
-title:"🔤 Word Scramble",
-type:"text",
-items:[
-["PLEAP","APPLE"],["NARIB","BRAIN"],["REWAT","WATER"],
-["NOMEL","LEMON"],["OCHOLS","SCHOOL"],["DNIREF","FRIEND"],
-["NACEO","OCEAN"],["WOLFRE","FLOWER"],["RTAHE","EARTH"],["GAMNE","MANGO"]
-]
-},
-math:{
-title:"⚡ Math Sprint",
-type:"choice",
-items:[
-["8 + 7 = ?",["15","14","16","13"],0],
-["9 × 6 = ?",["45","54","56","49"],1],
-["45 ÷ 5 = ?",["8","10","9","7"],2],
-["100 - 37 = ?",["63","67","73","53"],0],
-["12 × 12 = ?",["124","144","132","154"],1],
-["56 + 29 = ?",["85","84","86","83"],0],
-["81 ÷ 9 = ?",["8","7","9","6"],2],
-["15 × 4 = ?",["45","50","60","55"],2],
-["90 - 46 = ?",["44","46","54","42"],0],
-["7 × 8 = ?",["54","56","64","48"],1]
-]
-},
-truefalse:{
-title:"🧠 True or False",
-type:"choice",
-items:[
-["The Sun is a star.",["True","False"],0],
-["A spider has six legs.",["True","False"],1],
-["Earth has one natural moon.",["True","False"],0],
-["Penguins can fly.",["True","False"],1],
-["Water freezes at 0°C at standard pressure.",["True","False"],0],
-["The human body has two hearts.",["True","False"],1],
-["Lightning is hotter than the surface of the Sun.",["True","False"],0],
-["Bats are mammals.",["True","False"],0],
-["The Pacific is the largest ocean.",["True","False"],0],
-["A square has five sides.",["True","False"],1]
-]
-},
-odd:{
-title:"🔍 Odd One Out",
-type:"choice",
-items:[
-["Which one is not a fruit?",["Apple","Banana","Carrot","Mango"],2],
-["Which one is not a planet?",["Mars","Venus","Moon","Saturn"],2],
-["Which one is not a bird?",["Eagle","Parrot","Dolphin","Sparrow"],2],
-["Which one is not a colour?",["Blue","Green","Circle","Yellow"],2],
-["Which one is not a season?",["Winter","Summer","Monday","Spring"],2],
-["Which one is not a vehicle?",["Car","Bus","Bicycle","Table"],3],
-["Which one is not a musical instrument?",["Piano","Guitar","Drum","Laptop"],3],
-["Which one is not a shape?",["Triangle","Square","Banana","Circle"],2],
-["Which one is not a drink?",["Milk","Juice","Water","Bread"],3],
-["Which one is not an animal?",["Tiger","Elephant","Rose","Horse"],2]
-]
-},
-riddle:{
-title:"❓ Riddle Challenge",
-type:"choice",
-items:[
-["What has hands but cannot clap?",["Clock","Robot","Tree","Chair"],0],
-["What gets wetter as it dries?",["Soap","Towel","Rain","Sponge"],1],
-["What has a neck but no head?",["Bottle","Snake","Shirt","Guitar"],0],
-["What has keys but no locks?",["Car","Piano","Door","Map"],1],
-["What goes up but never comes down?",["Balloon","Age","Smoke","Lift"],1],
-["What has one eye but cannot see?",["Needle","Potato","Storm","Fish"],0],
-["What has many teeth but cannot bite?",["Lion","Comb","Shark","Dog"],1],
-["What can travel around the world while staying in a corner?",["Stamp","Plane","Sun","Clock"],0],
-["What has a face and two hands but no arms or legs?",["Clock","Doll","Book","Mirror"],0],
-["What has words but never speaks?",["Radio","Book","Phone","Bird"],1]
-]
-},
-emoji:{
-title:"😀 Emoji Decode",
-type:"choice",
-items:[
-["🍎📱",["Apple phone","Fruit basket","Red computer","Smart watch"],0],
-["🌞🌻",["Moon flower","Sunflower","Summer rain","Yellow sky"],1],
-["🐝🍯",["Bee honey","Sweet fish","Honey bee","Golden bird"],2],
-["🌧️☂️",["Sunny day","Rainy day","Snow fall","Windy day"],1],
-["⭐🐟",["Starfish","Goldfish","Sky fish","Sea star"],0],
-["🔥🐶",["Hot dog","Fire dog","Red puppy","Dog house"],0],
-["🌙🚶",["Moon walk","Night train","Space trip","Star walk"],0],
-["🎂🎉",["Wedding day","Birthday party","Music show","School day"],1],
-["🐱🐟",["Cat food","Fish cat","Pet shop","Wild animal"],0],
-["🧊🍦",["Cold drink","Ice cream","Snow cone","Frozen cake"],1]
-]
-}
-};
-
-const pictureScenes=[
-["🐱",["🌳","🌸","🐶","🏠","🌞","🚗","🐱","🍎","🦋","🌈","🐰","⚽","🌻","🐸","🍉","🚲","🐦","⭐","🎈","🐢"]],
-["⚽",["🏀","🌳","🐶","🚗","🍎","🏠","🎾","🌸","⚽","🐱","🚲","🌞","🍉","🦋","⭐","🐸","🎈","🐰","🌻","🐢"]],
-["🍎",["🍌","🍇","🍊","🌸","🐱","🚗","🍎","🏠","🌞","⚽","🐶","🌳","🦋","🍉","🚲","⭐","🐸","🎈","🐰","🌻"]],
-["🚗",["🚕","🚌","🚲","🏠","🌳","🐶","🌸","🚗","⚽","🍎","🌞","🐱","🦋","⭐","🍉","🐰","🐸","🎈","🌻","🐢"]],
-["🐟",["🐠","🐬","🦀","🌊","🐚","🐱","🌸","🐟","🚗","🍎","🏠","🌞","⚽","🦋","⭐","🐶","🐰","🌳","🎈","🍉"]],
-["🌻",["🌹","🌷","🌸","🌺","🌼","🐱","🚗","🍎","🌻","🏠","🌞","⚽","🦋","⭐","🐶","🐰","🐸","🌳","🎈","🍉"]],
-["🎈",["🎁","🎀","🎂","🎉","⭐","🐱","🚗","🍎","🏠","🌞","⚽","🦋","🎈","🐶","🐰","🌳","🐸","🍉","🚲","🌸"]],
-["🐸",["🐢","🐍","🦎","🐊","🐱","🚗","🍎","🏠","🌞","⚽","🦋","⭐","🐸","🐶","🐰","🌳","🎈","🍉","🚲","🌸"]],
-["🚲",["🚗","🚌","🚕","🚜","🐱","🌸","🍎","🏠","🌞","⚽","🦋","⭐","🐶","🐰","🌳","🚲","🐸","🍉","🎈","🌻"]],
-["⭐",["🌙","☀️","☁️","🌈","🐱","🚗","🍎","🏠","⭐","⚽","🦋","🐶","🐰","🌳","🎈","🍉","🚲","🐸","🌻","🌸"]]
-];
-
-let currentMode="";
-let currentItems=[];
-let currentIndex=0;
-let currentLocked=false;
-let currentCategory="";
-
-function openGame(title){
-$("gameBox").classList.add("active");
-$("gameTitle").textContent=title;
-$("feedback").textContent="";
-$("nextBtn").classList.add("hidden");
-$("restartBtn").classList.add("hidden");
-$("gameBox").scrollIntoView({behavior:"smooth",block:"start"});
-}
-
-function closeGame(){
-$("gameBox").classList.remove("active");
-}
-
-function startQuiz(category){
-currentMode="quiz";
-currentCategory=category;
-currentItems=shuffle(quizzes[category]);
-currentIndex=0;
-openGame("🧩 "+category.charAt(0).toUpperCase()+category.slice(1)+" Quiz");
-showQuestion();
-}
-
-function startGame(type){
-currentMode=type;
-currentCategory="";
-currentIndex=0;
-if(type==="difference"){
-currentItems=shuffle(pictureScenes);
-openGame("👀 Picture Hunt Challenge");
-}else{
-currentItems=shuffle(games[type].items);
-openGame(games[type].title);
-}
-showQuestion();
-}
-
-function showQuestion(){
-currentLocked=false;
-$("feedback").textContent="";
-$("nextBtn").classList.add("hidden");
-$("restartBtn").classList.add("hidden");
-$("nextBtn").textContent="Next Question →";
-
-$("gameProgress").textContent="Question "+(currentIndex+1)+" of "+currentItems.length;
-
-let item=currentItems[currentIndex];
-let content=$("gameContent");
-content.innerHTML="";
-
-if(currentMode==="difference"){
-showDifference();
-return;
-}
-
-if(currentMode==="words"){
-content.innerHTML=
-'<div class="question">Unscramble these letters</div>'+
-'<div class="big-emoji">🔠</div>'+
-'<div class="question" style="letter-spacing:7px">'+item[0]+'</div>'+
-'<div class="input-row">'+
-'<input id="answerInput" placeholder="Type your answer" autocomplete="off">'+
-'<button onclick="checkText()">Check</button>'+
-'</div>';
-
-$("answerInput").addEventListener("keydown",function(e){
-if(e.key==="Enter")checkText();
-});
-return;
-}
-
-if(currentMode==="flags"){
-content.innerHTML=
-'<div class="big-emoji">'+item[0]+'</div>'+
-'<div class="question">Which country does this flag belong to?</div>';
-renderChoices(item[2],item[2].indexOf(item[1]));
-return;
-}
-
-if(currentMode==="quiz"){
-content.innerHTML='<div class="question">'+item[0]+'</div>';
-renderChoices(item[1],item[2]);
-return;
-}
-
-if(["math","truefalse","odd","riddle","emoji"].includes(currentMode)){
-content.innerHTML=
-'<div class="big-emoji">'+(currentMode==="emoji"?item[0]:"")+'</div>'+
-'<div class="question">'+item[0]+'</div>';
-renderChoices(item[1],item[2]);
-}
-}
-
-function renderChoices(options,answerIndex){
-let box=document.createElement("div");
-box.className="answers";
-options.forEach(function(option,i){
-let b=document.createElement("button");
-b.textContent=option;
-b.onclick=function(){
-answerChoice(i,answerIndex,box);
-};
-box.appendChild(b);
-});
-$("gameContent").appendChild(box);
-}
-
-function answerChoice(selected,correct,box){
-if(currentLocked)return;
-currentLocked=true;
-let buttons=box.querySelectorAll("button");
-buttons.forEach(function(b,i){
-b.disabled=true;
-if(i===correct)b.classList.add("correct");
-});
-if(selected===correct){
-addPoints(10);
-$("feedback").textContent="Correct! +10 points 🎉";
-}else{
-buttons[selected].classList.add("wrong");
-$("feedback").textContent="Not quite! Better luck next time.";
-}
-finishQuestion();
-}
-
-function checkText(){
-if(currentLocked)return;
-let answer=$("answerInput").value.trim().toUpperCase();
-if(!answer){
-$("feedback").textContent="Please enter your answer.";
-return;
-}
-currentLocked=true;
-if(answer===currentItems[currentIndex][1]){
-addPoints(10);
-$("feedback").textContent="Excellent! Correct answer. +10 points 🎉";
-}else{
-$("feedback").textContent="Correct answer: "+currentItems[currentIndex][1];
-}
-$("answerInput").disabled=true;
-finishQuestion();
-}
-
-function showDifference(){
-let item=currentItems[currentIndex];
-let target=item[0];
-let objects=shuffle(item[1]);
-$("gameContent").innerHTML=
-'<div class="question">Find this object: <span style="font-size:35px">'+target+'</span></div>'+
-'<p class="info">Look carefully at the picture and tap the matching object.</p>'+
-'<div class="difference-board" id="pictureBoard"></div>';
-
-let board=$("pictureBoard");
-objects.forEach(function(emoji){
-let b=document.createElement("button");
-b.className="diff-cell";
-b.textContent=emoji;
-b.onclick=function(){
-checkDifference(emoji,b);
-};
-board.appendChild(b);
-});
-}
-
-function checkDifference(selected,button){
-if(currentLocked)return;
-currentLocked=true;
-let target=currentItems[currentIndex][0];
-if(selected===target){
-button.classList.add("correct");
-addPoints(15);
-$("feedback").textContent="Amazing! You found it. +15 points 🎉";
-}else{
-button.classList.add("wrong");
-$("feedback").textContent="Not quite! Look for "+target;
-document.querySelectorAll(".diff-cell").forEach(function(cell){
-if(cell.textContent===target){
-cell.classList.add("correct");
-}
-});
-}
-finishQuestion();
-}
-
-function finishQuestion(){
-$("nextBtn").classList.remove("hidden");
-if(currentIndex===currentItems.length-1){
-$("nextBtn").textContent="See Results";
-}
-}
-
-function nextQuestion(){
-if(!currentLocked)return;
-if(currentIndex<currentItems.length-1){
-currentIndex++;
-showQuestion();
-}else{
-showResults();
-}
-}
-
-function showResults(){
-$("gameContent").innerHTML=
-'<div class="big-emoji">🏆</div>'+
-'<div class="question">Challenge Completed!</div>'+
-'<p class="center">Great effort! Keep playing and learning.</p>';
-$("gameProgress").textContent="You completed "+currentItems.length+" questions.";
-$("feedback").textContent="Your total points: "+score;
-$("nextBtn").classList.add("hidden");
-$("restartBtn").classList.remove("hidden");
-}
-
-function restartGame(){
-if(currentMode==="quiz"){
-startQuiz(currentCategory);
-}else{
-startGame(currentMode);
-}
-}
-
-const facts=[
-"Octopuses have three hearts. Two pump blood to the gills, while one pumps it to the rest of the body!",
-"Honey can stay edible for a very long time when properly stored.",
-"Bananas are berries, but strawberries are not botanical berries.",
-"The Moon is slowly moving away from Earth.",
-"An adult human body usually has 206 bones.",
-"Some turtles can breathe through specialised tissues near their tails.",
-"Light from the Sun takes about eight minutes to reach Earth.",
-"A group of flamingos is called a flamboyance.",
-"Sharks existed before trees appeared on Earth.",
-"Your brain uses a large share of your body's energy."
-];
-
-function newFact(){
-let fact=facts[Math.floor(Math.random()*facts.length)];
-$("dailyFact").textContent=fact;
-}
+document.getElementById("score").textContent=localStorage.getItem("pwaScore")||"0";
 </script>
-
 </body>
 </html>
