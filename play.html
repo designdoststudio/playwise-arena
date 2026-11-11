@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17112f">
+<meta name="robots" content="noindex,follow">
+<title>Play a Game | PlayWise Arena</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f1ff;color:#211b38;font-family:Arial,sans-serif}
+header{background:#17112f;color:white;padding:15px;text-align:center}
+header h1{font-size:23px;margin:0}
+header a{display:inline-block;color:#fff;text-decoration:none;margin-top:9px;font-size:14px}
+main{max-width:850px;margin:20px auto;padding:0 13px}
+.panel{background:white;padding:20px;border-radius:18px;box-shadow:0 5px 20px #20163b12}
+h2{text-align:center;margin:5px 0 12px}
+#instructions{text-align:center;color:#716a83;line-height:1.5}
+.status{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#f1edff;padding:12px;border-radius:10px;margin:15px 0;font-weight:bold}
+#content{min-height:220px}
+.question{text-align:center;font-size:22px;font-weight:bold;margin:22px 0}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button,.option{border:0;border-radius:11px;background:#6245d4;color:white;padding:13px 12px;font-size:16px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.55;cursor:default}
+.option{background:#f0ecff;color:#30215d;border:1px solid #ddd3ff}
+.option:hover{background:#ded5ff}
+#feedback{text-align:center;font-weight:bold;margin:15px 0;min-height:24px}
+.primary{display:block;width:100%;margin:12px auto;background:#6245d4}
+.secondary{background:#eee9ff;color:#332263}
+.big{font-size:35px;text-align:center;margin:20px 0}
+input{width:100%;padding:13px;border:1px solid #cfc5f5;border-radius:10px;font-size:17px;margin:8px 0}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;max-width:360px;margin:20px auto}
+.tile{aspect-ratio:1;background:#6245d4;color:white;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:bold;cursor:pointer}
+.tile.empty{background:#eee9ff;color:#6245d4}
+.memory{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:440px;margin:15px auto}
+.memory button{aspect-ratio:1;font-size:27px;padding:4px;background:#6245d4}
+.memory button.open,.memory button.matched{background:#eee9ff;color:#30215d}
+.memory button.matched{opacity:.55}
+.gridhunt{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:18px auto}
+.gridhunt button{padding:10px 2px;font-size:25px;background:#f0ecff;color:#30215d}
+.gridhunt button.found{background:#b8f2cf}
+.wordgrid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;max-width:430px;margin:15px auto}
+.wordgrid button{padding:9px 0;background:#eee9ff;color:#30215d;font-size:17px}
+.wordgrid button.selected{background:#6245d4;color:white}
+.sudoku{display:grid;grid-template-columns:repeat(4,1fr);max-width:300px;margin:15px auto;border:2px solid #30215d}
+.sudoku input{margin:0;border-radius:0;text-align:center;padding:12px 2px;font-size:22px;border:1px solid #bcb2db}
+.sudoku input:nth-child(2),.sudoku input:nth-child(4){border-right:2px solid #30215d}
+.sudoku input:nth-child(n+5):nth-child(-n+8){border-bottom:2px solid #30215d}
+.numberpad{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-width:300px;margin:auto}
+.numberpad button{padding:12px}
+footer{text-align:center;color:#77718b;padding:20px;font-size:13px}
+@media(max-width:420px){.panel{padding:15px}.question{font-size:19px}.options{grid-template-columns:1fr}.tile{font-size:23px}.gridhunt button{font-size:21px}}
+</style>
+</head>
+<body>
+<header>
+<h1>🎮 PlayWise Arena</h1>
+<a href="index.html">← Back to Home</a>
+</header>
+<main>
+<div class="panel">
+<h2 id="title">Loading Challenge...</h2>
+<p id="instructions">Get ready to play!</p>
+<div class="status">
+<span id="progress">Question: 0</span>
+<span>⭐ Score: <b id="score">0</b></span>
+</div>
+<div id="content"></div>
+<div id="feedback"></div>
+<button class="primary" id="next" style="display:none">Next</button>
+</div>
+</main>
+<footer>Created & Managed by Muhammad Bilal · PlayWise Arena</footer>
+
+<script>
+const $=id=>document.getElementById(id);
+let score=Number(localStorage.getItem("pwaScore")||0);
+let round=0,items=[],locked=false,game="";
+function updateScore(){ $("score").textContent=score;localStorage.setItem("pwaScore",score); }
+function addPoints(n){score+=n;updateScore();}
+function status(a,b){$("progress").textContent=a;$("feedback").textContent=b||"";}
+function finish(message){$("content").innerHTML='<div class="big">🏆</div><div class="question">'+message+'</div><button class="primary" onclick="location.href=\'index.html\'">Back to Games</button><button class="primary secondary" onclick="location.reload()">Play Again</button>';$("next").style.display="none";}
+function start(title,description){$("title").textContent=title;$("instructions").textContent=description;updateScore();}
+function shuffle(a){return [...a].sort(()=>Math.random()-.5);}
+function showNext(){if(round>=items.length){finish("Challenge Complete!");return;}locked=false;$("next").style.display="none";render();}
+function nextButton(){ $("next").style.display="block";$("next").onclick=()=>{round++;showNext();};}
+function answer(correct,message){if(locked)return;locked=true;if(correct){addPoints(10);status("Question "+(round+1)+" / "+items.length,"✅ Correct! +10 points");}else{status("Question "+(round+1)+" / "+items.length,"❌ "+message);}nextButton();}
+function choiceQuestion(question,options,correct){$("content").innerHTML='<div class="question">'+question+'</div><div class="options">'+options.map((x,i)=>'<button class="option" data-i="'+i+'">'+x+'</button>').join("")+'</div>';$("content").querySelectorAll("button").forEach(b=>b.onclick=()=>answer(Number(b.dataset.i)===correct,"Correct answer: "+options[correct]));}
+const quizzes={
+general:[
+["Which planet is known as the Red Planet?",["Earth","Mars","Venus","Jupiter"],1],
+["How many days are in a leap year?",["364","365","366","367"],2],
+["Which is the largest ocean?",["Atlantic","Indian","Arctic","Pacific"],3],
+["What is the capital of Japan?",["Tokyo","Seoul","Beijing","Bangkok"],0],
+["How many sides does a hexagon have?",["Five","Six","Seven","Eight"],1]],
+science:[
+["What gas do plants absorb?",["Oxygen","Carbon dioxide","Nitrogen","Hydrogen"],1],
+["Which planet is closest to the Sun?",["Venus","Earth","Mercury","Mars"],2],
+["What is H2O commonly called?",["Salt","Water","Oxygen","Hydrogen"],1],
+["Which organ pumps blood?",["Lungs","Brain","Heart","Kidney"],2],
+["What force pulls objects toward Earth?",["Magnetism","Gravity","Friction","Light"],1]],
+sports:[
+["How many players are in a football team on the field?",["9","10","11","12"],2],
+["Which sport uses a shuttlecock?",["Tennis","Badminton","Cricket","Hockey"],1],
+["How many rings are on the Olympic symbol?",["Four","Five","Six","Seven"],1],
+["In cricket, how many runs is a boundary without a bounce?",["Four","Five","Six","Three"],2],
+["Which sport uses a hoop and a ball?",["Basketball","Golf","Rugby","Boxing"],0]],
+pakistan:[
+["When did Pakistan become independent?",["1940","1947","1956","1965"],1],
+["What is the capital of Pakistan?",["Karachi","Lahore","Islamabad","Peshawar"],2],
+["Which is Pakistan's national language?",["Punjabi","Sindhi","Urdu","English"],2],
+["Which is the highest mountain in Pakistan?",["Nanga Parbat","K2","Rakaposhi","Tirich Mir"],1],
+["What is the national animal of Pakistan?",["Lion","Markhor","Snow leopard","Deer"],1]],
+world:[
+["Which is the largest continent?",["Africa","Europe","Asia","Australia"],2],
+["Which country has the city of Paris?",["Italy","France","Spain","Germany"],1],
+["What is the currency of Japan?",["Yuan","Won","Yen","Dollar"],2],
+["Which is the largest hot desert?",["Sahara","Gobi","Kalahari","Arabian"],0],
+["Which country is famous for the pyramids of Giza?",["Mexico","Egypt","Greece","India"],1]]
+};
+function quiz(category){game="quiz";items=quizzes[category]||quizzes.general;start((category||"General")+" Quiz","Choose the correct answer. Each correct answer earns 10 points.");round=0;render();}
+function render(){status("Question "+(round+1)+" / "+items.length,"");let q=items[round];choiceQuestion(q[0],q[1],q[2]);}
+
+const params=new URLSearchParams(location.search);
+const quizCategory=params.get("category");
+game=params.get("game")||"";
+if(params.get("type")==="quiz"||quizCategory){quiz(quizCategory);}
+
+const flags=[
+["🇵🇰","Pakistan",["Pakistan","Turkey","Malaysia","Bangladesh"]],
+["🇯🇵","Japan",["China","Japan","South Korea","Thailand"]],
+["🇧🇷","Brazil",["Argentina","Brazil","Portugal","Mexico"]],
+["🇹🇷","Turkey",["Turkey","Pakistan","Tunisia","Algeria"]],
+["🇨🇦","Canada",["USA","Canada","Australia","UK"]],
+["🇫🇷","France",["Italy","France","Russia","Germany"]],
+["🇸🇦","Saudi Arabia",["Iran","Oman","Saudi Arabia","Qatar"]],
+["🇦🇺","Australia",["New Zealand","Australia","Canada","Ireland"]]
+];
+const scrambles=[["ELPPA","APPLE"],["NOLEM","LEMON"],["REWOLF","FLOWER"],["LOOHCS","SCHOOL"],["RETUPMOC","COMPUTER"],["NEDRAG","GARDEN"],["KOOB","BOOK"],["RIAHC","CHAIR"]];
+const truths=[
+["The Sun is a star.",true],["Fish can breathe underwater using gills.",true],["The Earth has two moons.",false],["A week has seven days.",true],["Humans have three hearts.",false],["Lightning is hotter than the surface of the Sun.",true],["The Pacific is the largest ocean.",true],["Bats are blind.",false]
+];
+const odds=[
+["🍎","🍌","🥕","🍇",2],["🚗","🚌","🚲","🍕",3],["🐱","🐶","🐰","✈️",3],["⚽","🏀","🎾","🍉",3],["🌹","🌻","🌷","📱",3],["🍚","🍞","🥛","👟",3]
+];
+const riddles=[
+["What has keys but cannot open locks?","A piano"],["What has hands but cannot clap?","A clock"],["What gets wetter as it dries?","A towel"],["What has a face and two hands but no arms or legs?","A clock"],["What has one eye but cannot see?","A needle"]
+];
+const emojis=[
+["🐝 + 🍯","Honey"],["🌞 + 🌻","Sunflower"],["⭐ + 🐟","Starfish"],["🌧️ + 🌈","Rainbow"],["🔥 + 🐶","Hotdog"]
+];
+const hunts=[
+{target:"🐱",scene:["🐶","🌳","🐱","🚗","🌸","🐟","🍎","🐦","🏠","🐱","🌙","🚲","🐸","🍉","🐱","🌻","🐼","⚽","🐱","🍓"]},
+{target:"🍎",scene:["🍌","🍇","🍎","🍊","🥕","🍉","🍎","🍓","🍍","🥝","🍒","🍎","🍐","🍋","🥭","🍎","🍑","🍈","🍎","🍌"]},
+{target:"⭐",scene:["🌙","☁️","⭐","🌞","🌈","⭐","🌳","🌸","☁️","⭐","🌙","🪐","🌞","⭐","🌟","🌧️","⭐","☁️","🌙","⭐"]}
+];
+function launchGame(){round=0;locked=false;let names={flags:"Flag Challenge",scramble:"Word Scramble",math:"Math Sprint",truefalse:"True or False",odd:"Odd One Out",riddle:"Riddle Challenge",emoji:"Emoji Decode",hunt:"Picture Hunt Challenge",number:"Number Puzzle",memory:"Memory Match",wordsearch:"Word Search",reaction:"Reaction Test",sudoku:"Sudoku Challenge",guess:"Word Guess"};start(names[game]||"Mind Game","Complete the challenge and earn points!");if(game==="flags"){items=shuffle(flags).slice(0,8);renderFlag();}else if(game==="scramble"){items=shuffle(scrambles).slice(0,8);renderScramble();}else if(game==="math"){mathGame();}else if(game==="truefalse"){items=shuffle(truths).slice(0,8);renderTrue();}else if(game==="odd"){items=shuffle(odds);renderOdd();}else if(game==="riddle"){items=shuffle(riddles);renderRiddle();}else if(game==="emoji"){items=shuffle(emojis);renderEmoji();}else if(game==="hunt"){huntGame();}else if(game==="number"){numberGame();}else if(game==="memory"){memoryGame();}else if(game==="wordsearch"){wordSearchGame();}else if(game==="reaction"){reactionGame();}else if(game==="sudoku"){sudokuGame();}else if(game==="guess"){guessGame();}else{finish("Game not found. Please return home.");}}
+function customNext(fn){$("next").style.display="block";$("next").onclick=fn;}
+function renderFlag(){status("Round "+(round+1)+" / "+items.length,"");let q=items[round];$("content").innerHTML='<div class="big">'+q[0]+'</div><div class="question">Which country does this flag belong to?</div><div class="options">'+shuffle(q[2]).map(x=>'<button class="option">'+x+'</button>').join("")+'</div>';$("content").querySelectorAll("button").forEach(b=>b.onclick=()=>{if(locked)return;locked=true;if(b.textContent===q[1]){addPoints(15);$("feedback").textContent="✅ Correct! +15 points";}else{$("feedback").textContent="❌ Correct answer: "+q[1];}customNext(()=>{round++;if(round>=items.length)finish("Flag Challenge Complete!");else renderFlag();});});}
+function renderScramble(){status("Round "+(round+1)+" / "+items.length,"");let q=items[round];$("content").innerHTML='<div class="big">🔤</div><div class="question">Unscramble: '+q[0]+'</div><input id="word" placeholder="Type your answer"><button class="primary" id="check">Check Answer</button>';$("check").onclick=()=>{if(locked)return;locked=true;if($("word").value.trim().toUpperCase()===q[1]){addPoints(15);$("feedback").textContent="✅ Correct! +15 points";}else{$("feedback").textContent="❌ Correct word: "+q[1];}customNext(()=>{round++;if(round>=items.length)finish("Word Scramble Complete!");else renderScramble();});};}
+function mathGame(){start("Math Sprint","Solve 10 quick maths questions. Each correct answer earns 10 points.");round=0;mathNext();}
+function mathNext(){if(round>=10){finish("Math Sprint Complete!");return;}let a=Math.floor(Math.random()*20)+1,b=Math.floor(Math.random()*20)+1,op=Math.random()>.5?"+":"-",ans=op==="+"?a+b:a-b;status("Question "+(round+1)+" / 10","");$("content").innerHTML='<div class="big">➗</div><div class="question">'+a+" "+op+" "+b+' = ?</div><input id="mathanswer" type="number" placeholder="Your answer"><button class="primary" id="mathcheck">Submit</button>';$("mathcheck").onclick=()=>{if(locked)return;locked=true;if(Number($("mathanswer").value)===ans){addPoints(10);$("feedback").textContent="✅ Correct! +10 points";}else{$("feedback").textContent="❌ Correct answer: "+ans;}$("next").style.display="block";$("next").onclick=()=>{round++;locked=false;mathNext();};};}
+function renderTrue(){status("Question "+(round+1)+" / "+items.length,"");let q=items[round];$("content").innerHTML='<div class="big">🤔</div><div class="question">'+q[0]+'</div><div class="options"><button class="option" id="yes">True</button><button class="option" id="no">False</button></div>';$("yes").onclick=()=>answer(q[1]===true,"The correct answer is "+q[1]);$("no").onclick=()=>answer(q[1]===false,"The correct answer is "+q[1]);}
+function renderOdd(){status("Round "+(round+1)+" / "+items.length,"");let q=items[round];$("content").innerHTML='<div class="question">Find the odd one out</div><div class="options">'+q.slice(0,4).map((x,i)=>'<button class="option" data-i="'+i+'" style="font-size:30px">'+x+'</button>').join("")+'</div>';$("content").querySelectorAll("button").forEach(b=>b.onclick=()=>answer(Number(b.dataset.i)===q[4],"Try another one!"));}
+function renderRiddle(){status("Riddle "+(round+1)+" / "+items.length,"");let q=items[round];$("content").innerHTML='<div class="big">💡</div><div class="question">'+q[0]+'</div><input id="riddleanswer" placeholder="Your answer"><button class="primary" id="riddlecheck">Check Answer</button>';$("riddlecheck").onclick=()=>{let v=$("riddleanswer").value.trim().toLowerCase();answer(v.length>0&&(v.includes(q[1].toLowerCase())||q[1].toLowerCase().includes(v)),"Answer: "+q[1]);};}
+function renderEmoji(){status("Round "+(round+1)+" / "+items.length,"");let q=items[round];$("content").innerHTML='<div class="big">'+q[0]+'</div><div class="question">Guess the word</div><input id="emanswer" placeholder="Your answer"><button class="primary" id="emcheck">Check</button>';$("emcheck").onclick=()=>answer($("emanswer").value.trim().toLowerCase()===q[1].toLowerCase(),"Answer: "+q[1]);}
+function huntGame(){let q=hunts[Math.floor(Math.random()*hunts.length)],found=0,total=q.scene.filter(x=>x===q.target).length;start("Picture Hunt Challenge","Find all "+total+" hidden "+q.target+" objects in the picture. Each one earns 15 points.");status("Found 0 / "+total,"");$("content").innerHTML='<div class="question">Find all: '+q.target+'</div><div class="gridhunt">'+q.scene.map((x,i)=>'<button data-i="'+i+'">'+x+'</button>').join("")+'</div>';$("content").querySelectorAll("button").forEach(b=>b.onclick=()=>{if(b.disabled)return;if(q.scene[Number(b.dataset.i)]===q.target){b.classList.add("found");b.disabled=true;found++;addPoints(15);status("Found "+found+" / "+total,"✅ Great find! +15 points");if(found===total)finish("Amazing! You found every hidden object!");}else{$("feedback").textContent="❌ Not this one. Keep looking!";b.disabled=true;}});}
