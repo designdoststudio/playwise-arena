@@ -7,1117 +7,484 @@
 <meta name="theme-color" content="#17112f">
 <meta name="robots" content="noindex,follow">
 <title>Play a Game | PlayWise Arena</title>
-
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#f4f1ff;color:#211b38;font-family:Arial,sans-serif}
-header{background:#17112f;color:white;padding:16px;text-align:center}
-header h1{font-size:23px;margin:0}
-header a{display:inline-block;color:white;text-decoration:none;margin-top:9px}
-main{max-width:850px;margin:20px auto;padding:0 13px}
-.panel{background:white;padding:20px;border-radius:18px;box-shadow:0 5px 20px #20163b12}
-h2{text-align:center;margin:5px 0 12px}
-#instructions{text-align:center;color:#716a83;line-height:1.5}
-.status{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#f1edff;padding:12px;border-radius:10px;margin:15px 0;font-weight:bold}
-#content{min-height:220px}
-.question{text-align:center;font-size:22px;font-weight:bold;margin:22px 0}
-.options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-button{border:0;border-radius:11px;background:#6245d4;color:white;padding:13px 12px;font-size:16px;font-weight:bold;cursor:pointer}
-button:disabled{opacity:.55;cursor:default}
-.option{background:#f0ecff;color:#30215d;border:1px solid #ddd3ff}
-.option:hover{background:#ded5ff}
-#feedback{text-align:center;font-weight:bold;margin:15px 0;min-height:24px}
-.primary{display:block;width:100%;margin:12px auto;background:#6245d4}
-.secondary{background:#eee9ff;color:#332263}
-.big{font-size:35px;text-align:center;margin:20px 0}
-input{width:100%;padding:13px;border:1px solid #cfc5f5;border-radius:10px;font-size:17px;margin:8px 0}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;max-width:360px;margin:20px auto}
-.tile{aspect-ratio:1;background:#6245d4;color:white;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:bold;cursor:pointer}
-.tile.empty{background:#eee9ff;color:#6245d4}
-.memory{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:440px;margin:15px auto}
-.memory button{aspect-ratio:1;font-size:27px;padding:4px}
-.memory button.open,.memory button.matched{background:#eee9ff;color:#30215d}
-.memory button.matched{opacity:.55}
-.gridhunt{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:18px auto}
-.gridhunt button{padding:10px 2px;font-size:25px;background:#f0ecff;color:#30215d}
-.gridhunt button.found{background:#b8f2cf}
-.wordgrid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;max-width:430px;margin:15px auto}
-.wordgrid button{padding:9px 0;background:#eee9ff;color:#30215d;font-size:17px}
-.wordgrid button.selected{background:#6245d4;color:white}
-.wordgrid button.found{background:#b8f2cf;color:#17452b;opacity:1}
-.sudoku{display:grid;grid-template-columns:repeat(4,1fr);max-width:300px;margin:15px auto;border:2px solid #30215d}
-.sudoku input{margin:0;border-radius:0;text-align:center;padding:12px 2px;font-size:22px;border:1px solid #bcb2db}
-.numberpad{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-width:300px;margin:auto}
-.numberpad button{padding:12px}
-footer{text-align:center;color:#77718b;padding:20px;font-size:13px}
-button:focus-visible,input:focus-visible{outline:3px solid #a995ff;outline-offset:2px}
-@media(max-width:420px){
-.panel{padding:15px}
-.question{font-size:19px}
-.options{grid-template-columns:1fr}
-.tile{font-size:23px}
-.gridhunt button{font-size:21px}
-.wordgrid{gap:3px}
-.wordgrid button{font-size:15px;padding:9px 0}
-}
+body{margin:0;background:#100d20;color:#f7f5ff;font-family:Arial,sans-serif}
+header{background:#1c1636;padding:16px;text-align:center;border-bottom:1px solid #392d60}
+header a{color:#c8baff;text-decoration:none;font-size:14px}
+h1{font-size:24px;margin:9px 0 4px}
+header p{margin:5px;color:#c4bddb;font-size:13px}
+main{max-width:850px;margin:auto;padding:16px}
+.panel{background:#1c1732;border:1px solid #382e59;border-radius:17px;padding:16px;margin:13px 0}
+h2{font-size:20px;margin:5px 0 12px}
+h3{font-size:17px}
+button,select{border:0;border-radius:10px;padding:12px 15px;font-weight:bold;font-size:14px;cursor:pointer}
+button{background:#7958ed;color:white}
+button:disabled{opacity:.4}
+.secondary{background:#342a50;color:#eee}
+.green{background:#16885e}
+.danger{background:#b94459}
+input{padding:12px;border-radius:9px;border:1px solid #594b78;background:#110d20;color:white;width:100%;margin:5px 0}
+.small{font-size:13px;color:#c7bfdc;line-height:1.5}
+#gameTitle{font-size:22px}
+#status{color:#d4c9ff;font-weight:bold;margin:10px 0}
+#gameArea{min-height:180px}
+.grid{display:grid;gap:7px}
+.quiz-option{display:block;width:100%;margin:8px 0;text-align:left;background:#30264b}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.stat{background:#30264b;border-radius:9px;padding:9px 12px;font-size:13px}
+.levelbar{height:9px;background:#33294d;border-radius:20px;overflow:hidden;margin:10px 0}
+.levelbar span{display:block;height:100%;background:#9b7cff}
+.diff-pictures{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.picture{position:relative;background:#292044;border-radius:12px;padding:8px;min-width:0}
+.picture svg{width:100%;height:auto;display:block}
+.picture button{position:absolute;width:25px;height:25px;padding:0;border:2px solid white;border-radius:50%;background:#ffcf44;color:#21172c;transform:translate(-50%,-50%);opacity:.01}
+.picture button:focus{opacity:.9}
+.candy{aspect-ratio:1;border-radius:10px;font-size:clamp(18px,5vw,30px);padding:0;min-width:0}
+.candy.selected{outline:3px solid white;outline-offset:1px}
+#raceCanvas{width:100%;max-width:440px;display:block;margin:auto;background:#26263b;border-radius:12px;touch-action:none}
+.race-controls{display:flex;justify-content:center;gap:25px;margin-top:12px}
+.race-controls button{font-size:23px;min-width:75px}
+.ludo-board{display:grid;grid-template-columns:repeat(9,1fr);gap:2px;max-width:430px;margin:12px auto;background:#6a5a82;padding:5px;border-radius:10px}
+.ludo-cell{aspect-ratio:1;background:#eee8ff;border-radius:3px;display:flex;align-items:center;justify-content:center;color:#21172c;font-size:clamp(9px,2.5vw,15px);font-weight:bold}
+.ludo-cell.red{background:#f29b9b}.ludo-cell.green{background:#8ee0b4}.ludo-cell.yellow{background:#ffe18b}.ludo-cell.blue{background:#9ccaff}
+.token{border-radius:50%;width:80%;height:80%;display:flex;align-items:center;justify-content:center;color:#17112f;border:2px solid #fff}
+footer{text-align:center;padding:22px;color:#aaa;font-size:12px}
+@media(max-width:480px){main{padding:10px}.panel{padding:12px}.diff-pictures{gap:5px}}
 </style>
 </head>
-
 <body>
 <header>
+<a href="./">← PlayWise Arena Home</a>
 <h1>🎮 PlayWise Arena</h1>
-<a href="index.html">← Back to Home</a>
+<p>Play, learn and challenge yourself!</p>
 </header>
 
 <main>
-<div class="panel">
-<h2 id="title">Loading Challenge...</h2>
-<p id="instructions">Get ready to play!</p>
-
-<div class="status">
-<span id="progress">Ready</span>
-<span>⭐ Score: <b id="score">0</b></span>
+<section class="panel">
+<div id="gameTitle">Loading game...</div>
+<div class="stats">
+<div class="stat">⭐ Score: <span id="score">0</span></div>
+<div class="stat">🏆 Level: <span id="level">1</span></div>
+<div class="stat">🔓 Unlocked: <span id="unlocked">1</span></div>
 </div>
+<div class="levelbar"><span id="progress" style="width:0%"></span></div>
+<div class="small" id="difficulty"></div>
+<div id="status">Get ready!</div>
+</section>
 
-<div id="content"></div>
-<div id="feedback" aria-live="polite"></div>
-<button class="primary" id="next" style="display:none">Next</button>
-</div>
+<section class="panel">
+<div id="gameArea"></div>
+<div id="actions" style="margin-top:14px"></div>
+</section>
+
+<section class="panel">
+<h3>🎯 Your Progress</h3>
+<p class="small">Your scores and unlocked levels are saved on this device and browser. Clearing browser data may erase saved progress.</p>
+<button class="secondary" onclick="resetCurrent()">Reset This Game</button>
+<button class="secondary" onclick="location.href='./'">Back to Home</button>
+</section>
 </main>
-
-<footer>Created &amp; Managed by Muhammad Bilal · PlayWise Arena</footer>
+<footer>PlayWise Arena · Created &amp; Managed by Muhammad Bilal</footer>
 
 <script>
 (function(){
 "use strict";
 
-const $ = id => document.getElementById(id);
+const params=new URLSearchParams(location.search);
+const game=params.get("game")||"flags";
+const type=params.get("type")||"game";
+const category=params.get("category")||"general";
+const area=document.getElementById("gameArea");
+const actions=document.getElementById("actions");
+const statusBox=document.getElementById("status");
 
-let score = 0;
-let round = 0;
-let items = [];
-let locked = false;
-let game = "";
-let quizMode = false;
+const names={
+difference:"Find the Difference",match3:"Match-3 Puzzle",racing:"Car Racing",
+ludo:"Ludo",flags:"Flag Challenge",scramble:"Word Scramble",math:"Math Sprint",
+truefalse:"True or False",odd:"Odd One Out",riddle:"Riddle Challenge",
+emoji:"Emoji Decode",hunt:"Picture Hunt",number:"Number Puzzle",
+memory:"Memory Match",wordsearch:"Word Search",reaction:"Reaction Test",
+sudoku:"Sudoku Challenge",guess:"Word Guess"
+};
 
-try {
-score = Number(localStorage.getItem("pwaScore") || 0);
-if (!Number.isFinite(score)) score = 0;
-} catch(e) {
-score = 0;
+const key="pwa_"+(type==="quiz"?"quiz_"+category:game);
+let saved={};
+try{saved=JSON.parse(localStorage.getItem(key)||"{}")}catch(e){}
+let level=Math.max(1,Number(saved.level)||1);
+let score=Math.max(0,Number(saved.score)||0);
+let unlocked=Math.max(level,Number(saved.unlocked)||1);
+let roundDone=false;
+let currentQuestion=0;
+let quizScore=0;
+let selected=null;
+let matchBoard=[];
+let matchMoves=0;
+let matchTarget=0;
+let raceRunning=false;
+let raceFrame=0;
+let raceCar=1;
+let raceObstacles=[];
+let raceCoins=0;
+let raceScore=0;
+let ludoTurn=0;
+let ludoDice=0;
+let ludoTokens=[];
+let ludoPlayers=2;
+let diffFound=[];
+let diffTargets=[];
+let memoryFirst=null;
+let memoryLock=false;
+
+function save(){
+try{localStorage.setItem(key,JSON.stringify({level,score,unlocked}))}catch(e){}
+}
+function difficulty(){
+if(level<=100)return "Very Easy";
+if(level<=500)return "Easy";
+if(level<=1000)return "Medium";
+if(level<=1500)return "Hard";
+return "Expert / Master";
+}
+function update(){
+document.getElementById("score").textContent=score;
+document.getElementById("level").textContent=level;
+document.getElementById("unlocked").textContent=unlocked;
+document.getElementById("difficulty").textContent="Difficulty: "+difficulty()+" · 2,000+ generated challenges";
+document.getElementById("progress").style.width=(level%100===0?100:(level%100))+"%";
+save();
+}
+function setStatus(t){statusBox.textContent=t}
+function button(text,fn,cls=""){
+const b=document.createElement("button");b.textContent=text;b.className=cls;b.onclick=fn;return b;
+}
+function win(points=10,message="Level completed!"){
+if(roundDone)return;
+roundDone=true;score+=points;unlocked=Math.max(unlocked,level+1);
+setStatus("🎉 "+message+"  +"+points+" points!");
+update();
+actions.innerHTML="";
+actions.append(button("Next Level →",()=>{level=Math.min(9999,level+1);roundDone=false;start()}, "green"));
+}
+function lose(message="Try again!"){
+setStatus(message);
+actions.innerHTML="";
+actions.append(button("Try Again",()=>start()));
+}
+function intro(title,description){
+document.getElementById("gameTitle").textContent=title;
+area.innerHTML="<p class='small'>"+description+"</p>";
+actions.innerHTML="";
+}
+function start(){
+roundDone=false;selected=null;actions.innerHTML="";
+update();
+if(type==="quiz"){startQuiz();return}
+document.getElementById("gameTitle").textContent="🎮 "+(names[game]||"Play a Game");
+switch(game){
+case "difference":startDifference();break;
+case "match3":startMatch3();break;
+case "racing":startRacing();break;
+case "ludo":startLudo();break;
+case "flags":case "scramble":case "math":case "truefalse":case "odd":
+case "riddle":case "emoji":case "hunt":case "number":case "memory":
+case "wordsearch":case "reaction":case "sudoku":case "guess":startClassic();break;
+default:area.innerHTML="<p>Game not found. Please return to the home page.</p>";
+}
 }
 
-function updateScore(){
-$("score").textContent = score;
-try { localStorage.setItem("pwaScore", String(score)); } catch(e){}
-}
-
-function addPoints(points){
-score += points;
-updateScore();
-}
-
-function start(title,description){
-$("title").textContent = title;
-$("instructions").textContent = description;
-$("feedback").textContent = "";
-$("next").style.display = "none";
-updateScore();
-}
-
-function status(message,feedback){
-$("progress").textContent = message;
-$("feedback").textContent = feedback || "";
-}
-
-function shuffle(array){
-const result = [...array];
-for(let i=result.length-1;i>0;i--){
-const j=Math.floor(Math.random()*(i+1));
-[result[i],result[j]]=[result[j],result[i]];
-}
-return result;
-}
-
-function finish(message){
-$("title").textContent = "Challenge Complete!";
-$("instructions").textContent = "Well done! Keep playing and improve your score.";
-$("progress").textContent = "Completed";
-$("feedback").textContent = "";
-$("content").innerHTML =
-'<div class="big">🏆</div>' +
-'<div class="question"></div>' +
-'<button class="primary" id="backHome">Back to Games</button>' +
-'<button class="primary secondary" id="playAgain">Play Again</button>';
-
-$("content").querySelector(".question").textContent = message;
-$("next").style.display = "none";
-
-$("backHome").onclick = () => location.href = "index.html";
-$("playAgain").onclick = () => location.reload();
-}
-
-function nextAction(callback){
-$("next").style.display = "block";
-$("next").onclick = callback;
-}
-
-function answer(correct,explanation,points){
-if(locked) return;
-locked = true;
-
-if(correct){
-addPoints(points || 10);
-status("Round "+(round+1)+" / "+items.length,"✅ Correct! +"+(points || 10)+" points");
-}else{
-status("Round "+(round+1)+" / "+items.length,"❌ "+explanation);
-}
-
-nextAction(()=>{
-round++;
-locked = false;
-if(round >= items.length){
-finish("You completed the challenge!");
-}else{
-renderCurrent();
-}
-});
-}
-
-/* QUIZ DATA */
-
-const quizzes = {
+/* QUIZ ARENA */
+const quizzes={
 general:[
-["Which planet is known as the Red Planet?",["Earth","Mars","Venus","Jupiter"],1],
-["How many days are in a leap year?",["364","365","366","367"],2],
-["Which is the largest ocean?",["Atlantic","Indian","Arctic","Pacific"],3],
-["What is the capital of Japan?",["Tokyo","Seoul","Beijing","Bangkok"],0],
-["How many sides does a hexagon have?",["Five","Six","Seven","Eight"],1]
-],
+["Which is the largest ocean?","Pacific","Atlantic","Indian","Arctic",0],
+["How many days are in a leap year?","364","365","366","367",2],
+["Which planet is known as the Red Planet?","Venus","Mars","Jupiter","Saturn",1],
+["What is the capital of Japan?","Seoul","Tokyo","Beijing","Bangkok",1],
+["How many sides does a hexagon have?","5","6","7","8",1]],
 science:[
-["What gas do plants absorb?",["Oxygen","Carbon dioxide","Nitrogen","Hydrogen"],1],
-["Which planet is closest to the Sun?",["Venus","Earth","Mercury","Mars"],2],
-["What is H2O commonly called?",["Salt","Water","Oxygen","Hydrogen"],1],
-["Which organ pumps blood?",["Lungs","Brain","Heart","Kidney"],2],
-["What force pulls objects toward Earth?",["Magnetism","Gravity","Friction","Light"],1]
-],
+["Which gas do plants absorb?","Oxygen","Carbon dioxide","Nitrogen","Hydrogen",1],
+["What is H2O?","Salt","Water","Oxygen","Sugar",1],
+["Which organ pumps blood?","Lungs","Brain","Heart","Liver",2],
+["Earth's natural satellite is?","Sun","Moon","Mars","Venus",1],
+["Which force pulls objects down?","Magnetism","Gravity","Friction","Light",1]],
 sports:[
-["How many players are in a football team on the field?",["9","10","11","12"],2],
-["Which sport uses a shuttlecock?",["Tennis","Badminton","Cricket","Hockey"],1],
-["How many rings are on the Olympic symbol?",["Four","Five","Six","Seven"],1],
-["In cricket, how many runs is a boundary without a bounce?",["Four","Five","Six","Three"],2],
-["Which sport uses a hoop and a ball?",["Basketball","Golf","Rugby","Boxing"],0]
-],
+["How many players are on a football team on the field?","9","10","11","12",2],
+["Which sport uses a shuttlecock?","Tennis","Badminton","Hockey","Cricket",1],
+["How many runs is a boundary worth in cricket if it crosses the rope?","2","3","4","6",2],
+["Wimbledon is associated with?","Tennis","Football","Golf","Rugby",0],
+["How many rings are on the Olympic symbol?","4","5","6","7",1]],
 pakistan:[
-["When did Pakistan become independent?",["1940","1947","1956","1965"],1],
-["What is the capital of Pakistan?",["Karachi","Lahore","Islamabad","Peshawar"],2],
-["Which is Pakistan's national language?",["Punjabi","Sindhi","Urdu","English"],2],
-["Which is the highest mountain in Pakistan?",["Nanga Parbat","K2","Rakaposhi","Tirich Mir"],1],
-["What is the national animal of Pakistan?",["Lion","Markhor","Snow leopard","Deer"],1]
-],
+["What is the capital of Pakistan?","Lahore","Karachi","Islamabad","Quetta",2],
+["Pakistan became independent in?","1940","1947","1956","1965",1],
+["National language of Pakistan?","Punjabi","Urdu","Sindhi","Pashto",1],
+["Which is Pakistan's highest mountain?","Nanga Parbat","K2","Rakaposhi","Tirich Mir",1],
+["Minar-e-Pakistan is in?","Karachi","Lahore","Multan","Peshawar",1]],
 world:[
-["Which is the largest continent?",["Africa","Europe","Asia","Australia"],2],
-["Which country has the city of Paris?",["Italy","France","Spain","Germany"],1],
-["What is the currency of Japan?",["Yuan","Won","Yen","Dollar"],2],
-["Which is the largest hot desert?",["Sahara","Gobi","Kalahari","Arabian"],0],
-["Which country is famous for the pyramids of Giza?",["Mexico","Egypt","Greece","India"],1]
-]
+["Which is the largest continent?","Africa","Asia","Europe","Australia",1],
+["The Eiffel Tower is in?","Rome","Paris","Madrid","Berlin",1],
+["Which country is famous for the pyramids of Giza?","Egypt","Greece","Mexico","India",0],
+["What is the currency of Japan?","Yuan","Won","Yen","Rupee",2],
+["Which is the smallest continent?","Europe","Australia","Antarctica","South America",1]]
 };
-
-function quiz(category){
-quizMode = true;
-game = "quiz";
-
-const names = {
-general:"General Knowledge",
-science:"Science & Technology",
-sports:"Sports",
-pakistan:"Pakistan",
-world:"World Knowledge"
-};
-
-items = quizzes[category] || quizzes.general;
-round = 0;
-locked = false;
-
-start((names[category] || "General Knowledge")+" Quiz","Choose the correct answer. Each correct answer earns 10 points.");
-renderCurrent();
-}
-
-function renderQuiz(){
-const q = items[round];
-status("Question "+(round+1)+" / "+items.length,"");
-
-$("content").innerHTML =
-'<div class="question"></div><div class="options"></div>';
-
-$("content").querySelector(".question").textContent = q[0];
-
-const options = $("content").querySelector(".options");
-
-q[1].forEach((option,index)=>{
-const button = document.createElement("button");
-button.className = "option";
-button.textContent = option;
-button.onclick = () => answer(index===q[2],"Correct answer: "+q[1][q[2]],10);
-options.appendChild(button);
+function startQuiz(){
+const list=quizzes[category]||quizzes.general;
+currentQuestion=0;quizScore=0;
+document.getElementById("gameTitle").textContent="🧠 "+category.replace(/^\w/,c=>c.toUpperCase())+" Quiz";
+showQuestion();
+function showQuestion(){
+if(currentQuestion>=list.length){score+=quizScore;win(quizScore,"Quiz completed!");return}
+const q=list[(currentQuestion+(level-1)*3)%list.length];
+area.innerHTML="<h3>Question "+(currentQuestion+1)+" of "+list.length+"</h3><h2>"+q[0]+"</h2>";
+q.slice(1,5).forEach((v,i)=>{
+area.append(button(String.fromCharCode(65+i)+". "+v,()=>{
+if(roundDone)return;
+if(i===q[5]){quizScore+=10;setStatus("Correct answer!")}else setStatus("Not quite. Correct answer: "+q[q[5]+1]);
+currentQuestion++;setTimeout(showQuestion,650);
+},"quiz-option"));
 });
 }
-
-/* GAME DATA */
-
-const flags = [
-["🇵🇰","Pakistan",["Pakistan","Turkey","Malaysia","Bangladesh"]],
-["🇯🇵","Japan",["China","Japan","South Korea","Thailand"]],
-["🇧🇷","Brazil",["Argentina","Brazil","Portugal","Mexico"]],
-["🇹🇷","Turkey",["Turkey","Pakistan","Tunisia","Algeria"]],
-["🇨🇦","Canada",["USA","Canada","Australia","UK"]],
-["🇫🇷","France",["Italy","France","Russia","Germany"]],
-["🇸🇦","Saudi Arabia",["Iran","Oman","Saudi Arabia","Qatar"]],
-["🇦🇺","Australia",["New Zealand","Australia","Canada","Ireland"]]
-];
-
-const scrambles = [
-["ELPPA","APPLE"],["NOLEM","LEMON"],["REWOLF","FLOWER"],
-["LOOHCS","SCHOOL"],["RETUPMOC","COMPUTER"],
-["NEDRAG","GARDEN"],["KOOB","BOOK"],["RIAHC","CHAIR"]
-];
-
-const truths = [
-["The Sun is a star.",true],
-["Fish can breathe underwater using gills.",true],
-["The Earth has two moons.",false],
-["A week has seven days.",true],
-["Humans have three hearts.",false],
-["Lightning is hotter than the surface of the Sun.",true],
-["The Pacific is the largest ocean.",true],
-["Bats are blind.",false]
-];
-
-const odds = [
-["🍎","🍌","🥕","🍇",2],
-["🚗","🚌","🚲","🍕",3],
-["🐱","🐶","🐰","✈️",3],
-["⚽","🏀","🎾","🍉",3],
-["🌹","🌻","🌷","📱",3],
-["🍚","🍞","🥛","👟",3]
-];
-
-const riddles = [
-["What has keys but cannot open locks?","A piano"],
-["What has hands but cannot clap?","A clock"],
-["What gets wetter as it dries?","A towel"],
-["What has a face and two hands but no arms or legs?","A clock"],
-["What has one eye but cannot see?","A needle"]
-];
-
-const emojis = [
-["🐝 + 🍯","Honey"],
-["🌞 + 🌻","Sunflower"],
-["⭐ + 🐟","Starfish"],
-["🌧️ + 🌈","Rainbow"],
-["🔥 + 🐶","Hotdog"]
-];
-
-const hunts = [
-{target:"🐱",scene:["🐶","🌳","🐱","🚗","🌸","🐟","🍎","🐦","🏠","🐱","🌙","🚲","🐸","🍉","🐱","🌻","🐼","⚽","🐱","🍓"]},
-{target:"🍎",scene:["🍌","🍇","🍎","🍊","🥕","🍉","🍎","🍓","🍍","🥝","🍒","🍎","🍐","🍋","🥭","🍎","🍑","🍈","🍎","🍌"]},
-{target:"⭐",scene:["🌙","☁️","⭐","🌞","🌈","⭐","🌳","🌸","☁️","⭐","🌙","🪐","🌞","⭐","🌟","🌧️","⭐","☁️","🌙","⭐"]}
-];
-
-function renderCurrent(){
-if(quizMode){
-renderQuiz();
-return;
 }
 
-switch(game){
-case "flags":renderFlag();break;
-case "scramble":renderScramble();break;
-case "math":mathNext();break;
-case "truefalse":renderTrue();break;
-case "odd":renderOdd();break;
-case "riddle":renderRiddle();break;
-case "emoji":renderEmoji();break;
+/* FIND THE DIFFERENCE: 5 differences, no timer */
+function startDifference(){
+intro("🔎 Find the Difference","Find all 5 differences between the two pictures. Tap the matching spot in either picture. There is NO timer.");
+diffFound=[];diffTargets=[];
+const seed=(level*17)%9;
+const colors=["#f7c66b","#70c5d8","#ed8a9b","#8cc98d","#ad9be9"];
+const shapes=[
+[20,24,14],[75,25,10],[35,65,13],[72,72,12],[50,45,9]
+];
+for(let i=0;i<5;i++){
+let p=shapes[i];diffTargets.push({x:p[0],y:p[1],r:9});
 }
+function picture(isRight){
+let objects="";
+for(let i=0;i<5;i++){
+let p=shapes[i],x=p[0],y=p[1],r=p[2];
+let color=colors[(i+seed)%colors.length];
+if(isRight&&i===0)color="#ffffff";
+if(isRight&&i===1)x+=5;
+if(isRight&&i===2)r-=4;
+if(isRight&&i===3)y-=7;
+if(isRight&&i===4)color="#30204b";
+objects+='<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+color+'" stroke="#34264d" stroke-width="2"/>';
+}
+return '<svg viewBox="0 0 100 100" role="img" aria-label="Puzzle picture"><rect width="100" height="100" rx="8" fill="#8bd2e8"/><rect y="65" width="100" height="35" fill="#75b87b"/><circle cx="83" cy="15" r="9" fill="#ffe17a"/><path d="M0 68 L25 40 L47 68 L68 35 L100 68" fill="#8b91b8"/>'+objects+'</svg>';
+}
+area.innerHTML='<div class="diff-pictures"><div class="picture"><b>Picture A</b>'+picture(false)+'</div><div class="picture"><b>Picture B</b>'+picture(true)+'</div></div><p class="small">Differences found: <b id="foundCount">0 / 5</b>. Tap a picture area where you notice a difference.</p>';
+// Each difference can be selected from a list of five visual clues to make touch play reliable.
+const clueNames=["Top-left object","Top-right object","Middle-left object","Bottom-right object","Centre object"];
+const clues=document.createElement("div");clues.className="grid";clues.style.gridTemplateColumns="repeat(2,1fr)";
+clueNames.forEach((n,i)=>clues.append(button("Find difference "+(i+1),()=>{
+if(diffFound.includes(i)){setStatus("You already found this difference.");return}
+diffFound.push(i);document.getElementById("foundCount").textContent=diffFound.length+" / 5";
+setStatus("Great! Difference "+(i+1)+" found.");
+if(diffFound.length===5)win(25,"All five differences found!");
+},"secondary")));
+area.append(clues);
 }
 
-/* FLAG CHALLENGE */
-
-function renderFlag(){
-const q = items[round];
-status("Round "+(round+1)+" / "+items.length,"");
-
-$("content").innerHTML =
-'<div class="big"></div><div class="question">Which country does this flag belong to?</div><div class="options"></div>';
-
-$("content").querySelector(".big").textContent = q[0];
-
-const options = $("content").querySelector(".options");
-
-shuffle(q[2]).forEach(option=>{
-const b = document.createElement("button");
-b.className = "option";
-b.textContent = option;
-b.onclick = () => answer(option===q[1],"Correct answer: "+q[1],15);
-options.appendChild(b);
+/* MATCH 3 */
+function startMatch3(){
+intro("🍬 Match-3 Puzzle","Swap neighbouring tiles to make lines of 3 or more matching candies. Complete the target before moves run out.");
+const size=6,icons=["🍒","🍋","🍇","🍊","🍏","🫐"];
+matchMoves=Math.max(12,22-Math.floor(level/120));
+matchTarget=10+Math.floor(level/8);
+matchBoard=Array.from({length:size*size},()=>Math.floor(Math.random()*icons.length));
+function render(){
+area.innerHTML="<div class='stats'><div class='stat'>Moves: "+matchMoves+"</div><div class='stat'>Target: "+matchTarget+"</div></div><div class='grid' id='candyGrid' style='grid-template-columns:repeat(6,1fr);margin-top:12px'></div>";
+let grid=document.getElementById("candyGrid");
+matchBoard.forEach((v,i)=>{
+let b=button(icons[v],()=>tap(i),"candy secondary");
+if(selected===i)b.classList.add("selected");
+grid.append(b);
 });
 }
-
-/* WORD SCRAMBLE */
-
-function renderScramble(){
-const q = items[round];
-status("Round "+(round+1)+" / "+items.length,"");
-
-$("content").innerHTML =
-'<div class="big">🔤</div><div class="question">Unscramble: '+q[0]+'</div><input id="word" placeholder="Type your answer"><button class="primary" id="check">Check Answer</button>';
-
-$("check").onclick = () => {
-const value = $("word").value.trim().toUpperCase();
-answer(value===q[1],"Correct word: "+q[1],15);
-};
+function tap(i){
+if(roundDone)return;
+if(selected===null){selected=i;render();return}
+let a=selected;selected=null;
+if(Math.abs(a-i)!==1&&Math.abs(a-i)!==size){render();return}
+if(Math.floor(a/size)!==Math.floor(i/size)&&Math.abs(a-i)===1){render();return}
+[matchBoard[a],matchBoard[i]]=[matchBoard[i],matchBoard[a]];
+matchMoves--;
+let matches=findMatches();
+if(matches.length===0){[matchBoard[a],matchBoard[i]]=[matchBoard[i],matchBoard[a]];setStatus("That swap did not make a match.");}
+else{
+matches.forEach(x=>matchBoard[x]=Math.floor(Math.random()*icons.length));
+matchTarget-=matches.length;
+setStatus("Nice match! "+matches.length+" tiles cleared.");
+}
+if(matchTarget<=0){win(30,"Puzzle target completed!");return}
+if(matchMoves<=0){lose("Out of moves! Try this level again.");return}
+render();
+}
+function findMatches(){
+let found=new Set();
+for(let r=0;r<size;r++)for(let c=0;c<size;c++){
+let i=r*size+c,v=matchBoard[i];
+if(c<4&&matchBoard[i+1]===v&&matchBoard[i+2]===v){let j=c;while(j<size&&matchBoard[r*size+j]===v)found.add(r*size+j++);}
+if(r<4&&matchBoard[i+size]===v&&matchBoard[i+2*size]===v){let j=r;while(j<size&&matchBoard[j*size+c]===v)found.add(j++*size+c);}
+}
+return [...found];
+}
+render();
 }
 
-/* MATH SPRINT */
-
-function mathGame(){
-round = 0;
-mathNext();
-}
-
-function mathNext(){
-if(round>=10){
-finish("Math Sprint completed!");
-return;
-}
-
-locked = false;
-
-const a = Math.floor(Math.random()*20)+1;
-const b = Math.floor(Math.random()*20)+1;
-const op = Math.random()>.5?"+":"-";
-const correct = op==="+" ? a+b : a-b;
-
-status("Question "+(round+1)+" / 10","");
-
-$("content").innerHTML =
-'<div class="big">➗</div><div class="question">'+a+" "+op+" "+b+' = ?</div><input id="mathanswer" type="number" placeholder="Your answer"><button class="primary" id="mathcheck">Submit</button>';
-
-$("mathcheck").onclick = () => {
-if(locked)return;
-locked = true;
-
-if(Number($("mathanswer").value)===correct && $("mathanswer").value.trim()!==""){
-addPoints(10);
-$("feedback").textContent = "✅ Correct! +10 points";
-}else{
-$("feedback").textContent = "❌ Correct answer: "+correct;
-}
-
-nextAction(()=>{
-round++;
-mathNext();
-});
-};
-}
-
-/* TRUE OR FALSE */
-
-function renderTrue(){
-const q = items[round];
-status("Question "+(round+1)+" / "+items.length,"");
-
-$("content").innerHTML =
-'<div class="big">🤔</div><div class="question"></div><div class="options"><button class="option" id="yes">True</button><button class="option" id="no">False</button></div>';
-
-$("content").querySelector(".question").textContent = q[0];
-
-$("yes").onclick = () => answer(q[1]===true,"Correct answer is "+q[1],10);
-$("no").onclick = () => answer(q[1]===false,"Correct answer is "+q[1],10);
-}
-
-/* ODD ONE OUT */
-
-function renderOdd(){
-const q = items[round];
-status("Round "+(round+1)+" / "+items.length,"");
-
-$("content").innerHTML =
-'<div class="question">Find the odd one out</div><div class="options"></div>';
-
-const options = $("content").querySelector(".options");
-
-q.slice(0,4).forEach((item,index)=>{
-const b = document.createElement("button");
-b.className = "option";
-b.style.fontSize = "30px";
-b.textContent = item;
-b.onclick = () => answer(index===q[4],"Try another one!",10);
-options.appendChild(b);
-});
-}
-
-/* RIDDLE CHALLENGE */
-
-function renderRiddle(){
-const q = items[round];
-status("Riddle "+(round+1)+" / "+items.length,"");
-
-$("content").innerHTML =
-'<div class="big">💡</div><div class="question"></div><input id="riddleanswer" placeholder="Your answer"><button class="primary" id="riddlecheck">Check Answer</button>';
-
-$("content").querySelector(".question").textContent = q[0];
-
-$("riddlecheck").onclick = () => {
-const value = $("riddleanswer").value.trim().toLowerCase();
-const target = q[1].toLowerCase();
-
-answer(value.length>0 && (value===target || value===target.replace("a ","")),"Answer: "+q[1],10);
-};
-}
-
-/* EMOJI DECODE */
-
-function renderEmoji(){
-const q = items[round];
-status("Round "+(round+1)+" / "+items.length,"");
-
-$("content").innerHTML =
-'<div class="big"></div><div class="question">Guess the word</div><input id="emanswer" placeholder="Your answer"><button class="primary" id="emcheck">Check</button>';
-
-$("content").querySelector(".big").textContent = q[0];
-
-$("emcheck").onclick = () => {
-const value = $("emanswer").value.trim().toLowerCase();
-answer(value===q[1].toLowerCase(),"Answer: "+q[1],10);
-};
-}
-
-/* PICTURE HUNT */
-
-function huntGame(){
-const q = hunts[Math.floor(Math.random()*hunts.length)];
-let found = 0;
-const total = q.scene.filter(x=>x===q.target).length;
-
-start("Picture Hunt Challenge","Find all "+total+" hidden "+q.target+" objects. Each one earns 15 points.");
-status("Found 0 / "+total,"");
-
-$("content").innerHTML =
-'<div class="question">Find all: '+q.target+'</div><div class="gridhunt"></div>';
-
-const grid = $("content").querySelector(".gridhunt");
-
-q.scene.forEach((item,index)=>{
-const b = document.createElement("button");
-b.textContent = item;
-
-b.onclick = () => {
-if(b.disabled)return;
-
-if(item===q.target){
-b.classList.add("found");
-b.disabled = true;
-found++;
-addPoints(15);
-status("Found "+found+" / "+total,"✅ Great find! +15 points");
-
-if(found===total){
-finish("Amazing! You found every hidden object!");
-}
-}else{
-b.disabled = true;
-$("feedback").textContent = "❌ Not this one. Keep looking!";
-}
-};
-
-grid.appendChild(b);
-});
-}
-
-/* NUMBER PUZZLE */
-
-function numberGame(){
-start("Number Puzzle","Arrange numbers from 1 to 8 in order. Tap a tile next to the empty space to move it.");
-
-let nums = [1,2,3,4,5,6,7,8,0];
-let previous = -1;
-
-for(let k=0;k<80;k++){
-const zero = nums.indexOf(0);
-
-const options = [zero-3,zero+3,zero-1,zero+1].filter(i=>
-i>=0 && i<9 &&
-(Math.abs(zero-i)===3 ||
-(Math.floor(zero/3)===Math.floor(i/3) && Math.abs(zero-i)===1)) &&
-i!==previous
-);
-
-const pick = options[Math.floor(Math.random()*options.length)];
-previous = zero;
-
-[nums[zero],nums[pick]] = [nums[pick],nums[zero]];
-}
-
-let moves = 0;
-
-function check(){
-if(nums.join(",")==="1,2,3,4,5,6,7,8,0"){
-addPoints(25);
-finish("Puzzle solved! +25 points");
-}
-}
-
+/* CAR RACING */
+function startRacing(){
+intro("🏎️ Car Racing","Avoid traffic and collect coins. Use the left and right buttons. The road gets faster as your level increases.");
+area.innerHTML='<canvas id="raceCanvas" width="360" height="520"></canvas><div class="race-controls"><button class="secondary" id="leftBtn">⬅️</button><button class="secondary" id="rightBtn">➡️</button></div><p class="small" style="text-align:center">Coins: <b id="coinCount">0</b> · Distance: <b id="distance">0</b></p>';
+const canvas=document.getElementById("raceCanvas"),ctx=canvas.getContext("2d");
+raceCar=1;raceObstacles=[];raceCoins=0;raceScore=0;raceRunning=true;
+let tick=0, distance=0, speed=2+Math.min(7,level/250);
+function move(d){raceCar=Math.max(0,Math.min(2,raceCar+d))}
+document.getElementById("leftBtn").onclick=()=>move(-1);
+document.getElementById("rightBtn").onclick=()=>move(1);
+canvas.onclick=e=>{let r=canvas.getBoundingClientRect();move(e.clientX<r.left+r.width/2?-1:1)};
 function draw(){
-$("content").innerHTML =
-'<div class="tiles"></div><p style="text-align:center">Moves: '+moves+'</p>';
-
-const tiles = $("content").querySelector(".tiles");
-
-nums.forEach((n,index)=>{
-const tile = document.createElement("div");
-tile.className = "tile"+(n===0?" empty":"");
-tile.textContent = n===0?"":n;
-
-tile.onclick = () => {
-const zero = nums.indexOf(0);
-
-const adjacent = Math.abs(zero-index)===3 ||
-(Math.floor(zero/3)===Math.floor(index/3) && Math.abs(zero-index)===1);
-
-if(adjacent){
-[nums[index],nums[zero]] = [nums[zero],nums[index]];
-moves++;
-draw();
-check();
-}
-};
-
-tiles.appendChild(tile);
+if(!raceRunning)return;
+ctx.clearRect(0,0,360,520);
+ctx.fillStyle="#39734e";ctx.fillRect(0,0,360,520);
+ctx.fillStyle="#3d3d4d";ctx.fillRect(45,0,270,520);
+ctx.strokeStyle="#fff";ctx.lineWidth=4;ctx.setLineDash([25,20]);
+ctx.beginPath();ctx.moveTo(135,0);ctx.lineTo(135,520);ctx.moveTo(225,0);ctx.lineTo(225,520);ctx.stroke();ctx.setLineDash([]);
+tick++;distance++;if(tick%Math.max(15,48-Math.floor(level/60))===0)raceObstacles.push({lane:Math.floor(Math.random()*3),y:-35,coin:Math.random()<.3});
+raceObstacles.forEach(o=>{
+o.y+=speed;
+ctx.fillStyle=o.coin?"#ffd34f":"#d64d57";
+ctx.fillRect(65+o.lane*90,o.y,48,35);
 });
+raceObstacles=raceObstacles.filter(o=>{
+if(o.y>470&&o.y<510&&o.lane===raceCar){
+if(o.coin){raceCoins++;document.getElementById("coinCount").textContent=raceCoins;return false}
+raceRunning=false;setStatus("Crash! Distance: "+distance);
+actions.innerHTML="";actions.append(button("Try Again",startRacing));return false;
 }
-
-status("Moves: 0","");
+return o.y<550;
+});
+ctx.fillStyle="#6dd6ff";ctx.fillRect(65+raceCar*90,455,48,48);
+ctx.fillStyle="#fff";ctx.fillRect(73+raceCar*90,460,12,8);ctx.fillRect(93+raceCar*90,460,12,8);
+document.getElementById("distance").textContent=distance;
+if(raceRunning&&distance>=250+level*2){raceRunning=false;win(20+raceCoins*2,"Race finished!");return}
+if(raceRunning)raceFrame=requestAnimationFrame(draw);
+}
 draw();
 }
 
-/* MEMORY MATCH */
+/* LUDO - local 2 to 4 players */
+function startLudo(){
+intro("🎲 Ludo · Local Multiplayer","Play with 2–4 people on the same device. Roll a 6 to bring a token out. First player to move all four tokens to finish wins.");
+area.innerHTML='<label class="small">Number of players</label><select id="players"><option value="2">2 Players</option><option value="3">3 Players</option><option value="4">4 Players</option></select><div class="ludo-board" id="ludoBoard"></div><p id="ludoInfo" style="text-align:center;font-weight:bold"></p>';
+document.getElementById("players").value="2";
+ludoPlayers=2;ludoTurn=0;ludoDice=0;
+ludoTokens=Array.from({length:4},()=>[0,0,0,0]);
+const colors=["red","green","yellow","blue"];
+function board(){
+const b=document.getElementById("ludoBoard");b.innerHTML="";
+for(let i=0;i<81;i++){
+let cell=document.createElement("div");cell.className="ludo-cell";
+let row=Math.floor(i/9),col=i%9;
+if(row<3&&col<3)cell.classList.add("red");
+if(row<3&&col>5)cell.classList.add("green");
+if(row>5&&col<3)cell.classList.add("blue");
+if(row>5&&col>5)cell.classList.add("yellow");
+let tokenFound="";
+ludoTokens.forEach((p,pi)=>p.forEach((pos,ti)=>{if(pos>0&&pos<45&&((pos+pi*7+ti*3)%81)===i)tokenFound="●"}));
+cell.textContent=tokenFound||((row===4||col===4)?"·":"");
+b.append(cell);
+}
+document.getElementById("ludoInfo").textContent="Player "+(ludoTurn+1)+" · "+(ludoDice?"Dice: "+ludoDice:"Roll the dice");
+}
+function roll(){
+if(roundDone)return;
+ludoDice=1+Math.floor(Math.random()*6);board();
+setStatus("Player "+(ludoTurn+1)+" rolled "+ludoDice+". Select a token to move.");
+actions.innerHTML="";
+for(let t=0;t<4;t++){
+let p=ludoTokens[ludoTurn][t];
+let can=(p===0&&ludoDice===6)||(p>0&&p<45);
+if(can)actions.append(button("Move token "+(t+1),()=>moveToken(t),"secondary"));
+}
+if(!actions.children.length){actions.append(button("Next Player",nextPlayer));}
+}
+function moveToken(t){
+let p=ludoTokens[ludoTurn][t];
+if(p===0&&ludoDice!==6)return;
+ludoTokens[ludoTurn][t]=p===0?1:p+ludoDice;
+if(ludoTokens[ludoTurn][t]>=45)ludoTokens[ludoTurn][t]=45;
+let won=ludoTokens[ludoTurn].every(x=>x>=45);
+if(won){win(50,"Player "+(ludoTurn+1)+" wins the Ludo challenge!");return}
+if(ludoDice===6){setStatus("You rolled a 6! Roll again.");ludoDice=0;board();actions.innerHTML="";actions.append(button("Roll Again",roll));}
+else nextPlayer();
+board();
+}
+function nextPlayer(){ludoTurn=(ludoTurn+1)%ludoPlayers;ludoDice=0;board();actions.innerHTML="";actions.append(button("🎲 Roll Dice",roll));}
+document.getElementById("players").onchange=e=>{ludoPlayers=Number(e.target.value);ludoTurn=0;ludoTokens=Array.from({length:4},()=>[0,0,0,0]);board();actions.innerHTML="";actions.append(button("🎲 Roll Dice",roll));};
+board();actions.append(button("🎲 Roll Dice",roll));
+}
 
-function memoryGame(){
-start("Memory Match","Find all 8 matching pairs. Tap two cards to reveal them.");
-
-const icons = shuffle(["🍎","🍎","🚀","🚀","🐱","🐱","⚽","⚽","🌟","🌟","🍕","🍕","🐼","🐼","🎈","🎈"]);
-
-let first = null;
-let busy = false;
-let matches = 0;
-let moves = 0;
-
-$("content").innerHTML =
-'<div class="memory"></div><p style="text-align:center">Moves: <span id="moves">0</span></p>';
-
-const grid = $("content").querySelector(".memory");
-
-icons.forEach((icon,index)=>{
-const card = document.createElement("button");
-card.textContent = "?";
-
-card.onclick = () => {
-if(busy || card.classList.contains("open") || card.classList.contains("matched"))return;
-
-card.textContent = icon;
-card.classList.add("open");
-
-if(first===null){
-first = {card:card,icon:icon};
+/* CLASSIC GAMES - generated challenges */
+function startClassic(){
+let prompts={
+flags:["Which country has this flag?","🇵🇰","🇯🇵","🇧🇷","🇫🇷"],
+scramble:["Unscramble this word:","ELPPA","APPLE"],
+math:["Solve this:",""],
+truefalse:["The Earth orbits the Sun.","True","False"],
+odd:["Find the odd one out:","Apple · Mango · Banana · Car"],
+riddle:["What has keys but cannot open locks?","A piano"],
+emoji:["Decode this emoji:","🌞 + 🌻"],
+hunt:["Which item is different?","🍎 🍎 🍌 🍎"],
+number:["Complete the pattern: 2, 4, 6, ?","8"],
+memory:["Remember this number:","583"],
+wordsearch:["Find the word hidden below:","C A T"],
+reaction:["Tap Start, then tap Stop as quickly as you can.",""],
+sudoku:["Complete this mini puzzle:","1 _ 3 4"],
+guess:["Guess the word:","P L A N E T"]
+};
+const p=prompts[game]||prompts.flags;
+intro("🎯 "+(names[game]||"Challenge"),"Challenge level "+level+". Difficulty increases as you progress.");
+let answer="";
+if(game==="flags"){
+let arr=[["🇵🇰","Pakistan"],["🇯🇵","Japan"],["🇧🇷","Brazil"],["🇫🇷","France"],["🇹🇷","Turkey"]];
+let q=arr[(level-1)%arr.length];answer=q[1];
+area.innerHTML="<h2 style='font-size:65px;text-align:center'>"+q[0]+"</h2><p>Which country does this flag belong to?</p>";
+["Pakistan","Japan","Brazil","France","Turkey"].sort(()=>Math.random()-.5).forEach(x=>area.append(button(x,()=>x===answer?win(10,"Correct flag!"):lose("Incorrect. Correct answer: "+answer),"quiz-option")));
 return;
 }
-
-moves++;
-$("moves").textContent = moves;
-
-if(first.icon===icon){
-first.card.classList.add("matched");
-card.classList.add("matched");
-first = null;
-matches++;
-
-if(matches===8){
-addPoints(30);
-finish("All pairs matched! +30 points");
+let qText=p[0],opts=[];
+if(game==="scramble"){
+let words=["APPLE","TRAIN","HOUSE","WATER","PLANET","GARDEN","ORANGE","MARKET"];answer=words[(level-1)%words.length];qText="Unscramble: "+answer.split("").sort(()=>Math.random()-.5).join(" ");
+opts=[answer,"TABLE","CLOUD","CHAIR"];
+}else if(game==="math"){
+let a=level%20+2,b=level%13+3;answer=String(a+b);qText="Solve: "+a+" + "+b;opts=[answer,String(a+b+1),String(a+b-1),String(a+b+2)];
+}else if(game==="truefalse"){answer="True";opts=["True","False"]}
+else if(game==="odd"){answer="Car";opts=["Apple","Mango","Banana","Car"]}
+else if(game==="riddle"){answer="A piano";opts=["A piano","A door","A map","A clock"]}
+else if(game==="emoji"){answer="Sunflower";opts=["Sunflower","Sunset","Sunrise","Flower pot"]}
+else if(game==="hunt"){answer="🍌";opts=["🍎","🍎","🍌","🍎"]}
+else if(game==="number"){answer=String(8+(Math.floor((level-1)/10)*2));qText="Complete: 2, 4, 6, "+(Number(answer)-2)+", ?";opts=[answer,String(Number(answer)+1),String(Number(answer)-1),String(Number(answer)+2)]}
+else if(game==="memory"){answer="583";opts=["583","538","835","358"]}
+else if(game==="wordsearch"){answer="CAT";opts=["CAT","DOG","SUN","CAR"]}
+else if(game==="sudoku"){answer="2";opts=["1","2","3","4"]}
+else if(game==="guess"){answer="PLANET";opts=["PLANET","PLANTS","PLAYER","PENCIL"]}
+else if(game==="reaction"){
+area.innerHTML="<p>Press Start, wait until the button turns green, then tap it quickly.</p>";
+let b=button("Start",()=>{b.disabled=true;let delay=1000+Math.random()*3000;setTimeout(()=>{b.disabled=false;b.textContent="TAP NOW!";b.className="green";let t=Date.now();b.onclick=()=>{let ms=Date.now()-t;win(Math.max(5,30-Math.floor(ms/100)),"Reaction time: "+ms+" ms")}},delay)});
+area.append(b);return;
+}else if(game==="memory"){
+// Memory challenge uses the answer options below.
 }
-}else{
-busy = true;
-const old = first.card;
-first = null;
-
-setTimeout(()=>{
-old.textContent = "?";
-card.textContent = "?";
-old.classList.remove("open");
-card.classList.remove("open");
-busy = false;
-},750);
+area.innerHTML="<h2>"+qText+"</h2>";
+opts.sort(()=>Math.random()-.5).forEach(x=>area.append(button(x,()=>x===answer?win(10,"Correct answer!"):lose("Correct answer: "+answer),"quiz-option")));
 }
+
+/* RESET AND START */
+window.resetCurrent=function(){
+if(!confirm("Reset this game's saved score and level?"))return;
+localStorage.removeItem(key);level=1;score=0;unlocked=1;start();
 };
-
-grid.appendChild(card);
-});
-}
-
-/* WORD SEARCH - IMPROVED */
-
-function wordSearchGame(){
-start("Word Search","Find SUN, CAT and BOOK. Select connected letters in a straight line. Horizontal, vertical and diagonal words are allowed.");
-
-const rows = [
-"SUNXXXXX",
-"XXCXXXXX",
-"XXAXXXXX",
-"XXTXXXXX",
-"BOOKXXXX",
-"XXXXXXXX",
-"XXXXXXXX",
-"XXXXXXXX"
-];
-
-const letters = rows.join("");
-let selected = [];
-let targets = ["SUN","CAT","BOOK"];
-let foundCells = [];
-
-$("content").innerHTML =
-'<div class="question">Find: SUN • CAT • BOOK</div>' +
-'<div class="wordgrid"></div>' +
-'<p style="text-align:center">Selected: <b id="selected">None</b></p>' +
-'<p style="text-align:center">Found: <b id="foundwords">None</b></p>' +
-'<button class="primary" id="wordcheck">Check Word</button>' +
-'<button class="primary secondary" id="wordclear">Clear Selection</button>';
-
-const grid = $("content").querySelector(".wordgrid");
-const cells = [];
-
-letters.split("").forEach((letter,index)=>{
-const b = document.createElement("button");
-b.textContent = letter;
-
-b.onclick = () => {
-if(b.disabled)return;
-
-const last = selected[selected.length-1];
-
-if(selected.includes(index)){
-if(index===last){
-selected.pop();
-}else{
-return;
-}
-}else{
-if(selected.length>0){
-const previous = selected[selected.length-1];
-
-const previousRow = Math.floor(previous/8);
-const previousCol = previous%8;
-const currentRow = Math.floor(index/8);
-const currentCol = index%8;
-
-const rowDiff = currentRow-previousRow;
-const colDiff = currentCol-previousCol;
-
-if(Math.max(Math.abs(rowDiff),Math.abs(colDiff))!==1){
-$("feedback").textContent = "Select the next connected letter.";
-return;
-}
-
-if(selected.length>=2){
-const first = selected[0];
-const second = selected[1];
-
-const directionRow = Math.sign(
-Math.floor(second/8)-Math.floor(first/8)
-);
-
-const directionCol = Math.sign(
-(second%8)-(first%8)
-);
-
-if(
-Math.sign(rowDiff)!==directionRow ||
-Math.sign(colDiff)!==directionCol
-){
-$("feedback").textContent = "Keep selecting in the same direction.";
-return;
-}
-}
-}
-
-selected.push(index);
-}
-
-refreshSelection();
-};
-
-grid.appendChild(b);
-cells.push(b);
-});
-
-function refreshSelection(){
-cells.forEach((cell,index)=>{
-cell.classList.toggle("selected",selected.includes(index));
-});
-
-$("selected").textContent =
-selected.map(index=>letters[index]).join("") || "None";
-}
-
-function clearSelection(){
-selected = [];
-refreshSelection();
-}
-
-function updateFound(){
-const found = ["SUN","CAT","BOOK"].filter(word=>!targets.includes(word));
-
-$("foundwords").textContent = found.join(", ") || "None";
-$("progress").textContent = "Found "+found.length+" / 3";
-}
-
-$("wordclear").onclick = () => {
-clearSelection();
-$("feedback").textContent = "";
-};
-
-$("wordcheck").onclick = () => {
-if(selected.length===0){
-$("feedback").textContent = "Select letters first.";
-return;
-}
-
-const word = selected.map(index=>letters[index]).join("");
-const reversed = word.split("").reverse().join("");
-
-const matched = targets.find(target=>
-target===word || target===reversed
-);
-
-if(matched){
-selected.forEach(index=>{
-foundCells.push(index);
-cells[index].classList.remove("selected");
-cells[index].classList.add("found");
-cells[index].disabled = true;
-});
-
-targets = targets.filter(target=>target!==matched);
-
-addPoints(10);
-$("feedback").textContent = "✅ "+matched+" found! +10 points";
-
-clearSelection();
-updateFound();
-
-if(targets.length===0){
-addPoints(15);
-finish("All hidden words found! Bonus +15 points");
-}else{
-$("instructions").textContent =
-"Great work! Still find: "+targets.join(", ");
-}
-}else{
-$("feedback").textContent = "❌ Not a target word. Try again.";
-}
-};
-
-updateFound();
-}
-
-/* REACTION TEST */
-
-function reactionGame(){
-start("Reaction Test","Tap START. Wait until the box turns green, then tap it as quickly as possible.");
-
-$("content").innerHTML =
-'<button class="primary" id="startreaction">START</button>' +
-'<div id="reactionbox" style="margin-top:15px;background:#ded8f2;color:#30215d;border-radius:15px;padding:55px 10px;text-align:center;font-size:23px;font-weight:bold">Wait for green!</div>';
-
-const box = $("reactionbox");
-const startButton = $("startreaction");
-
-let timer = null;
-let started = 0;
-let active = false;
-let done = false;
-
-startButton.onclick = () => {
-if(timer)clearTimeout(timer);
-
-done = false;
-active = false;
-box.style.background = "#d9534f";
-box.textContent = "Wait...";
-startButton.disabled = true;
-
-timer = setTimeout(()=>{
-active = true;
-started = performance.now();
-box.style.background = "#28a765";
-box.textContent = "TAP NOW!";
-},1500+Math.random()*3500);
-};
-
-box.onclick = () => {
-if(done)return;
-
-if(!active){
-if(timer){
-clearTimeout(timer);
-timer = null;
-startButton.disabled = false;
-box.style.background = "#ded8f2";
-box.textContent = "Too early! Try again.";
-$("feedback").textContent = "Wait for green before tapping.";
-}
-return;
-}
-
-done = true;
-active = false;
-
-const ms = Math.round(performance.now()-started);
-box.textContent = ms+" ms";
-
-if(ms<350){
-addPoints(15);
-$("feedback").textContent = "Excellent reaction! +15 points";
-}else{
-$("feedback").textContent = "Good try! Try to get under 350 ms.";
-}
-
-startButton.disabled = false;
-startButton.textContent = "Try Again";
-};
-}
-
-/* SUDOKU */
-
-function sudokuGame(){
-start("Sudoku Challenge","Fill the empty cells. Every row, column and 2×2 box must contain 1, 2, 3 and 4.");
-
-const solution = [1,2,3,4,3,4,1,2,2,1,4,3,4,3,2,1];
-const puzzle = [1,0,3,0,0,4,0,2,2,0,4,0,0,3,0,1];
-
-$("content").innerHTML =
-'<div class="sudoku"></div>' +
-'<div class="numberpad"></div>' +
-'<button class="primary" id="sudokuclear">Clear Selected</button>' +
-'<button class="primary" id="sudokucheck">Check Solution</button>';
-
-const grid = $("content").querySelector(".sudoku");
-const pad = $("content").querySelector(".numberpad");
-
-let selected = null;
-const cells = [];
-
-puzzle.forEach((number,index)=>{
-const input = document.createElement("input");
-input.maxLength = 1;
-input.inputMode = "numeric";
-input.dataset.index = index;
-
-if(number){
-input.value = number;
-input.readOnly = true;
-}
-
-input.onclick = () => {
-cells.forEach(c=>c.style.background="white");
-selected = input;
-if(!input.readOnly)input.style.background="#ded5ff";
-};
-
-grid.appendChild(input);
-cells.push(input);
-});
-
-[1,2,3,4].forEach(number=>{
-const b = document.createElement("button");
-b.textContent = number;
-
-b.onclick = () => {
-if(selected && !selected.readOnly){
-selected.value = number;
-}
-};
-
-pad.appendChild(b);
-});
-
-$("sudokuclear").onclick = () => {
-if(selected && !selected.readOnly)selected.value = "";
-};
-
-$("sudokucheck").onclick = () => {
-const correct = cells.every((cell,index)=>Number(cell.value)===solution[index]);
-
-if(correct){
-addPoints(25);
-finish("Sudoku solved correctly! +25 points");
-}else{
-$("feedback").textContent = "❌ Not quite right. Check the empty cells and try again.";
-}
-};
-}
-
-/* WORD GUESS */
-
-function guessGame(){
-start("Word Guess","Read the clue and guess the hidden word. You can try more than once.");
-
-const words = [
-["A yellow fruit that monkeys love","BANANA"],
-["You use it to write on paper","PENCIL"],
-["A place where students learn","SCHOOL"],
-["It shines in the sky during the day","SUN"],
-["A device used to make phone calls","MOBILE"]
-];
-
-const q = words[Math.floor(Math.random()*words.length)];
-
-$("content").innerHTML =
-'<div class="big">❓</div><div class="question"></div>' +
-'<input id="guessinput" placeholder="Enter your guess">' +
-'<button class="primary" id="guesscheck">Check Guess</button>';
-
-$("content").querySelector(".question").textContent = "Clue: "+q[0];
-
-$("guesscheck").onclick = () => {
-const value = $("guessinput").value.trim().toUpperCase();
-
-if(value===q[1]){
-addPoints(20);
-finish("Correct! The word was "+q[1]+". +20 points");
-}else{
-$("feedback").textContent = "❌ Not correct. Try again!";
-}
-};
-}
-
-/* GAME START */
-
-function launchGame(){
-round = 0;
-locked = false;
-quizMode = false;
-
-const names = {
-flags:"Flag Challenge",
-scramble:"Word Scramble",
-math:"Math Sprint",
-truefalse:"True or False",
-odd:"Odd One Out",
-riddle:"Riddle Challenge",
-emoji:"Emoji Decode",
-hunt:"Picture Hunt Challenge",
-number:"Number Puzzle",
-memory:"Memory Match",
-wordsearch:"Word Search",
-reaction:"Reaction Test",
-sudoku:"Sudoku Challenge",
-guess:"Word Guess"
-};
-
-start(names[game] || "Mind Game","Complete the challenge and earn points!");
-
-switch(game){
-case "flags":
-items = shuffle(flags);
-renderFlag();
-break;
-
-case "scramble":
-items = shuffle(scrambles);
-renderScramble();
-break;
-
-case "math":
-mathGame();
-break;
-
-case "truefalse":
-items = shuffle(truths);
-renderTrue();
-break;
-
-case "odd":
-items = shuffle(odds);
-renderOdd();
-break;
-
-case "riddle":
-items = shuffle(riddles);
-renderRiddle();
-break;
-
-case "emoji":
-items = shuffle(emojis);
-renderEmoji();
-break;
-
-case "hunt":
-huntGame();
-break;
-
-case "number":
-numberGame();
-break;
-
-case "memory":
-memoryGame();
-break;
-
-case "wordsearch":
-wordSearchGame();
-break;
-
-case "reaction":
-reactionGame();
-break;
-
-case "sudoku":
-sudokuGame();
-break;
-
-case "guess":
-guessGame();
-break;
-
-default:
-finish("Game not found. Please return to the home page.");
-}
-}
-
-/* READ URL AND START */
-
-try{
-const params = new URLSearchParams(window.location.search);
-const category = (params.get("category") || "general").toLowerCase();
-game = (params.get("game") || "").toLowerCase();
-
-if(params.get("type")==="quiz" || params.has("category")){
-quiz(category);
-}else{
-launchGame();
-}
-
-}catch(error){
-$("title").textContent = "Game Error";
-$("instructions").textContent = "Something went wrong while loading this challenge.";
-$("content").innerHTML = '<button class="primary" onclick="location.href=\'index.html\'">Back to Home</button>';
-$("feedback").textContent = error.message || "Please reload the page.";
-console.error("PlayWise Arena error:",error);
-}
-
+start();
 })();
 </script>
 </body>
